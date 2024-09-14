@@ -77,21 +77,7 @@ const ImageCarousel = () => {
           ))}
         </div>
 
-        {/* Navigation buttons */}
-        {/* <button
-          onClick={handlePrev}
-          className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/30 hover:bg-white/50 rounded-full p-2 transition-colors duration-300"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-6 h-6 text-white" />
-        </button>
-        <button
-          onClick={handleNext}
-          className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/30 hover:bg-white/50 rounded-full p-2 transition-colors duration-300"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button> */}
+        
 
         {/* Slider indicators */}
         <div
