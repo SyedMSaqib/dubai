@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className=" ">
       <ImageCarousel />
-      <div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-10">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam et, culpa deleniti dolor
         harum sed? Labore repudiandae ab optio hic dolores obcaecati eligendi? Iste fugiat ipsa nisi
         itaque non reprehenderit deleniti inventore voluptatibus commodi, numquam, optio nemo eius

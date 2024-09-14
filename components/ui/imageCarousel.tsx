@@ -1,53 +1,52 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
-import { useSwipeable } from "react-swipeable";
+"use client"
+import { useState } from "react"
+import Image from "next/image"
+import { useSwipeable } from "react-swipeable"
 // import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ImageCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const items = [
-      {
-        src: "/images/dubai4.jpg",
-        alt: "Dubai Image 4",
-        
-      },
+  interface CarouselItem {
+    src: string
+    alt: string
+  }
+  const [activeIndex, setActiveIndex] = useState(0)
+  const items: CarouselItem[] = [
+    {
+      src: "/images/dubai4.jpg",
+      alt: "Dubai Image 4",
+    },
     {
       src: "/images/dubai.jpg",
       alt: "Dubai Image 1",
-      
     },
     {
       src: "/images/dubai2.jpg",
       alt: "Dubai Image 2",
-      
     },
     {
       src: "/images/dubai3.jpg",
       alt: "Dubai Image 3",
-      
     },
     {
       src: "/images/dubai5.jpg",
       alt: "Dubai Image 5",
-      
     },
-  ];
+  ]
 
   const handlePrev = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
-  };
+    setActiveIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1))
+  }
 
   const handleNext = () => {
-    setActiveIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
-  };
+    setActiveIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1))
+  }
 
   const handlers = useSwipeable({
     onSwipedLeft: handleNext,
     onSwipedRight: handlePrev,
     trackMouse: true,
     trackTouch: true,
-  });
+  })
 
   return (
     <div className="mx-auto relative" {...handlers}>
@@ -70,7 +69,6 @@ const ImageCarousel = () => {
                 placeholder="blur"
                 style={{
                   objectFit: "cover",
-                 
                 }}
                 draggable="false"
                 priority
@@ -96,7 +94,10 @@ const ImageCarousel = () => {
         </button> */}
 
         {/* Slider indicators */}
-        <div className="flex absolute bottom-5 left-1/2 z-30 -translate-x-1/2 space-x-2" data-carousel-indicators>
+        <div
+          className="flex absolute bottom-5 left-1/2 z-30 -translate-x-1/2 space-x-2"
+          data-carousel-indicators
+        >
           {items.map((_, index) => (
             <button
               key={index}
@@ -111,7 +112,7 @@ const ImageCarousel = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ImageCarousel;
+export default ImageCarousel
