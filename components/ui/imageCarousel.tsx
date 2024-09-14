@@ -49,7 +49,7 @@ const ImageCarousel = () => {
   })
 
   return (
-    <div className="mx-auto relative" {...handlers}>
+    <div className="mx-auto absolute inset-0" {...handlers}>
       <div className="relative overflow-hidden" data-carousel="static">
         {/* Carousel wrapper */}
         <div className="relative h-80 md:h-[60vh]">

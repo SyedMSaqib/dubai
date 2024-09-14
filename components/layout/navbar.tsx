@@ -32,8 +32,7 @@ export default function App() {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      isBordered
-      shouldHideOnScroll
+    //   shouldHideOnScroll
       classNames={{
         item: [
           "flex",
