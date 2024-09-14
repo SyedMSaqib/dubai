@@ -32,7 +32,9 @@ export default function App() {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-    //   shouldHideOnScroll
+    isBordered
+    isBlurred={false}
+    className="bg-white"
       classNames={{
         item: [
           "flex",
@@ -88,22 +90,23 @@ export default function App() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
+      <NavbarMenu className={`${isMenuOpen ? "bg-white" : ""}`}>
+  {menuItems.map((item, index) => (
+    <NavbarMenuItem key={`${item}-${index}`}>
+      <Link
+        color={
+          index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+        }
+        className="w-full"
+        href="#"
+        size="lg"
+      >
+        {item}
+      </Link>
+    </NavbarMenuItem>
+  ))}
+</NavbarMenu>
+
     </Navbar>
   )
 }
