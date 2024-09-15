@@ -4,17 +4,6 @@ import "./globals.css"
 import { Providers } from "./providers"
 import Navbar from "../components/layout/navbar"
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// })
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// })
-
 const tripSans = localFont({
   src: [
     { path: "./fonts/TripSans-Regular.woff2", weight: "400", style: "normal" },

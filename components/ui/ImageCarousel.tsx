@@ -94,7 +94,7 @@ const ImageCarousel = () => {
               key={index}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+              className={`w-1 h-1 sm:w-2 sm:h-2 rounded-full transition-colors duration-300 ${
                 activeIndex === index ? "bg-white" : "bg-white/50 hover:bg-white/75"
               } focus:outline-none`}
               aria-label={`Slide ${index + 1}`}
