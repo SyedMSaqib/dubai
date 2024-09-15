@@ -40,6 +40,5 @@ next-env.d.ts
 *.jpg
 *.jpeg
 *.gif
-*.svg
 *.webp
 *.bmp

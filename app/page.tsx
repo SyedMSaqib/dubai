@@ -10,8 +10,8 @@ export default function Home() {
         <div className="mx-auto gap-y-7 grid grid-cols-2 md:grid-cols-4 lg:max-w-[70vw] px-4 sm:px-6 lg:px-8 mt-10">
           <WhyBookUs
             logo="icons/svg/map.svg"
-            header="Expert local guides"
-            body="Get local insights from our knowledgeable guides."
+            header="Expert guides"
+            body="Enjoy detailed tours guided by our knowledgeable experts."
           />
           <WhyBookUs
             logo="icons/svg/priceTag.svg"
@@ -19,9 +19,9 @@ export default function Home() {
             body="Enjoy competitive prices with no hidden fees."
           />
           <WhyBookUs
-            logo="icons/svg/gear.svg"
-            header="Tailor-made experiences"
-            body="Personalize your itinerary for a perfect journey."
+            logo="icons/svg/calender.svg"
+            header="Flexible Booking"
+            body="free cancellation and the choice to pay later at no extra cost."
           />
           <WhyBookUs
             logo="icons/svg/stars.svg"
