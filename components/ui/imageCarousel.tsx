@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useSwipeable } from "react-swipeable"
 // import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,6 +9,13 @@ const ImageCarousel = () => {
     src: string
     alt: string
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1))
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
   const [activeIndex, setActiveIndex] = useState(0)
   const items: CarouselItem[] = [
     {
@@ -76,8 +83,6 @@ const ImageCarousel = () => {
             </div>
           ))}
         </div>
-
-        
 
         {/* Slider indicators */}
         <div
