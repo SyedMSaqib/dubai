@@ -1,5 +1,4 @@
-import ImageCarousel from "@/components/ui/imageCarousel"
-
+import ImageCarousel from "@/components/ui/ImageCarousel"
 
 export default function Home() {
   return (
