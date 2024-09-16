@@ -35,27 +35,27 @@ export default function Home() {
         <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[50px]">
           Tour Categories
         </h3>
-        <div className=" gap-y-7 grid grid-cols-2 md:grid-cols-4 lg:max-w-[70vw] px-4 sm:px-6 lg:px-8 mt-10">
-          <TourPackages src="/images/dubai1.jpg" text="dubai" />
-          <TourPackages src="/images/dubai2.jpg" text="dubai" />
-          <TourPackages src="/images/dubai3.jpg" text="dubai" />
-          <TourPackages src="/images/dubai4.jpg" text="dubai" />
-          <TourPackages src="/images/dubai5.jpg" text="dubai" />
-          <TourPackages src="/images/dubai1.jpg" text="dubai" />
-          <TourPackages src="/images/dubai2.jpg" text="dubai" />
-          <TourPackages src="/images/dubai3.jpg" text="dubai" />
-          <TourPackages src="/images/dubai4.jpg" text="dubai" />
-          <TourPackages src="/images/dubai5.jpg" text="dubai" />
-          <TourPackages src="/images/dubai1.jpg" text="dubai" />
-          <TourPackages src="/images/dubai2.jpg" text="dubai" />
-          <TourPackages src="/images/dubai3.jpg" text="dubai" />
-          <TourPackages src="/images/dubai4.jpg" text="dubai" />
-          <TourPackages src="/images/dubai5.jpg" text="dubai" />
-          <TourPackages src="/images/dubai1.jpg" text="dubai" />
-          <TourPackages src="/images/dubai2.jpg" text="dubai" />
-          <TourPackages src="/images/dubai3.jpg" text="dubai" />
-          <TourPackages src="/images/dubai4.jpg" text="dubai" />
-          <TourPackages src="/images/dubai5.jpg" text="dubai" />
+        <div className=" gap-y-7 gap-x-2 grid grid-cols-2 md:grid-cols-4  mt-10">
+          <TourPackages src="/images/dubai1.jpg" text="Desert Safari" />
+          <TourPackages src="/images/dubai2.jpg" text="Helicopter Ride" />
+          <TourPackages src="/images/dubai3.jpg" text="Dhow Cruise Dinner" />
+          <TourPackages src="/images/dubai4.jpg" text="Burj Khalifa Tour" />
+          <TourPackages src="/images/dubai5.jpg" text="Dubai City Tour" />
+          <TourPackages src="/images/dubai1.jpg" text="Atlantis Aquaventure" />
+          <TourPackages src="/images/dubai2.jpg" text="Hot Air Balloon Ride" />
+          <TourPackages src="/images/dubai3.jpg" text="Dubai Marina Yacht Cruise" />
+          <TourPackages src="/images/dubai4.jpg" text="Dubai Miracle Garden" />
+          <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
+          <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
+          <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
+          <TourPackages src="/images/dubai3.jpg" text="Worlds of Adventure" />
+          <TourPackages src="/images/dubai4.jpg" text="Dubai Fountain Show" />
+          <TourPackages src="/images/dubai5.jpg" text="Palm Jumeirah Sightseeing" />
+          <TourPackages src="/images/dubai1.jpg" text="Dubai Mall Aquarium" />
+          <TourPackages src="/images/dubai2.jpg" text="Al Fahidi Historical Tour" />
+          <TourPackages src="/images/dubai3.jpg" text="Jebel Jais Zipline" />
+          <TourPackages src="/images/dubai4.jpg" text="Global Village Experience" />
+          <TourPackages src="/images/dubai5.jpg" text="Wild Wadi Waterpark" />
         </div>
       </div>
     </>
