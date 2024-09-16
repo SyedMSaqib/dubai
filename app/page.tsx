@@ -4,6 +4,7 @@ import WhyBookUs from "@/components/ui/WhyBookUs"
 import { Divider } from "@nextui-org/divider"
 import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
 import { EmblaOptionsType } from "embla-carousel"
+import TopTours from "@/components/ui/TopTours"
 
 export default function Home() {
   const OPTIONS: EmblaOptionsType = { align: "start" }
@@ -56,7 +57,7 @@ export default function Home() {
         <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[100px]">
           Top Tours
         </h3>
-        <div className=" mt-14">
+        <div className=" mt-10">
           <EmblaCarousel options={OPTIONS} />
         </div>
       </div>

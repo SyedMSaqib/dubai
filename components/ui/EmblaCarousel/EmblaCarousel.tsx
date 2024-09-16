@@ -4,19 +4,19 @@ import { EmblaOptionsType } from "embla-carousel"
 import { DotButton, useDotButton } from "./EmblaCarouselDotButtons"
 import { PrevButton, NextButton, usePrevNextButtons } from "./EmblaCarouselArrowButtons"
 import useEmblaCarousel from "embla-carousel-react"
-import TourPackages from "../TourPackages" // Import TourPackagesProps here
+import TopTours from "../TopTours"
 
 type PropType = {
   // Updated type to be an array of TourPackageType
   options?: EmblaOptionsType
 }
 const slides = [
-  { src: "/images/desertSafari.jpg", text: "s" },
-  { src: "/images/heliride.jpg", text: "s" },
-  { src: "/images/dowCuise.jpg", text: "s" },
-  { src: "/images/burjKhalifa.jpg", text: "s" },
-  { src: "/images/dubaiCity.jpg", text: "s" },
-  { src: "/images/atlantas.jpg", text: "s" },
+  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
+  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
+  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
+  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
+  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
+  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
 ]
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
@@ -34,7 +34,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slides.map((tourPackage, index) => (
             <div className="embla__slide" key={index}>
-              <TourPackages src={tourPackage.src} text={tourPackage.text} />
+              <TopTours
+                src={tourPackage.src}
+                title={tourPackage.title}
+                price={tourPackage.price}
+                rating={tourPackage.rating}
+              />
             </div>
           ))}
         </div>

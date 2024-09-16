@@ -121,12 +121,12 @@ body {
   border: 0;
   padding: 0;
   margin: 0;
-  background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+  background-color: rgb(255, 255, 255); /* Light background on hover */
   box-shadow: inset 0 0 0 0.2rem var(--text-body); /* Darker border on hover */
   
   /* Set the size of the button */
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
   
   /* Create a round button */
   border-radius: 50%;
