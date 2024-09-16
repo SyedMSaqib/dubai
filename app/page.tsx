@@ -2,6 +2,7 @@ import ImageCarousel from "@/components/ui/ImageCarousel"
 import TourPackages from "@/components/ui/TourPackages"
 import WhyBookUs from "@/components/ui/WhyBookUs"
 import { Divider } from "@nextui-org/divider"
+import Loading from "./loading"
 
 export default function Home() {
   return (
@@ -36,26 +37,18 @@ export default function Home() {
           Tour Categories
         </h3>
         <div className=" gap-y-7 gap-x-2 grid grid-cols-2 md:grid-cols-4  mt-10">
-          <TourPackages src="/images/dubai1.jpg" text="Desert Safari" />
-          <TourPackages src="/images/dubai2.jpg" text="Helicopter Ride" />
-          <TourPackages src="/images/dubai3.jpg" text="Dhow Cruise Dinner" />
-          <TourPackages src="/images/dubai4.jpg" text="Burj Khalifa Tour" />
-          <TourPackages src="/images/dubai5.jpg" text="Dubai City Tour" />
-          <TourPackages src="/images/dubai1.jpg" text="Atlantis Aquaventure" />
-          <TourPackages src="/images/dubai2.jpg" text="Hot Air Balloon Ride" />
-          <TourPackages src="/images/dubai3.jpg" text="Dubai Marina Yacht Cruise" />
-          <TourPackages src="/images/dubai4.jpg" text="Dubai Miracle Garden" />
+          <TourPackages src="/images/desertSafari.jpg" text="Desert Safari" />
+          <TourPackages src="/images/heliride.jpg" text="Helicopter Ride" />
+          <TourPackages src="/images/dowCuise.jpg" text="Dhow Cruise Dinner" />
+          <TourPackages src="/images/burjKhalifa.jpg" text="Burj Khalifa Tour" />
+          <TourPackages src="/images/dubaiCity.jpg" text="Dubai City Tour" />
+          <TourPackages src="/images/atlantas.jpg" text="Atlantis Aquaventure" />
+          <TourPackages src="/images/hotAir.jpg" text="Hot Air Balloon Ride" />
+          <TourPackages src="/images/marinaYacht.jpg" text="Dubai Marina Yacht Cruise" />
+          <TourPackages src="/images/garden.jpg" text="Dubai Miracle Garden" />
           <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
           <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
-          <TourPackages src="/images/dubai3.jpg" text="Worlds of Adventure" />
-          <TourPackages src="/images/dubai4.jpg" text="Dubai Fountain Show" />
-          <TourPackages src="/images/dubai5.jpg" text="Palm Jumeirah Sightseeing" />
-          <TourPackages src="/images/dubai1.jpg" text="Dubai Mall Aquarium" />
-          <TourPackages src="/images/dubai2.jpg" text="Al Fahidi Historical Tour" />
-          <TourPackages src="/images/dubai3.jpg" text="Jebel Jais Zipline" />
-          <TourPackages src="/images/dubai4.jpg" text="Global Village Experience" />
-          <TourPackages src="/images/dubai5.jpg" text="Wild Wadi Waterpark" />
         </div>
       </div>
     </>

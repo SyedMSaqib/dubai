@@ -59,7 +59,7 @@ export default function App() {
         />
         <NavbarBrand>
           {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit">Dubai Tourism</p>
+          <p className="font-bold text-inherit text-xl">Dubai Tourism</p>
         </NavbarBrand>
       </NavbarContent>
 
