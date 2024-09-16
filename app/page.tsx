@@ -1,5 +1,7 @@
 import ImageCarousel from "@/components/ui/ImageCarousel"
+import TourPackages from "@/components/ui/TourPackages"
 import WhyBookUs from "@/components/ui/WhyBookUs"
+import { Divider } from "@nextui-org/divider"
 
 export default function Home() {
   return (
@@ -28,6 +30,33 @@ export default function Home() {
             header="Trusted by thousands"
             body="Book confidently with verified customer feedback."
           />
+        </div>
+        <Divider className="my-8" />
+        <div className=" gap-y-7 grid grid-cols-2 md:grid-cols-4 lg:max-w-[70vw] px-4 sm:px-6 lg:px-8 mt-10">
+          <TourPackages src="/images/dubai.jpg" text="dubai" />
+          <TourPackages src="/images/dubai1.jpg" text="dubai" />
+          <TourPackages src="/images/dubai2.jpg" text="dubai" />
+          <TourPackages src="/images/dubai3.jpg" text="dubai" />
+          <TourPackages src="/images/dubai4.jpg" text="dubai" />
+          <TourPackages src="/images/dubai5.jpg" text="dubai" />
+          <TourPackages src="/images/dubai.jpg" text="dubai" />
+          <TourPackages src="/images/dubai1.jpg" text="dubai" />
+          <TourPackages src="/images/dubai2.jpg" text="dubai" />
+          <TourPackages src="/images/dubai3.jpg" text="dubai" />
+          <TourPackages src="/images/dubai4.jpg" text="dubai" />
+          <TourPackages src="/images/dubai5.jpg" text="dubai" />
+          <TourPackages src="/images/dubai.jpg" text="dubai" />
+          <TourPackages src="/images/dubai1.jpg" text="dubai" />
+          <TourPackages src="/images/dubai2.jpg" text="dubai" />
+          <TourPackages src="/images/dubai3.jpg" text="dubai" />
+          <TourPackages src="/images/dubai4.jpg" text="dubai" />
+          <TourPackages src="/images/dubai5.jpg" text="dubai" />
+          <TourPackages src="/images/dubai.jpg" text="dubai" />
+          <TourPackages src="/images/dubai1.jpg" text="dubai" />
+          <TourPackages src="/images/dubai2.jpg" text="dubai" />
+          <TourPackages src="/images/dubai3.jpg" text="dubai" />
+          <TourPackages src="/images/dubai4.jpg" text="dubai" />
+          <TourPackages src="/images/dubai5.jpg" text="dubai" />
         </div>
       </div>
     </>

@@ -1,5 +1,4 @@
 "use client"
-import React from "react"
 import {
   Navbar,
   NavbarBrand,
@@ -8,9 +7,10 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
-  Button,
-} from "@nextui-org/react"
+} from "@nextui-org/navbar"
+import { Link } from "@nextui-org/link"
+import { Button } from "@nextui-org/button"
+import React from "react"
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function App() {
@@ -32,9 +32,9 @@ export default function App() {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-    isBordered
-    isBlurred={false}
-    className="bg-white"
+      isBordered
+      isBlurred={false}
+      className="bg-white"
       classNames={{
         item: [
           "flex",
@@ -82,31 +82,32 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link className="text-black" href="#">Login</Link>
+          <Link className="text-black" href="#">
+            Login
+          </Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link}  className="bg-[#74DFA2]" href="#" variant="flat">
+          <Button as={Link} className="bg-[#74DFA2]" href="#" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className={`${isMenuOpen ? "bg-white" : ""}`}>
-  {menuItems.map((item, index) => (
-    <NavbarMenuItem key={`${item}-${index}`}>
-      <Link
-        color={
-          index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-        }
-        className="w-full"
-        href="#"
-        size="lg"
-      >
-        {item}
-      </Link>
-    </NavbarMenuItem>
-  ))}
-</NavbarMenu>
-
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              color={
+                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+              }
+              className="w-full"
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   )
 }
