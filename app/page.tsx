@@ -32,26 +32,25 @@ export default function Home() {
           />
         </div>
         <Divider className="my-8" />
+        <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[50px]">
+          Tour Categories
+        </h3>
         <div className=" gap-y-7 grid grid-cols-2 md:grid-cols-4 lg:max-w-[70vw] px-4 sm:px-6 lg:px-8 mt-10">
-          <TourPackages src="/images/dubai.jpg" text="dubai" />
           <TourPackages src="/images/dubai1.jpg" text="dubai" />
           <TourPackages src="/images/dubai2.jpg" text="dubai" />
           <TourPackages src="/images/dubai3.jpg" text="dubai" />
           <TourPackages src="/images/dubai4.jpg" text="dubai" />
           <TourPackages src="/images/dubai5.jpg" text="dubai" />
-          <TourPackages src="/images/dubai.jpg" text="dubai" />
           <TourPackages src="/images/dubai1.jpg" text="dubai" />
           <TourPackages src="/images/dubai2.jpg" text="dubai" />
           <TourPackages src="/images/dubai3.jpg" text="dubai" />
           <TourPackages src="/images/dubai4.jpg" text="dubai" />
           <TourPackages src="/images/dubai5.jpg" text="dubai" />
-          <TourPackages src="/images/dubai.jpg" text="dubai" />
           <TourPackages src="/images/dubai1.jpg" text="dubai" />
           <TourPackages src="/images/dubai2.jpg" text="dubai" />
           <TourPackages src="/images/dubai3.jpg" text="dubai" />
           <TourPackages src="/images/dubai4.jpg" text="dubai" />
           <TourPackages src="/images/dubai5.jpg" text="dubai" />
-          <TourPackages src="/images/dubai.jpg" text="dubai" />
           <TourPackages src="/images/dubai1.jpg" text="dubai" />
           <TourPackages src="/images/dubai2.jpg" text="dubai" />
           <TourPackages src="/images/dubai3.jpg" text="dubai" />
