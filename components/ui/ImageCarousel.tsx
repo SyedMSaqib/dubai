@@ -79,7 +79,7 @@ const ImageCarousel = () => {
                 }}
                 draggable="false"
                 priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 768px) 70vw, (max-width: 1200px) 70vw, 100vw"
               />
             </div>
           ))}

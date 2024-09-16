@@ -2,9 +2,11 @@ import ImageCarousel from "@/components/ui/ImageCarousel"
 import TourPackages from "@/components/ui/TourPackages"
 import WhyBookUs from "@/components/ui/WhyBookUs"
 import { Divider } from "@nextui-org/divider"
-import Loading from "./loading"
+import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
+import { EmblaOptionsType } from "embla-carousel"
 
 export default function Home() {
+  const OPTIONS: EmblaOptionsType = { align: "start" }
   return (
     <>
       <ImageCarousel />
@@ -49,6 +51,13 @@ export default function Home() {
           <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
           <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
+        </div>
+
+        <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[100px]">
+          Top Tours
+        </h3>
+        <div className=" mt-14">
+          <EmblaCarousel options={OPTIONS} />
         </div>
       </div>
     </>
