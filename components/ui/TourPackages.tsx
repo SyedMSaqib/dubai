@@ -16,8 +16,9 @@ const TourPackages: React.FC<TourPackagesProps> = ({ src, text }) => {
           alt="packages image"
           className="z-0 w-full h-full scale-125  object-cover"
           src={src}
-          width={500}
-          height={500}
+          fill
+          blurDataURL="data:..."
+          placeholder="blur"
         />
         <CardFooter className="absolute w-full bg-black/50 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between flex flex-col items-center">
           <div className="text-center w-full">
