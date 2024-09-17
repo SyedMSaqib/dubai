@@ -1,14 +1,16 @@
 import React from "react"
 import { Card, CardBody, CardFooter } from "@nextui-org/card"
 import Image from "next/image"
+import Ratings from "./Ratings"
 
 type TopToursProps = {
   src: string
   title: string
   price: number
   rating: number
+  totalRatings: number
 }
-const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating }) => {
+const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating, totalRatings }) => {
   return (
     <div className="w-full max-w-sm mx-auto p-4">
       <Card className="shadow-none">
@@ -27,7 +29,9 @@ const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating }) => {
           <div>
             <b className="text-lg">{title}</b>
           </div>
-          <div className="text-default-500">{rating}</div>
+          <div className="text-default-500">
+            {<Ratings rating={rating} totalRatings={totalRatings} />}
+          </div>
           <div className="font-semibold text-lg">${price}</div>
         </CardFooter>
       </Card>

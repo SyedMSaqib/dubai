@@ -39,7 +39,7 @@ export default function Home() {
         <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[50px]">
           Tour Categories
         </h3>
-        <div className=" gap-y-7 gap-x-2 grid grid-cols-2 md:grid-cols-4  mt-10">
+        <div className=" gap-y-7 gap-x-2 grid grid-cols-2 md:grid-cols-4  mt-[20px]">
           <TourPackages src="/images/desertSafari.jpg" text="Desert Safari" />
           <TourPackages src="/images/heliride.jpg" text="Helicopter Ride" />
           <TourPackages src="/images/dowCuise.jpg" text="Dhow Cruise Dinner" />
@@ -54,10 +54,11 @@ export default function Home() {
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
         </div>
 
-        <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[100px]">
-          Top Tours
-        </h3>
-        <div className=" mt-10">
+        <div className=" text-center  mt-[100px]">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">Top Tours</h3>
+          <p className=" text-sm lg:text-lg  text-[#333]">More things to do in Dubai</p>
+        </div>
+        <div className=" mt-[10px]">
           <EmblaCarousel options={OPTIONS} />
         </div>
       </div>
