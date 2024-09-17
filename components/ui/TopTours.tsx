@@ -22,6 +22,7 @@ const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating, totalRat
             className="w-full object-cover h-[190px] md:h-[240px]"
             src={src}
             sizes="(max-width: 768px) 70vw, (max-width: 1200px) 70vw, 100vw"
+            priority
           />
         </CardBody>
 

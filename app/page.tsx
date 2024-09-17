@@ -53,7 +53,16 @@ export default function Home() {
           <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
         </div>
-
+      </div>
+      <div className="w-full bg-[#74DFA2] mt-[50px] py-[50px]">
+        <div className="mx-auto lg:max-w-[70vw] px-4 sm:px-6 lg:px-8">
+          <h3 className="text-center text-4xl font-bold">Explore, Experience, Enjoy</h3>
+          <p className="text-center text-xl mt-[20px]">
+            Book your next trip today and start your adventure.
+          </p>
+        </div>
+      </div>
+      <div className="mx-auto lg:max-w-[70vw] px-4 sm:px-6 lg:px-8">
         <div className=" text-center  mt-[100px]">
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">Top Tours</h3>
           <p className=" text-sm lg:text-lg  text-[#333]">More things to do in Dubai</p>

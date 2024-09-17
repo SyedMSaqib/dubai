@@ -70,22 +70,22 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
   const { fullStar, halfStar, emptyStar } = getRatings(rating, totalRatings)
 
   const generateFullStars = Array.from({ length: fullStar }, (_, index) => (
-    <div key={index}>{FullStar}</div>
+    <p key={index}>{FullStar}</p>
   ))
   const generateHalfStars = Array.from({ length: halfStar }, (_, index) => (
-    <div key={index}>{HalfStar}</div>
+    <p key={index}>{HalfStar}</p>
   ))
   const generateEmptyStars = Array.from({ length: emptyStar }, (_, index) => (
-    <div key={index}>{EmptyStar}</div>
+    <p key={index}>{EmptyStar}</p>
   ))
 
   return (
     <div className="flex flex-row">
-      <p className="flex flex-row">
+      <div className="flex flex-row">
         {generateFullStars}
         {generateHalfStars}
         {generateEmptyStars}
-      </p>
+      </div>
       <p className="pl-2">{totalRatings}</p>
     </div>
   )
