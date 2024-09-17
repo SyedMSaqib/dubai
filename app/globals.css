@@ -15,6 +15,7 @@
 
 :root {
   --font-trip-sans: 'Trip Sans', sans-serif;
+  
 }
 
 body {
@@ -22,16 +23,16 @@ body {
 }
 
 .embla {
-  max-width: 70rem;
+  max-width: 100rem;
   margin: auto;
   position: relative; /* Make the embla carousel relative to position buttons absolutely */
   --slide-height: 19rem;
-  --slide-spacing: 1rem;
+  /* --slide-spacing: 1rem; */
   --slide-size: 100%;
   --slide-spacing-sm: 1.6rem;
   --slide-size-sm: 50%;
-  --slide-spacing-lg: 2rem;
-  --slide-size-lg: calc(100% / 3);
+  /* --slide-spacing-lg: 2rem; */
+  --slide-size-lg: calc(100% / 4);
 }
 
 .embla__viewport {
@@ -57,6 +58,7 @@ body {
     margin-left: calc(var(--slide-spacing-lg) * -1);
   }
 }
+
 
 .embla__slide {
   min-width: 0;
