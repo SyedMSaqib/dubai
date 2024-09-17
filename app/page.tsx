@@ -54,7 +54,7 @@ export default function Home() {
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
         </div>
       </div>
-      <div className="w-full bg-[#74DFA2] mt-[50px] py-[50px]">
+      <div className="w-full bg-[#74DFA2] mt-[50px] py-[100px]">
         <div className="mx-auto lg:max-w-[70vw] px-4 sm:px-6 lg:px-8">
           <h3 className="text-center text-4xl font-bold">Explore, Experience, Enjoy</h3>
           <p className="text-center text-xl mt-[20px]">
