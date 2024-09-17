@@ -7,7 +7,7 @@ import { EmblaOptionsType } from "embla-carousel"
 import TopTours from "@/components/ui/TopTours"
 
 export default function Home() {
-  const OPTIONS: EmblaOptionsType = { align: "start" }
+  const OPTIONS: EmblaOptionsType = {}
   return (
     <>
       <ImageCarousel />
@@ -54,7 +54,7 @@ export default function Home() {
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
         </div>
       </div>
-      <div className="w-full bg-[#74DFA2] mt-[50px] py-[100px]">
+      <div className="w-full bg-[#74DFA2] mt-[50px] py-[100px] sm:py-[150px]">
         <div className="mx-auto lg:max-w-[70vw] px-4 sm:px-6 lg:px-8">
           <h3 className="text-center text-4xl font-bold">Explore, Experience, Enjoy</h3>
           <p className="text-center text-xl mt-[20px]">
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mx-auto lg:max-w-[70vw] px-4 sm:px-6 lg:px-8">
-        <div className=" text-center  mt-[100px]">
+        <div className=" text-center  mt-[50px]">
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">Top Tours</h3>
           <p className=" text-sm lg:text-lg  text-[#333]">More things to do in Dubai</p>
         </div>

@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import "./globals.css"
 import { Providers } from "./providers"
 import Navbar from "../components/layout/navbar"
+import Footer from "@/components/layout/Footer"
 
 const tripSans = localFont({
   src: [
@@ -31,7 +32,9 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+          <Footer />
         </Providers>
+        <div></div>
       </body>
     </html>
   )
