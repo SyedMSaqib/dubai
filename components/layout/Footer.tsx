@@ -11,7 +11,7 @@ const Footer = () => {
             </p>
             <a
               href=""
-              className="py-2.5 px-5 h-9 block w-fit bg-green-500 rounded-full shadow-sm text-xs text-black mx-auto transition-all  duration-500 hover:bg-green-600 lg:mx-0"
+              className="py-2.5 px-5 h-9 block w-fit bg-greenBG rounded-full shadow-sm text-xs text-black mx-auto transition-all  duration-500 hover:bg-green-600 lg:mx-0"
             >
               Contact us
             </a>
