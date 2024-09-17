@@ -11,12 +11,12 @@ type PropType = {
   options?: EmblaOptionsType
 }
 const slides = [
-  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
-  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
-  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
-  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
-  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
-  { src: "/images/atlantas.jpg", price: "$200", title: "Dubai City", rating: 4.5 },
+  { src: "/images/desertSafari.jpg", price: 200, title: "Desert Safari", rating: 4.5 },
+  { src: "/images/heliride.jpg", price: 299.99, title: "Helicopter Ride", rating: 5 },
+  { src: "/images/dowCuise.jpg", price: 322, title: "Dhow Cruise Dinner", rating: 4.5 },
+  { src: "/images/burjKhalifa.jpg", price: 130, title: "Burj Khalifa Tour", rating: 5 },
+  { src: "/images/dubaiCity.jpg", price: 180, title: "Dubai City Tour", rating: 4.5 },
+  { src: "/images/atlantas.jpg", price: 499.9, title: "Atlantis Aquaventure", rating: 4.5 },
 ]
 
 const EmblaCarousel: React.FC<PropType> = (props) => {

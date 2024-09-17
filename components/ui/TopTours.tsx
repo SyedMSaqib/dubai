@@ -5,7 +5,7 @@ import Image from "next/image"
 type TopToursProps = {
   src: string
   title: string
-  price: string
+  price: number
   rating: number
 }
 const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating }) => {
@@ -28,7 +28,7 @@ const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating }) => {
             <b className="text-lg">{title}</b>
           </div>
           <div className="text-default-500">{rating}</div>
-          <div className="font-semibold text-lg">{price}</div>
+          <div className="font-semibold text-lg">${price}</div>
         </CardFooter>
       </Card>
     </div>
