@@ -4,8 +4,8 @@ const Footer = () => {
   return (
     <footer className="w-full bg-black">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8">
-          <div className="col-span-full mb-10 lg:col-span-2 lg:mb-0">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8 justify-items-center">
+          <div className="col-span-full mb-10 lg:col-span-2 lg:mb-0 ">
             <p className="py-8 text-sm text-white lg:max-w-xs text-center lg:text-left">
               Trusted in more than 100 countries & 5 million customers. Have any query ?
             </p>
@@ -87,31 +87,6 @@ const Footer = () => {
               <li>
                 <a href="" className=" text-white ">
                   User Guide
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="lg:mx-auto text-left">
-            <h4 className="text-lg text-white font-medium mb-7">Blogs</h4>
-            <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a href="" className="text-white ">
-                  News
-                </a>
-              </li>
-              <li className="mb-6">
-                <a href="" className=" text-white ">
-                  Tips & Tricks
-                </a>
-              </li>
-              <li className="mb-6">
-                <a href="" className=" text-white ">
-                  New Updates
-                </a>
-              </li>
-              <li>
-                <a href="" className=" text-white ">
-                  Events
                 </a>
               </li>
             </ul>
