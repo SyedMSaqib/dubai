@@ -52,6 +52,18 @@ export default function Home() {
           <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
           <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
           <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
+          <TourPackages src="/images/desertSafari.jpg" text="Desert Safari" />
+          <TourPackages src="/images/heliride.jpg" text="Helicopter Ride" />
+          <TourPackages src="/images/dowCuise.jpg" text="Dhow Cruise Dinner" />
+          <TourPackages src="/images/burjKhalifa.jpg" text="Burj Khalifa Tour" />
+          <TourPackages src="/images/dubaiCity.jpg" text="Dubai City Tour" />
+          <TourPackages src="/images/atlantas.jpg" text="Atlantis Aquaventure" />
+          <TourPackages src="/images/hotAir.jpg" text="Hot Air Balloon Ride" />
+          <TourPackages src="/images/marinaYacht.jpg" text="Dubai Marina Yacht Cruise" />
+          <TourPackages src="/images/garden.jpg" text="Dubai Miracle Garden" />
+          <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
+          <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
+          <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
         </div>
       </div>
       <div className="w-full bg-[#74DFA2] mt-[50px] py-[100px] sm:py-[150px]">

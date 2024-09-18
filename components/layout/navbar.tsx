@@ -41,6 +41,8 @@ export default function App() {
           "relative",
           "h-full",
           "items-center",
+          "text-black",
+          "data-[active=true]:text-[#74DFA2]",
           "data-[active=true]:after:content-['']",
           "data-[active=true]:after:absolute",
           "data-[active=true]:after:bottom-0",
@@ -48,7 +50,7 @@ export default function App() {
           "data-[active=true]:after:right-0",
           "data-[active=true]:after:h-[2px]",
           "data-[active=true]:after:rounded-[2px]",
-          "data-[active=true]:after:bg-primary",
+          "data-[active=true]:after:bg-[#74DFA2]",
         ],
       }}
     >
@@ -70,7 +72,7 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="#" aria-current="page" className="text-[#4ac57f]">
             Customers
           </Link>
         </NavbarItem>
