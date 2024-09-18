@@ -47,7 +47,7 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
   const isFloat = (num: number) => {
     return num !== Math.floor(num)
   }
-  const getRatings = (rating: number, totalRatings: number) => {
+  const getRatings = (rating: number) => {
     let fullStar = 0
     let halfStar = 0
     let emptyStar = 0
@@ -67,7 +67,7 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
     return { fullStar, halfStar, emptyStar }
   }
 
-  const { fullStar, halfStar, emptyStar } = getRatings(rating, totalRatings)
+  const { fullStar, halfStar, emptyStar } = getRatings(rating)
 
   const generateFullStars = Array.from({ length: fullStar }, (_, index) => (
     <p key={index}>{FullStar}</p>

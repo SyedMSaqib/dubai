@@ -4,7 +4,6 @@ import WhyBookUs from "@/components/ui/WhyBookUs"
 import { Divider } from "@nextui-org/divider"
 import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
 import { EmblaOptionsType } from "embla-carousel"
-import TopTours from "@/components/ui/TopTours"
 
 export default function Home() {
   const OPTIONS: EmblaOptionsType = {}

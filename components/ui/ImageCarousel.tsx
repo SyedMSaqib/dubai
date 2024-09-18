@@ -9,14 +9,6 @@ const ImageCarousel = () => {
     src: string
     alt: string
   }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1))
-    }, 10000)
-    return () => clearInterval(interval)
-  }, [])
-  const [activeIndex, setActiveIndex] = useState(0)
   const items: CarouselItem[] = [
     {
       src: "/images/dubai4.jpg",
@@ -39,6 +31,14 @@ const ImageCarousel = () => {
       alt: "Dubai Image 5",
     },
   ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1))
+    }, 10000)
+    return () => clearInterval(interval)
+  }, [])
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const handlePrev = () => {
     setActiveIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1))
