@@ -4,9 +4,33 @@ import WhyBookUs from "@/components/ui/WhyBookUs"
 import { Divider } from "@nextui-org/divider"
 import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
 import { EmblaOptionsType } from "embla-carousel"
+import Link from "next/link"
+
+const tourPackages = [
+  { src: "/images/desertSafari.jpg", text: "Desert Safari" },
+  { src: "/images/heliride.jpg", text: "Helicopter Ride" },
+  { src: "/images/dowCuise.jpg", text: "Dhow Cruise Dinner" },
+  { src: "/images/burjKhalifa.jpg", text: "Burj Khalifa Tour" },
+  { src: "/images/dubaiCity.jpg", text: "Dubai City Tour" },
+  { src: "/images/atlantas.jpg", text: "Atlantis Aquaventure" },
+  { src: "/images/hotAir.jpg", text: "Hot Air Balloon Ride" },
+  { src: "/images/marinaYacht.jpg", text: "Dubai Marina Yacht Cruise" },
+  { src: "/images/garden.jpg", text: "Dubai Miracle Garden" },
+  { src: "/images/dubai5.jpg", text: "Dubai Frame Experience" },
+  { src: "/images/dubai1.jpg", text: "Ski Dubai Adventure" },
+  { src: "/images/dubai2.jpg", text: "Ferrari World Tour" },
+]
 
 export default function Home() {
   const OPTIONS: EmblaOptionsType = {}
+  const createSlug = (text: string) => {
+    return text
+      .toLowerCase() // Convert to lowercase
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/[^\w\-]+/g, "") // Remove non-word characters
+      .replace(/--+/g, "-") // Replace multiple hyphens with a single hyphen
+      .trim() // Trim leading and trailing hyphens
+  }
   return (
     <>
       <ImageCarousel />
@@ -39,30 +63,11 @@ export default function Home() {
           Tour Categories
         </h3>
         <div className=" gap-y-7 gap-x-2 grid grid-cols-2 md:grid-cols-4  mt-[20px]">
-          <TourPackages src="/images/desertSafari.jpg" text="Desert Safari" />
-          <TourPackages src="/images/heliride.jpg" text="Helicopter Ride" />
-          <TourPackages src="/images/dowCuise.jpg" text="Dhow Cruise Dinner" />
-          <TourPackages src="/images/burjKhalifa.jpg" text="Burj Khalifa Tour" />
-          <TourPackages src="/images/dubaiCity.jpg" text="Dubai City Tour" />
-          <TourPackages src="/images/atlantas.jpg" text="Atlantis Aquaventure" />
-          <TourPackages src="/images/hotAir.jpg" text="Hot Air Balloon Ride" />
-          <TourPackages src="/images/marinaYacht.jpg" text="Dubai Marina Yacht Cruise" />
-          <TourPackages src="/images/garden.jpg" text="Dubai Miracle Garden" />
-          <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
-          <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
-          <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
-          <TourPackages src="/images/desertSafari.jpg" text="Desert Safari" />
-          <TourPackages src="/images/heliride.jpg" text="Helicopter Ride" />
-          <TourPackages src="/images/dowCuise.jpg" text="Dhow Cruise Dinner" />
-          <TourPackages src="/images/burjKhalifa.jpg" text="Burj Khalifa Tour" />
-          <TourPackages src="/images/dubaiCity.jpg" text="Dubai City Tour" />
-          <TourPackages src="/images/atlantas.jpg" text="Atlantis Aquaventure" />
-          <TourPackages src="/images/hotAir.jpg" text="Hot Air Balloon Ride" />
-          <TourPackages src="/images/marinaYacht.jpg" text="Dubai Marina Yacht Cruise" />
-          <TourPackages src="/images/garden.jpg" text="Dubai Miracle Garden" />
-          <TourPackages src="/images/dubai5.jpg" text="Dubai Frame Experience" />
-          <TourPackages src="/images/dubai1.jpg" text="Ski Dubai Adventure" />
-          <TourPackages src="/images/dubai2.jpg" text="Ferrari World Tour" />
+          {tourPackages.map(({ src, text }, index) => (
+            <Link key={index} href={`/packages/${createSlug(text)}`}>
+              <TourPackages src={src} text={text} />
+            </Link>
+          ))}
         </div>
       </div>
       <div className="w-full bg-[#74DFA2] mt-[50px] py-[100px] sm:py-[150px]">
