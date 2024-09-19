@@ -16,6 +16,7 @@
     "@nextui-org/image": "^2.0.32",
     "@nextui-org/link": "^2.0.35",
     "@nextui-org/navbar": "^2.0.37",
+    "@nextui-org/slider": "^2.2.17",
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/theme": "^2.2.11",
     "embla-carousel-react": "^8.3.0",
