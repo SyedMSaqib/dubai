@@ -8,7 +8,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar"
-import { Link } from "@nextui-org/link"
+import Link from "next/link"
 import { Button } from "@nextui-org/button"
 import React from "react"
 // import {AcmeLogo} from "./AcmeLogo.jsx";
@@ -61,7 +61,9 @@ export default function App() {
         />
         <NavbarBrand>
           {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit text-xl">Dubai Tourism</p>
+          <Link href={"/"} className="font-bold text-inherit text-xl">
+            Dubai Tourism
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -103,7 +105,6 @@ export default function App() {
               }
               className="w-full"
               href="#"
-              size="lg"
             >
               {item}
             </Link>

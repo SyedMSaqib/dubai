@@ -1,5 +1,9 @@
-// "use client"
+import LottieLoader from "../components/Loaders/LottieLoader"
+
 export default function Loading() {
-  // You can add any UI inside Loading, including a Skeleton.
-  return <div>loading</div>
+  return (
+    <div>
+      <LottieLoader />
+    </div>
+  )
 }
