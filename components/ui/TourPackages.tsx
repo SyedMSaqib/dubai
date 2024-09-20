@@ -18,8 +18,7 @@ const TourPackages: React.FC<TourPackagesProps> = ({ src, text }) => {
           fill
           blurDataURL="data:..."
           placeholder="blur"
-          sizes="(max-width: 768px) 70vw, (max-width: 1200px) 70vw, 100vw"
-          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <CardFooter className="absolute w-full bg-black/50 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between flex flex-col items-center">
           <div className="text-center w-full">
