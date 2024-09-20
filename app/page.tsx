@@ -5,21 +5,9 @@ import { Divider } from "@nextui-org/divider"
 import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
 import { EmblaOptionsType } from "embla-carousel"
 import Link from "next/link"
-
-const tourPackages = [
-  { src: "/images/desertSafari.jpg", text: "Desert Safari" },
-  { src: "/images/heliride.jpg", text: "Helicopter Ride" },
-  { src: "/images/dowCuise.jpg", text: "Dhow Cruise Dinner" },
-  { src: "/images/burjKhalifa.jpg", text: "Burj Khalifa Tour" },
-  { src: "/images/dubaiCity.jpg", text: "Dubai City Tour" },
-  { src: "/images/atlantas.jpg", text: "Atlantis Aquaventure" },
-  { src: "/images/hotAir.jpg", text: "Hot Air Balloon Ride" },
-  { src: "/images/marinaYacht.jpg", text: "Dubai Marina Yacht Cruise" },
-  { src: "/images/garden.jpg", text: "Dubai Miracle Garden" },
-  { src: "/images/dubai5.jpg", text: "Dubai Frame Experience" },
-  { src: "/images/dubai1.jpg", text: "Ski Dubai Adventure" },
-  { src: "/images/dubai2.jpg", text: "Ferrari World Tour" },
-]
+import TopTours from "../components/ui/TopTours"
+import { tourPackages, topTours } from "../utils/ToursStatic"
+import Tesimonial from "@/components/ui/Tesimonial"
 
 export default function Home() {
   const OPTIONS: EmblaOptionsType = {}
@@ -81,10 +69,56 @@ export default function Home() {
       <div className="mx-auto lg:max-w-[70vw] px-4 sm:px-6 lg:px-8">
         <div className=" text-center  mt-[50px]">
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">Top Tours</h3>
-          <p className=" text-sm lg:text-lg  text-[#333]">More things to do in Dubai</p>
+          <p className=" text-sm lg:text-lg  text-[#333]">More things to do in UAE</p>
         </div>
         <div className=" mt-[10px]">
-          <EmblaCarousel options={OPTIONS} />
+          <EmblaCarousel options={{ loop: false }}>
+            {topTours.map(({ src, title, price, rating, totalRatings }, index) => (
+              <TopTours
+                key={index}
+                src={src}
+                title={title}
+                price={price}
+                rating={rating}
+                totalRatings={totalRatings}
+              />
+            ))}
+          </EmblaCarousel>
+        </div>
+        <div className=" text-center  mt-[50px]">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">You might like these</h3>
+          <p className=" text-sm lg:text-lg  text-[#333]">More things to do in UAE</p>
+        </div>
+        <div className=" mt-[10px]">
+          <EmblaCarousel options={{ loop: false }}>
+            {topTours.map(({ src, title, price, rating, totalRatings }, index) => (
+              <TopTours
+                key={index}
+                src={src}
+                title={title}
+                price={price}
+                rating={rating}
+                totalRatings={totalRatings}
+              />
+            ))}
+          </EmblaCarousel>
+        </div>
+        <div className=" text-center  mt-[50px]">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">Client Testimonials</h3>
+          <p className=" text-sm lg:text-lg  text-[#333]">
+            See what our clients are saying about their experience with us.
+          </p>
+        </div>
+        <div className="">
+          <EmblaCarousel options={{ loop: false }}>
+            <Tesimonial />
+            <Tesimonial />
+            <Tesimonial />
+            <Tesimonial />
+            <Tesimonial />
+            <Tesimonial />
+            <Tesimonial />
+          </EmblaCarousel>
         </div>
       </div>
     </>
