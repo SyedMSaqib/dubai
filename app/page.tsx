@@ -3,14 +3,13 @@ import TourPackages from "@/components/ui/TourPackages"
 import WhyBookUs from "@/components/ui/WhyBookUs"
 import { Divider } from "@nextui-org/divider"
 import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
-import { EmblaOptionsType } from "embla-carousel"
 import Link from "next/link"
 import TopTours from "../components/ui/TopTours"
-import { tourPackages, topTours } from "../utils/ToursStatic"
+import { tourPackages, topTours, topTours2 } from "../utils/ToursStatic"
 import Tesimonial from "@/components/ui/Tesimonial"
+import testimonials from "@/utils/TestimonialStatic"
 
 export default function Home() {
-  const OPTIONS: EmblaOptionsType = {}
   const createSlug = (text: string) => {
     return text
       .toLowerCase() // Convert to lowercase
@@ -71,7 +70,7 @@ export default function Home() {
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">Top Tours</h3>
           <p className=" text-sm lg:text-lg  text-[#333]">More things to do in UAE</p>
         </div>
-        <div className=" mt-[10px]">
+        <div className=" mt-[20px]">
           <EmblaCarousel options={{ loop: false }}>
             {topTours.map(({ src, title, price, rating, totalRatings }, index) => (
               <TopTours
@@ -89,9 +88,10 @@ export default function Home() {
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold">You might like these</h3>
           <p className=" text-sm lg:text-lg  text-[#333]">More things to do in UAE</p>
         </div>
-        <div className=" mt-[10px]">
+
+        <div className=" mt-[20px]">
           <EmblaCarousel options={{ loop: false }}>
-            {topTours.map(({ src, title, price, rating, totalRatings }, index) => (
+            {topTours2.map(({ src, title, price, rating, totalRatings }, index) => (
               <TopTours
                 key={index}
                 src={src}
@@ -109,15 +109,11 @@ export default function Home() {
             See what our clients are saying about their experience with us.
           </p>
         </div>
-        <div className="">
+        <div className=" mt-[20px]">
           <EmblaCarousel options={{ loop: false }}>
-            <Tesimonial />
-            <Tesimonial />
-            <Tesimonial />
-            <Tesimonial />
-            <Tesimonial />
-            <Tesimonial />
-            <Tesimonial />
+            {testimonials.map(({ comment, name }, index) => (
+              <Tesimonial comment={comment} personName={name} key={index} />
+            ))}
           </EmblaCarousel>
         </div>
       </div>

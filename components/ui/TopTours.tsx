@@ -12,7 +12,7 @@ type TopToursProps = {
 }
 const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating, totalRatings }) => {
   return (
-    <div className="w-full max-w-sm mx-auto lg:px-[4px]">
+    <div className="w-full gap-2 max-w-sm mx-auto px-[2px]">
       <Card className="shadow-none">
         <CardBody className="overflow-visible p-0">
           <Image
