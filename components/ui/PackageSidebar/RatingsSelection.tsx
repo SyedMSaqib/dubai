@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Checkbox } from "@nextui-org/checkbox"
 import { FullStar, EmptyStar } from "@/utils/Stars"
 
-const Ratings = () => {
+const RatingSelection = () => {
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
   const handleCheckboxChange = (rating: number) => {
@@ -11,7 +11,8 @@ const Ratings = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-2 pt-4">
+      <h4 className="font-bold text-large">Ratings</h4>
       <Checkbox
         color="success"
         isSelected={selectedRating === 1}
@@ -63,8 +64,8 @@ const Ratings = () => {
           </span>
         </div>
       </Checkbox>
-    </>
+    </div>
   )
 }
 
-export default Ratings
+export default RatingSelection
