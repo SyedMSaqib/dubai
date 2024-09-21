@@ -15,13 +15,11 @@ const Packages = ({ params }: { params: { slug: string } }) => {
         <MobilePackageFilter />
       </div>
       <div className="flex flex-col md:flex-row gap-2 mt-5">
-        {/* Sidebar */}
         <div className="hidden md:block">
           <PackageSidebar />
         </div>
 
-        {/* PackagesItem and additional content */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 md:mt-[20px]">
           <div className="flex flex-row gap-5 w-full border border-zinc-300 rounded-lg sm:p-4">
             <div className="flex-shrink-0 w-[150px] sm:w-[300px]">
               <PackagesItem />
