@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const PackagesItem = () => {
   return (
-    <Card className="shadow-none rounded-lg">
+    <Card className="shadow-none lg:rounded-lg">
       <CardBody className="overflow-visible p-0">
         <Image
           alt="image"
