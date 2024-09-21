@@ -15,7 +15,7 @@ const MobilePackageFilter = () => {
   const onClose = () => setIsOpen(false)
 
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden mt-[10px]">
       <button
         onClick={onOpen}
         className="flex items-center border border-black px-2 py-1 rounded-full"

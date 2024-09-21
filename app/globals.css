@@ -64,6 +64,7 @@ body {
     flex: 0 0 var(--slide-size-sm);
     padding-left: var(--slide-spacing-sm);
   }
+  
 }
 @media (min-width: 768px) {
   .embla__slide {
@@ -112,12 +113,13 @@ body {
   border: 0;
   padding: 0;
   margin: 0;
-  background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
-  box-shadow: inset 0 0 0 0.2rem var(--text-body); /* Darker border on hover */
+  background-color: rgba(255, 255, 255, 0.7);
   
+  /* Dark border for contrast */
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
   /* Set the size of the button */
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 3rem;
+  height: 3rem;
   
   /* Create a round button */
   border-radius: 50%;
