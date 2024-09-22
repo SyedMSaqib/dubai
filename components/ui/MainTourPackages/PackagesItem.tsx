@@ -15,14 +15,14 @@ type PropType = {
 
 const PackagesItem = ({ src, title, price, rating, totalRatings, time, description }: PropType) => {
   const limitDesc = (text: string, limit: number) => {
-    return text.length > limit ? text.substring(0, limit) + "...see more" : text
+    return text.length > limit ? text.substring(0, limit) + "..." : text
   }
 
   return (
     <Card className="shadow-lg md:shadow-none rounded-lg md:border md:border-zinc-300">
       <CardBody className="p-0">
         <div className="flex flex-row gap-4 w-full rounded-lg overflow-hidden">
-          <div className="flex-shrink-0 w-[170px] md:w-[350px] md:p-6">
+          <div className="flex-shrink-0 w-[170px] md:w-[350px] md:p-4">
             <Image
               alt="image"
               className="w-full object-cover h-[160px] md:h-[240px] md:rounded-lg"
@@ -32,19 +32,21 @@ const PackagesItem = ({ src, title, price, rating, totalRatings, time, descripti
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
-          <div className="flex flex-col w-full py-6 gap-2 pr-4 relative ">
-            <div className="flex justify-between items-start mb-2">
+          <div className="flex flex-col w-full py-3 gap-2 pr-4 relative ">
+            <div className="flex justify-between items-start md:mb-2">
               <p className="text-sm md:text-medium flex items-center gap-2">
                 <span>{FullStar}</span>
                 {rating} ({totalRatings})
               </p>
               <p className="font-bold text-medium md:text-xl m-0 hidden md:block">${price}</p>
             </div>
-            <p className="text-sm md:text-xl font-semibold m-0">{title}</p>
-            <p className="text-sm hidden md:block m-0 mt-2 text-justify">
-              {limitDesc(description, 300)}
+            <p className="text-md md:text-2xl font-semibold m-0">{title}</p>
+            <p className="line-clamp-3 text-medium hidden md:block m-0 mt-2 text-justify max-h-[6rem] text-[#4d4d4d]">
+              {description}
             </p>
-            <p className="text-sm md:text-md flex items-center m-0 gap-2 mt-2">
+            <span className="underline hover:cursor-pointer hidden md:block">Read more</span>
+
+            <p className="text-sm md:text-md flex items-center m-0 gap-2">
               <span>{ClockIcon}</span>
               <span>{time} hrs</span>
             </p>
