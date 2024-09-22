@@ -2,6 +2,7 @@ import PackageSidebar from "@/components/ui/MainTourPackages/PackageSidebar/Pack
 import MobilePackageFilter from "@/components/ui/MainTourPackages/PackageSidebar/MobilePackageFilter"
 import PackagesItem from "@/components/ui/MainTourPackages/PackagesItem"
 import { packagesData } from "@/utils/ToursStatic"
+import PackagePagination from "@/components/ui/MainTourPackages/PackagePagination"
 const Packages = ({ params }: { params: { slug: string } }) => {
   const { slug } = params
   const slugToText = (slug: string) => {
@@ -32,6 +33,9 @@ const Packages = ({ params }: { params: { slug: string } }) => {
               description={item.description}
             />
           ))}
+          <div className="flex justify-center mt-[50px] mb-[20px]">
+            <PackagePagination />
+          </div>
         </div>
       </div>
     </div>
