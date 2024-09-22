@@ -185,3 +185,29 @@ body {
 .embla__dot--selected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
 }
+
+@media (max-width: 640px) {
+  .embla__slide {
+    flex: 0 0 calc(100% - 50px); /* Reduce the size of the slide to show a peek */
+    padding-left: 15px; /* Adjust the spacing between slides */
+  }
+}
+@media (max-width: 640px) {
+  .embla__buttons {
+    display: none;
+  }
+
+  .embla__slide {
+    flex: 0 0 calc(100% - 50px);
+    padding-left: 10px;
+  }
+
+  .embla__container {
+    margin-left: 0;
+  }
+}
+@media (max-width: 640px) {
+  .embla__container {
+    margin-left: 0; /* Prevent margin shifting */
+  }
+}
