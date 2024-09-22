@@ -1,7 +1,6 @@
 "use client"
 import React from "react"
 import { Pagination } from "@nextui-org/pagination"
-import { Button } from "@nextui-org/button"
 
 export default function App() {
   const [currentPage, setCurrentPage] = React.useState(1)
