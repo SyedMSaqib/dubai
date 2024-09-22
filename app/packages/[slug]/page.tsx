@@ -9,7 +9,7 @@ const Packages = ({ params }: { params: { slug: string } }) => {
   }
   const slugg = slugToText(slug)
   return (
-    <div className="mx-auto  2xl:max-w-[80vw] px-4 sm:px-6 lg:px-8 mt-10">
+    <div className="mx-auto  2xl:max-w-[90vw] px-4 sm:px-6 lg:px-8 mt-10">
       <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">{slugg}</h3>
       <div>
         <MobilePackageFilter />

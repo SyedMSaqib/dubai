@@ -9,7 +9,7 @@ interface TourPackagesProps {
 const TourPackages: React.FC<TourPackagesProps> = ({ src, text }) => {
   return (
     <div className="flex justify-center">
-      <Card className="w-[160px] h-[200px] lg:w-[250px] lg:h-[250px] relative ">
+      <Card className="w-[170px] h-[200px] lg:w-[250px] lg:h-[250px] relative ">
         <Image
           // removeWrapper
           alt="packages image"
