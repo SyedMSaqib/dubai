@@ -161,7 +161,7 @@ body {
   }
 
   .embla__slide {
-    flex: 0 0 calc(100% - 50px);
+    flex: 0 0 calc(100% - 100px);
     padding-left: 10px;
   }
 
