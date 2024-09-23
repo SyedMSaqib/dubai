@@ -3,20 +3,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { useSwipeable } from "react-swipeable"
 
-const ImageCarousel = () => {
-  interface CarouselItem {
-    src: string
-    alt: string
-  }
-
-  const items: CarouselItem[] = [
-    { src: "/images/dubai4.jpg", alt: "Dubai Image 4" },
-    { src: "/images/dubai.jpg", alt: "Dubai Image 1" },
-    { src: "/images/dubai2.jpg", alt: "Dubai Image 2" },
-    { src: "/images/dubai3.jpg", alt: "Dubai Image 3" },
-    { src: "/images/dubai5.jpg", alt: "Dubai Image 5" },
-  ]
-
+const ImageCarousel = ({ items }: { items: string[] }) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const handlePrev = () => {
@@ -47,8 +34,8 @@ const ImageCarousel = () => {
             onClick={() => setActiveIndex(index)}
           >
             <Image
-              src={item.src}
-              alt={item.alt}
+              src={item}
+              alt={item.slice(item.lastIndexOf("/") + 1)}
               fill
               style={{ objectFit: "cover" }}
               draggable="false"
@@ -70,8 +57,8 @@ const ImageCarousel = () => {
               data-carousel-item
             >
               <Image
-                src={item.src}
-                alt={item.alt}
+                src={item}
+                alt={item.slice(item.lastIndexOf("/") + 1)}
                 fill
                 blurDataURL="data:..."
                 placeholder="blur"
