@@ -8,16 +8,9 @@ import TopTours from "../components/ui/TopTours"
 import { tourPackages, topTours, topTours2 } from "../utils/ToursStatic"
 import Tesimonial from "@/components/ui/Tesimonial"
 import testimonials from "@/utils/TestimonialStatic"
+import { createSlug } from "@/utils/slug"
 
 export default function Home() {
-  const createSlug = (text: string) => {
-    return text
-      .toLowerCase() // Convert to lowercase
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .replace(/[^\w\-]+/g, "") // Remove non-word characters
-      .replace(/--+/g, "-") // Replace multiple hyphens with a single hyphen
-      .trim() // Trim leading and trailing hyphens
-  }
   return (
     <>
       <ImageCarousel />

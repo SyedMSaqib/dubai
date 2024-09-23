@@ -14,10 +14,6 @@ type PropType = {
 }
 
 const PackagesItem = ({ src, title, price, rating, totalRatings, time, description }: PropType) => {
-  const limitDesc = (text: string, limit: number) => {
-    return text.length > limit ? text.substring(0, limit) + "..." : text
-  }
-
   return (
     <Card className="shadow-lg md:shadow-none rounded-lg md:border md:border-zinc-300">
       <CardBody className="p-0">

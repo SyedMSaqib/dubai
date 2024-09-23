@@ -3,15 +3,16 @@ import MobilePackageFilter from "@/components/ui/MainTourPackages/PackageSidebar
 import PackagesItem from "@/components/ui/MainTourPackages/PackagesItem"
 import { packagesData } from "@/utils/ToursStatic"
 import PackagePagination from "@/components/ui/MainTourPackages/PackagePagination"
-const Packages = ({ params }: { params: { slug: string } }) => {
-  const { slug } = params
-  const slugToText = (slug: string) => {
-    return slug.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase()) // Capitalize the first letter of each word
-  }
-  const slugg = slugToText(slug)
+import Link from "next/link"
+import { createSlug, slugToText } from "@/utils/slug"
+
+const Packages = ({ params }: { params: { allPackages: string } }) => {
+  const { allPackages } = params
+
+  const packageName = slugToText(allPackages)
   return (
     <div className="mx-auto  2xl:max-w-[90vw] px-4 sm:px-6 lg:px-8 mt-10">
-      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">{slugg}</h3>
+      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">{packageName}</h3>
       <div>
         <MobilePackageFilter />
       </div>
@@ -22,16 +23,18 @@ const Packages = ({ params }: { params: { slug: string } }) => {
 
         <div className="lg:mt-[20px] flex flex-col gap-2 w-full">
           {packagesData.map((item) => (
-            <PackagesItem
-              key={item.title} // Use a unique key, here we can use title or any unique identifier
-              src={item.src}
-              title={item.title}
-              price={item.price}
-              rating={item.rating}
-              totalRatings={item.totalRatings}
-              time={item.time}
-              description={item.description}
-            />
+            <Link href={`/packages/${allPackages}/${createSlug(item.title)}`} key={item.title}>
+              <PackagesItem
+                key={item.title} // Use a unique key, here we can use title or any unique identifier
+                src={item.src}
+                title={item.title}
+                price={item.price}
+                rating={item.rating}
+                totalRatings={item.totalRatings}
+                time={item.time}
+                description={item.description}
+              />
+            </Link>
           ))}
           <div className="flex justify-center mt-[50px] mb-[20px]">
             <PackagePagination />
