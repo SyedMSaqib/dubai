@@ -1,7 +1,6 @@
 "use client"
 import React from "react"
 import { EmblaOptionsType } from "embla-carousel"
-import { DotButton, useDotButton } from "./EmblaCarouselDotButtons"
 import { PrevButton, NextButton, usePrevNextButtons } from "./EmblaCarouselArrowButtons"
 import useEmblaCarousel from "embla-carousel-react"
 
@@ -13,8 +12,6 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = ({ options, children }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi)
 
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
     usePrevNextButtons(emblaApi)
