@@ -7,7 +7,7 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
 
   return (
     <div className="mb-96 mx-auto max-w-[1400px]  lg:px-8 mt-10">
-      <h1 className="text-2xl font-bold mb-6">{slugToText(packagesDetails)}</h1>
+      <h1 className="text-2xl font-bold mb-6 pl-4">{slugToText(packagesDetails)}</h1>
       <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
         <div className="w-full  mb-6 lg:mb-0 ">
           <PackageDetailsCarousel />
