@@ -29,7 +29,7 @@ const ImageCarousel = ({ items }: { items: string[] }) => {
           <div
             key={index}
             className={`relative w-full h-[106px] cursor-pointer border-2 rounded-lg overflow-hidden ${
-              activeIndex === index ? "border-black" : "border-transparent"
+              activeIndex === index ? "bg-transparent" : "bg-no-repeat brightness-50"
             }`}
             onClick={() => setActiveIndex(index)}
           >
@@ -72,7 +72,7 @@ const ImageCarousel = ({ items }: { items: string[] }) => {
           {/* Left button */}
           <button
             onClick={handlePrev}
-            className="absolute top-1/2 left-4 z-30 flex items-center justify-center w-10 h-10 bg-white/50 text-black rounded-full hover:bg-white focus:outline-none transform -translate-y-1/2"
+            className="absolute top-1/2 left-4 z-30 flex items-center justify-center w-10 h-10 bg-white/80 text-black rounded-full hover:bg-white focus:outline-none transform -translate-y-1/2"
             aria-label="Previous slide"
           >
             <span className="sr-only">Previous</span>
@@ -95,7 +95,7 @@ const ImageCarousel = ({ items }: { items: string[] }) => {
           {/* Right button */}
           <button
             onClick={handleNext}
-            className="absolute top-1/2 right-4 z-30 flex items-center justify-center w-10 h-10 bg-white/50 text-black rounded-full hover:bg-white focus:outline-none transform -translate-y-1/2"
+            className="absolute top-1/2 right-4 z-30 flex items-center justify-center w-10 h-10 bg-white/80 text-black rounded-full hover:bg-white focus:outline-none transform -translate-y-1/2"
             aria-label="Next slide"
           >
             <span className="sr-only">Next</span>

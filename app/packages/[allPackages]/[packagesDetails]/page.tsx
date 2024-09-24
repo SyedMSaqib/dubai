@@ -1,4 +1,5 @@
 import PackageDetailsCarousel from "@/components/ui/PackageDetailsCarousel"
+import Ratings from "@/components/ui/Ratings"
 import { slugToText } from "@/utils/slug"
 import React from "react"
 
@@ -13,9 +14,13 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
   ]
 
   return (
-    <div className="mb-96 mx-auto max-w-[1400px]  lg:px-8 mt-10">
-      <h1 className="text-2xl font-bold mb-6 pl-4">{slugToText(packagesDetails)}</h1>
-      <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
+    <div className="mb-96 mx-auto max-w-[1400px]  lg:px-8 mt-4">
+      <h1 className="text-3xl font-bold  pl-4">{slugToText(packagesDetails)}</h1>
+      <div className="flex pl-4 ">
+        <Ratings rating={3.5} totalRatings={100} />
+        <p className="text-default-500 ml-2"> Reviews</p>
+      </div>
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between mt-2">
         <div className="w-full  mb-6 lg:mb-0 ">
           <PackageDetailsCarousel items={items} />
         </div>
