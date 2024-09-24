@@ -37,7 +37,7 @@ const PackagesItem = ({ src, title, price, rating, totalRatings, time, descripti
               <p className="font-bold text-medium md:text-xl m-0 hidden md:block">${price}</p>
             </div>
             <p className="text-md md:text-2xl font-semibold m-0">{title}</p>
-            <p className="line-clamp-3 text-medium hidden md:block m-0 mt-2 text-justify max-h-[6rem] text-[#4d4d4d]">
+            <p className="line-clamp-3 text-medium hidden md:block m-0 mt-2 text-justify max-h-[4.5rem] text-[#4d4d4d]">
               {description}
             </p>
             <span className="underline hover:cursor-pointer hidden md:block">Read more</span>

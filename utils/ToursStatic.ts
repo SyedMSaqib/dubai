@@ -106,7 +106,7 @@ export const tourPackages = [
   export const packagesData = [
     {
       src: "/images/desertSafari.jpg",
-      title: "Desert Safari Adventure",
+      title: "Sunrise Desert Safari with Camel Trekking and Sand Boarding",
       price: 100,
       rating: 4.5,
       totalRatings: 150,
@@ -116,7 +116,7 @@ export const tourPackages = [
     },
     {
       src: "/images/heliride.jpg",
-      title: "Helicopter Ride Over Dubai",
+      title: "Evening Desert Safari with BBQ Dinner",
       price: 300,
       rating: 4.8,
       totalRatings: 200,
@@ -126,7 +126,7 @@ export const tourPackages = [
     },
     {
       src: "/images/dowCuise.jpg",
-      title: "Dhow Cruise Dinner on Dubai Creek",
+      title: "Desert Safari with Quad Biking",
       price: 80,
       rating: 4.2,
       totalRatings: 100,
@@ -136,7 +136,7 @@ export const tourPackages = [
     },
     {
       src: "/images/burjKhalifa.jpg",
-      title: "Burj Khalifa Tour",
+      title: "Private Desert Safari with VIP Camp Access",
       price: 150,
       rating: 4.6,
       totalRatings: 250,
@@ -146,7 +146,7 @@ export const tourPackages = [
     },
     {
       src: "/images/dubaiCity.jpg",
-      title: "Dubai City Tour",
+      title: "Overnight Desert Safari with Stargazing",
       price: 70,
       rating: 4.4,
       totalRatings: 300,
@@ -156,7 +156,7 @@ export const tourPackages = [
     },
     {
       src: "/images/atlantas.jpg",
-      title: "Atlantis Aquaventure Waterpark",
+      title: "Desert Safari with Sandboarding and Camel Ride",
       price: 120,
       rating: 4.7,
       totalRatings: 180,
@@ -166,7 +166,7 @@ export const tourPackages = [
     },
     {
       src: "/images/hotAir.jpg",
-      title: "Hot Air Balloon Ride Over the Desert",
+      title: "Morning Desert Safari with Falconry Experience",
       price: 250,
       rating: 4.9,
       totalRatings: 80,
@@ -176,7 +176,7 @@ export const tourPackages = [
     },
     {
       src: "/images/marinaYacht.jpg",
-      title: "Dubai Marina Yacht Cruise",
+      title: "Luxury Desert Safari with Gourmet Dining",
       price: 200,
       rating: 4.6,
       totalRatings: 160,
@@ -186,7 +186,7 @@ export const tourPackages = [
     },
     {
       src: "/images/garden.jpg",
-      title: "Dubai Miracle Garden",
+      title: "Exclusive Desert Safari with Private Camp",
       price: 50,
       rating: 4.5,
       totalRatings: 120,
@@ -196,32 +196,21 @@ export const tourPackages = [
     },
     {
       src: "/images/dubai5.jpg",
-      title: "Dubai Frame Experience",
+      title: "Desert Safari with Dune Buggy Ride",
       price: 90,
       rating: 4.3,
       totalRatings: 90,
       time: 1,
       description: 
-        "Experience one of Dubai's newest architectural marvels, the Dubai Frame, which offers a unique way to see the city's past, present, and future. This massive picture-frame-like structure stands 150 meters tall and provides panoramic views of both old and new Dubai. Step onto the glass sky bridge for an exhilarating experience as you look down at the ground below, and learn about Dubai's transformation from a small fishing village to a global metropolis through the interactive museum exhibits. This tour offers a fascinating journey through time and a spectacular view of the city.  Experience one of Dubai's newest architectural marvels, the Dubai Frame, which offers a unique way to see the city's past, present, and future. This massive picture-frame-like structure stands 150 meters tall and provides panoramic views of both old and new Dubai. Step onto the glass sky bridge for an exhilarating experience as you look down at the ground below, and learn about Dubai's transformation from a small fishing village to a global metropolis through the interactive museum exhibits. This tour offers a fascinating journey through time and a spectacular view of the city",
+        "Experience one of Dubai's newest architectural marvels, the Dubai Frame, which offers a unique way to see the city's past, present, and future. This massive picture-frame-like structure stands 150 meters tall and provides panoramic views of both old and new Dubai. Step onto the glass sky bridge for an exhilarating experience as you look down at the ground below, and learn about Dubai's transformation from a small fishing village to a global metropolis through the interactive museum exhibits. This tour offers a fascinating journey through time and a spectacular view of the city. Experience one of Dubai's newest architectural marvels, the Dubai Frame, which offers a unique way to see the city's past, present, and future. This massive picture-frame-like structure stands 150 meters tall and provides panoramic views of both old and new Dubai. Step onto the glass sky bridge for an exhilarating experience as you look down at the ground below, and learn about Dubai's transformation from a small fishing village to a global metropolis through the interactive museum exhibits. This tour offers a fascinating journey through time and a spectacular view of the city",
     },
     {
       src: "/images/dubai1.jpg",
-      title: "Ski Dubai Adventure",
+      title: "Premium Desert Safari with Helicopter Ride",
       price: 110,
       rating: 4.8,
       totalRatings: 75,
       time: 2,
       description: 
-        "Get ready for an unexpected adventure in the desert – skiing! Ski Dubai, the Middle East's first indoor ski resort, offers visitors a chance to hit the slopes without ever leaving the city. Whether you're a seasoned skier or a complete beginner, you'll find something to enjoy, from skiing and snowboarding to tobogganing and playing with penguins. This one-of-a-kind attraction also features a snow park for family fun, making it a must-visit for anyone seeking a unique and exciting experience in Dubai.",
-    },
-    {
-      src: "/images/dubai2.jpg",
-      title: "Ferrari World Tour",
-      price: 160,
-      rating: 4.6,
-      totalRatings: 110,
-      time: 4,
-      description: 
-        "Rev your engines and get ready for a high-octane day at Ferrari World in Abu Dhabi. This thrilling theme park is home to the world's fastest roller coaster, Formula Rossa, as well as a variety of other exciting rides and attractions. Experience the speed, power, and elegance of Ferrari as you explore the exhibits, try your hand at racing simulators, and enjoy the rides inspired by the world of Formula 1."
+        "Get ready for an unexpected adventure in the desert – skiing! Ski Dubai, the Middle East's first indoor ski resort, offers visitors a chance to hit the slopes without ever leaving the city. Whether you're a seasoned skier or a complete beginner, you'll find something to enjoy, from skiing and snowboarding to tobogganing and playing with penguins. This one-of-a-kind attraction also features a snow park for family fun, making it a must-visit for anyone seeking a unique and"
     }]
-  

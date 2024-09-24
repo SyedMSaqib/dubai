@@ -7,11 +7,17 @@ const TimeOfDay = () => {
     <>
       <h4 className="font-bold text-large">Time of Day</h4>
       <div className="flex flex-col gap-2 pt-4">
-        <Checkbox color="success">Morning</Checkbox>
+        <Checkbox color="success" className="font-semibold">
+          Morning
+        </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts before 12pm</p>
-        <Checkbox color="success">Afternoon</Checkbox>
+        <Checkbox color="success" className="font-semibold">
+          Afternoon
+        </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts after 12pm</p>
-        <Checkbox color="success">Evening</Checkbox>
+        <Checkbox color="success" className="font-semibold">
+          Evening
+        </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts after 5pm</p>
         <Divider className="my-4" />
       </div>
