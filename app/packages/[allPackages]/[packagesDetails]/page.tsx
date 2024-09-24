@@ -18,7 +18,7 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
       <h1 className="text-3xl font-bold  pl-4">{slugToText(packagesDetails)}</h1>
       <div className="flex pl-4 ">
         <Ratings rating={3.5} totalRatings={100} />
-        <p className="text-default-500 ml-2"> Reviews</p>
+        <p className=" ml-2"> Reviews</p>
       </div>
       <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between mt-2">
         <div className="w-full  mb-6 lg:mb-0 ">

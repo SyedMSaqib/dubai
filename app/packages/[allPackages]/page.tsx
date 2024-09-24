@@ -5,18 +5,23 @@ import { packagesData } from "@/utils/ToursStatic"
 import PackagePagination from "@/components/ui/MainTourPackages/PackagePagination"
 import Link from "next/link"
 import { createSlug, slugToText } from "@/utils/slug"
+import Ratings from "@/components/ui/Ratings"
 
 const Packages = ({ params }: { params: { allPackages: string } }) => {
   const { allPackages } = params
 
   const packageName = slugToText(allPackages)
   return (
-    <div className="mx-auto  2xl:max-w-[90vw] px-4 sm:px-6 lg:px-8 mt-10">
-      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">{packageName}</h3>
+    <div className="mx-auto  2xl:max-w-[70vw] px-4 sm:px-6 lg:px-8 mt-10">
+      <h3 className="text-3xl sm:text-2xl lg:text-4xl font-bold">{packageName}</h3>
+      <div className="flex ">
+        <Ratings rating={3.5} totalRatings={10023} />
+        <p className=" ml-2"> Reviews</p>
+      </div>
       <div>
         <MobilePackageFilter />
       </div>
-      <div className=" flex flex-row gap-2 mt-5">
+      <div className=" flex flex-row gap-2 mt-5 lg:mt-0">
         <div className="hidden lg:block">
           <PackageSidebar />
         </div>
