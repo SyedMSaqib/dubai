@@ -22,6 +22,71 @@ export default function Loading() {
               </div>
             </div>
           </div>
+          <div className="flex gap-2 mt-2">
+            <Skeleton className="w-[300px] md:w-[350px] md:p-6 h-[170px] md:h-[250px] rounded-lg lg:text-3xl"></Skeleton>
+            <div className="space-y-4 mt-[50px] w-full">
+              <Skeleton className="w-[70px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <div className="flex justify-between pt-[20px]">
+                <Skeleton className="w-[50px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+                <Skeleton className="w-[40px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <Skeleton className="w-[300px] md:w-[350px] md:p-6 h-[170px] md:h-[250px] rounded-lg lg:text-3xl"></Skeleton>
+            <div className="space-y-4 mt-[50px] w-full">
+              <Skeleton className="w-[70px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <div className="flex justify-between pt-[20px]">
+                <Skeleton className="w-[50px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+                <Skeleton className="w-[40px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <Skeleton className="w-[300px] md:w-[350px] md:p-6 h-[170px] md:h-[250px] rounded-lg lg:text-3xl"></Skeleton>
+            <div className="space-y-4 mt-[50px] w-full">
+              <Skeleton className="w-[70px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <div className="flex justify-between pt-[20px]">
+                <Skeleton className="w-[50px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+                <Skeleton className="w-[40px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <Skeleton className="w-[300px] md:w-[350px] md:p-6 h-[170px] md:h-[250px] rounded-lg lg:text-3xl"></Skeleton>
+            <div className="space-y-4 mt-[50px] w-full">
+              <Skeleton className="w-[70px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <div className="flex justify-between pt-[20px]">
+                <Skeleton className="w-[50px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+                <Skeleton className="w-[40px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2 mt-2">
+            <Skeleton className="w-[300px] md:w-[350px] md:p-6 h-[170px] md:h-[250px] rounded-lg lg:text-3xl"></Skeleton>
+            <div className="space-y-4 mt-[50px] w-full">
+              <Skeleton className="w-[70px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <Skeleton className="w-full h-3 rounded-lg lg:text-3xl"></Skeleton>
+              <div className="flex justify-between pt-[20px]">
+                <Skeleton className="w-[50px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+                <Skeleton className="w-[40px] h-3 rounded-lg lg:text-3xl"></Skeleton>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

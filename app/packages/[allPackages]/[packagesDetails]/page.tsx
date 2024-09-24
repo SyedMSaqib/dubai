@@ -23,10 +23,10 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
         <p className=" ml-2"> Reviews</p>
       </div>
       <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between mt-2">
-        <div className="w-full  mb-6 lg:mb-0 ">
+        <div className="w-full   lg:mb-0 ">
           <PackageDetailsCarousel items={items} />
         </div>
-        <div className=" w-full lg:w-[500px]  hidden lg:block rounded-lg border border-zinc-300">
+        <div className=" w-full lg:w-[500px]  rounded-lg lg:border lg:border-zinc-400 ">
           <div className="p-6 space-y-3">
             <p className="text-3xl font-semibold ">
               From <span>$999</span>
