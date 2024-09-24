@@ -4,7 +4,7 @@ import React from "react"
 
 export default function TransportType() {
   const [value, setValue] = React.useState("private")
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
   console.log(value)

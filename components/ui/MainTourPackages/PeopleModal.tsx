@@ -9,7 +9,6 @@ export const PeopleModal = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const onOpen = () => setIsOpen(true)
-  const onClose = () => setIsOpen(false)
 
   const [Adults, setAdults] = useState(1)
 
