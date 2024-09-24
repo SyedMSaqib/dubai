@@ -21,7 +21,7 @@ export default function DateInput() {
         calendarWidth={350}
       />
       <p className=" text-sm">
-        Selected date: {value ? formatter.format(value.toDate(getLocalTimeZone())) : "--"}
+        {value ? formatter.format(value.toDate(getLocalTimeZone())) : "--"}
       </p>
     </div>
   )
