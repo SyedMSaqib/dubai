@@ -20,9 +20,18 @@ export default function AdOns() {
     <div className="flex flex-col gap-3 relative">
       <CheckboxGroup color="warning" value={selected} onValueChange={setSelected}>
         {addons.map((addon) => (
-          <Checkbox key={addon.name} value={addon.name}>
+          <Checkbox
+            classNames={{
+              base: "",
+              wrapper:
+                "before:border-black before:transition-colors group-data-[selected=true]:before:border-transparent",
+              icon: "text-black",
+            }}
+            key={addon.name}
+            value={addon.name}
+          >
             <div className="flex justify-between items-center w-full">
-              <span className="flex-1 w-[200px] md:w-[400px]">{addon.name}</span>
+              <span className="flex-1 w-[200px] md:w-[400px] font-normal">{addon.name}</span>
               <span className="ml-8 font-semibold text-right w-24">${addon.price}</span>
             </div>
           </Checkbox>

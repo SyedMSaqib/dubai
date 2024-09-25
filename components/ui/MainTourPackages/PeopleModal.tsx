@@ -60,7 +60,7 @@ export const PeopleModal = () => {
                 <p className="font-bold">Select Visitors</p>
                 <div className="flex flex-row justify-between md:justify-start md:gap-[300px]">
                   <div className="flex items-center gap-4">
-                    <p className="font-bold">Adults: </p>
+                    <p className="">Adults: </p>
                     <button
                       className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
                       onClick={handleDecrement}
@@ -68,7 +68,7 @@ export const PeopleModal = () => {
                     >
                       -
                     </button>
-                    <span className="text-xl font-bold">{Adults}</span>
+                    <span className="text-lg">{Adults}</span>
                     <button
                       className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
                       onClick={handleIncrement}
@@ -77,7 +77,7 @@ export const PeopleModal = () => {
                     </button>
                   </div>
                   <div className="flex items-center gap-4">
-                    <p className="font-bold">Childs: </p>
+                    <p className="">Childs: </p>
                     <button
                       className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
                       onClick={handleDecrementChildrens}
@@ -85,7 +85,7 @@ export const PeopleModal = () => {
                     >
                       -
                     </button>
-                    <span className="text-xl font-bold">{Childrens}</span>
+                    <span className="text-lg">{Childrens}</span>
                     <button
                       className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
                       onClick={handleIncrementChildrens}

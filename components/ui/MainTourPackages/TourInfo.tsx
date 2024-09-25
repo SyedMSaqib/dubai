@@ -9,7 +9,7 @@ const TourInfo = () => {
       </div>
       <div className="flex items-center gap-2">
         <p>{StartTime}</p>
-        <p>9:30 AM</p>
+        <p>Time: 9:30 AM</p>
       </div>
       <div className="flex items-center gap-2">
         <p>{MobileTicket}</p>
