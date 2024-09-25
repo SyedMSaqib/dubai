@@ -5,7 +5,9 @@ import { slugToText } from "@/utils/slug"
 import React from "react"
 import { PeopleModal } from "@/components/ui/MainTourPackages/PeopleModal"
 import FullRefundChip from "@/components/ui/MainTourPackages/FullRefundChip"
-
+import TourInfo from "@/components/ui/MainTourPackages/TourInfo"
+import { Divider } from "@nextui-org/divider"
+import TourInclusions from "@/components/ui/MainTourPackages/TourInclusions"
 const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) => {
   const { packagesDetails } = params
   const items: string[] = [
@@ -41,10 +43,26 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
           </div>
         </div>
       </div>
-      <div className="p-3">
-        <p>asdf</p>
-        <p>asdf</p>
-        <p>asdf</p>
+      <div className="p-4 space-y-4 lg:max-w-[80vw]  mx-auto">
+        <Divider />
+        <TourInfo />
+        <Divider />
+        <div>
+          <p className="font-bold text-xl ">Overview</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corrupti quo totam
+            enim illo! Eveniet quibusdam cupiditate quidem tenetur deserunt error asperiores fugit
+            eaque ullam vitae! Ut esse, aspernatur pariatur ea quod alias est consectetur error
+            officiis exercitationem magni, voluptate non, excepturi earum at? Aspernatur
+            consequuntur odio minima ullam magnam suscipit unde voluptatum saepe voluptatem non
+            recusandae molestias eius magni quo vel et esse repellat tenetur facilis dicta, culpa
+            blanditiis! Illo eveniet, sint dolor maxime numquam doloribus reiciendis ex veritatis
+            ea! Voluptates similique itaque quidem sit, culpa reiciendis tenetur fugit aliquam
+            perspiciatis dignissimos non repudiandae amet, omnis sunt illo doloribus!
+          </p>
+        </div>
+        <Divider />
+        <TourInclusions />
       </div>
     </div>
   )
