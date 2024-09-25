@@ -22,7 +22,7 @@ export default function AdOns() {
         {addons.map((addon) => (
           <Checkbox key={addon.name} value={addon.name}>
             <div className="flex justify-between items-center w-full">
-              <span className="flex-1 w-[200px]">{addon.name}</span>
+              <span className="flex-1 w-[200px] md:w-[400px]">{addon.name}</span>
               <span className="ml-8 font-semibold text-right w-24">${addon.price}</span>
             </div>
           </Checkbox>

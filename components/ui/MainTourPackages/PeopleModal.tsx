@@ -58,39 +58,41 @@ export const PeopleModal = () => {
               <ModalBody>
                 <div className="flex"></div>
                 <p className="font-bold">Select Visitors</p>
-                <div className="flex items-center gap-4">
-                  <p className="font-bold">Adults: </p>
-                  <button
-                    className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
-                    onClick={handleDecrement}
-                    disabled={Adults === 1}
-                  >
-                    -
-                  </button>
-                  <span className="text-xl font-bold">{Adults}</span>
-                  <button
-                    className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
-                    onClick={handleIncrement}
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="flex items-center gap-4">
-                  <p className="font-bold">Childs: </p>
-                  <button
-                    className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
-                    onClick={handleDecrementChildrens}
-                    disabled={Childrens === 0}
-                  >
-                    -
-                  </button>
-                  <span className="text-xl font-bold">{Childrens}</span>
-                  <button
-                    className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
-                    onClick={handleIncrementChildrens}
-                  >
-                    +
-                  </button>
+                <div className="flex flex-row justify-between md:justify-start md:gap-[300px]">
+                  <div className="flex items-center gap-4">
+                    <p className="font-bold">Adults: </p>
+                    <button
+                      className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
+                      onClick={handleDecrement}
+                      disabled={Adults === 1}
+                    >
+                      -
+                    </button>
+                    <span className="text-xl font-bold">{Adults}</span>
+                    <button
+                      className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
+                      onClick={handleIncrement}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <p className="font-bold">Childs: </p>
+                    <button
+                      className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
+                      onClick={handleDecrementChildrens}
+                      disabled={Childrens === 0}
+                    >
+                      -
+                    </button>
+                    <span className="text-xl font-bold">{Childrens}</span>
+                    <button
+                      className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
+                      onClick={handleIncrementChildrens}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
                 <div className="mt-4">
                   <TransportType />
