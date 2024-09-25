@@ -14,6 +14,12 @@ const RatingSelection = () => {
     <div className="flex flex-col gap-2 pt-4">
       <h4 className="font-bold text-large">Ratings</h4>
       <Checkbox
+        classNames={{
+          base: "inline-flex max-w-md w-full bg-content1 m-0",
+          wrapper:
+            "before:border-black before:transition-colors group-data-[selected=true]:before:border-transparent",
+          icon: "text-black",
+        }}
         color="success"
         isSelected={selectedRating === 1}
         onChange={() => handleCheckboxChange(1)}
@@ -29,6 +35,12 @@ const RatingSelection = () => {
         </div>
       </Checkbox>
       <Checkbox
+        classNames={{
+          base: "inline-flex max-w-md w-full bg-content1 m-0",
+          wrapper:
+            "before:border-black before:transition-colors group-data-[selected=true]:before:border-transparent",
+          icon: "text-black",
+        }}
         color="success"
         isSelected={selectedRating === 2}
         onChange={() => handleCheckboxChange(2)}
@@ -47,6 +59,12 @@ const RatingSelection = () => {
         </div>
       </Checkbox>
       <Checkbox
+        classNames={{
+          base: "inline-flex max-w-md w-full bg-content1 m-0",
+          wrapper:
+            "before:border-black before:transition-colors group-data-[selected=true]:before:border-transparent",
+          icon: "text-black",
+        }}
         color="success"
         isSelected={selectedRating === 3}
         onChange={() => handleCheckboxChange(3)}

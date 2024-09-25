@@ -17,7 +17,13 @@ export default function App() {
           minValue={0}
           value={value}
           onChange={setValue}
-          className="max-w-md"
+          className="max-w-md "
+          classNames={{
+            base: "max-w-md",
+            filler: "bg-black",
+            thumb: "bg-black border-black",
+            track: "bg-gray-200",
+          }}
           color="success"
           size="sm"
         />
