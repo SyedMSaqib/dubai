@@ -4,6 +4,7 @@ import DateInput from "@/components/ui/MainTourPackages/DateInput"
 import { slugToText } from "@/utils/slug"
 import React from "react"
 import { PeopleModal } from "@/components/ui/MainTourPackages/PeopleModal"
+import FullRefundChip from "@/components/ui/MainTourPackages/FullRefundChip"
 
 const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) => {
   const { packagesDetails } = params
@@ -27,7 +28,7 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
           <PackageDetailsCarousel items={items} />
         </div>
         <div className=" w-full lg:w-[500px]  rounded-lg lg:border lg:border-zinc-400 ">
-          <div className="p-6 space-y-3">
+          <div className="px-3 py-3 space-y-3">
             <p className="text-xl font-semibold ">
               From <span className="md:text-3xl text-2xl ">$999</span>
             </p>
@@ -35,6 +36,7 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
               <p className="text-md ">Select Date</p>
               <DateInput />
               <PeopleModal />
+              <FullRefundChip />
             </div>
           </div>
         </div>
