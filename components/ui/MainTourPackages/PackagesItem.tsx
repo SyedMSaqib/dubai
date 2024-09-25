@@ -1,5 +1,5 @@
 import ClockIcon from "@/utils/ClockIcon"
-import { FullStar } from "@/utils/Stars"
+import { FullStar } from "@/utils/StaticSvgs"
 import { Card, CardBody } from "@nextui-org/card"
 import Image from "next/image"
 

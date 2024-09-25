@@ -41,6 +41,11 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
           </div>
         </div>
       </div>
+      <div className="p-3">
+        <p>asdf</p>
+        <p>asdf</p>
+        <p>asdf</p>
+      </div>
     </div>
   )
 }

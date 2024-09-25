@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { Checkbox } from "@nextui-org/checkbox"
-import { FullStar, EmptyStar } from "@/utils/Stars"
+import { FullStar, EmptyStar } from "@/utils/StaticSvgs"
 
 const RatingSelection = () => {
   const [selectedRating, setSelectedRating] = useState<number | null>(null)

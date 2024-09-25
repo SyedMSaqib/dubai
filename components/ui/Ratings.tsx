@@ -1,4 +1,4 @@
-import { FullStar, EmptyStar, HalfStar } from "@/utils/Stars"
+import { FullStar, EmptyStar, HalfStar } from "@/utils/StaticSvgs"
 
 type PropType = {
   rating: number
