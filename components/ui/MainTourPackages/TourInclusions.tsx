@@ -22,7 +22,7 @@ const TourInclusions = () => {
           <div className="ml-2">{defaultContent}</div>
         </div>
       </AccordionItem>
-      <AccordionItem key="1" aria-label="Accordion 1" title={<strong>What's included</strong>}>
+      <AccordionItem key="1" aria-label="Accordion 1" title={<strong>What&apos;s included</strong>}>
         <div className="flex">
           <div>{DoubleTick}</div>
           <div className="ml-2">{defaultContent}</div>
