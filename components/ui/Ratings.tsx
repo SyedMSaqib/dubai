@@ -52,7 +52,7 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
 
   return (
     <div className="flex flex-row">
-      <div className="flex flex-row">
+      <div className="flex flex-row items-center">
         {generateFullStars}
         {generateHalfStars}
         {generateEmptyStars}
