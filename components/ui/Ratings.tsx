@@ -2,7 +2,7 @@ import { FullStar, EmptyStar, HalfStar } from "@/utils/StaticSvgs"
 
 type PropType = {
   rating: number
-  totalRatings: number
+  totalRatings: number | string
 }
 
 const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
@@ -57,7 +57,7 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
         {generateHalfStars}
         {generateEmptyStars}
       </div>
-      <p className="pl-2">{totalRatings}</p>
+      {totalRatings && <p className="pl-2">{totalRatings}</p>}
     </div>
   )
 }

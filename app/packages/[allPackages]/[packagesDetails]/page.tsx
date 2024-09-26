@@ -8,6 +8,7 @@ import FullRefundChip from "@/components/ui/MainTourPackages/FullRefundChip"
 import TourInfo from "@/components/ui/MainTourPackages/TourInfo"
 import { Divider } from "@nextui-org/divider"
 import TourInclusions from "@/components/ui/MainTourPackages/TourInclusions"
+import TourReviews from "@/components/ui/MainTourPackages/TourReviews"
 const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) => {
   const { packagesDetails } = params
   const items: string[] = [
@@ -19,7 +20,7 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
   ]
 
   return (
-    <div className="mb-96 mx-auto max-w-[1400px]  lg:px-8 mt-4">
+    <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4">
       <h1 className="text-xl lg:text-3xl font-bold  p-4">{slugToText(packagesDetails)}</h1>
       <div className="flex pl-4 ">
         <Ratings rating={3.5} totalRatings={100} />
@@ -63,6 +64,18 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
         </div>
         <Divider />
         <TourInclusions />
+        <Divider />
+        <div>
+          <p className="font-bold text-xl mt-[50px] ">Reviews</p>
+          <div className="py-4">
+            <TourReviews rating={5} totalRatings={""} />
+            <TourReviews rating={3} totalRatings={""} />
+            <TourReviews rating={4.6} totalRatings={""} />
+            <TourReviews rating={1} totalRatings={""} />
+            <TourReviews rating={5} totalRatings={""} />
+            <p className="text-center underline hover:cursor-pointer">Load more...</p>
+          </div>
+        </div>
       </div>
     </div>
   )

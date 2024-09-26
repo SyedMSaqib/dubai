@@ -7,7 +7,7 @@ export default function TransportType() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
-  console.log(value)
+
   return (
     <RadioGroup color="warning" defaultValue={value} onChange={handleChange}>
       <p className="font-bold">Transport type</p>
