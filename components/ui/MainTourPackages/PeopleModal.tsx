@@ -8,8 +8,6 @@ import AdOns from "./AddOns"
 export const PeopleModal = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const onOpen = () => setIsOpen(true)
-
   const [Adults, setAdults] = useState(1)
 
   const handleDecrement = () => {
@@ -37,9 +35,10 @@ export const PeopleModal = () => {
   return (
     <>
       <Button
-        onPress={onOpen}
-        className="bg-[#F1C40F] w-full font-bold text-md rounded-full text-black"
-        href="#"
+        onClick={() => {
+          setIsOpen(!isOpen)
+        }}
+        className="bg-[#F1C40F] w-full font-bold text-md rounded-full text-black "
         variant="flat"
       >
         Reserve Now

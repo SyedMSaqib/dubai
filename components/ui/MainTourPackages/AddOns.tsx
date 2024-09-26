@@ -27,10 +27,11 @@ export default function AdOns() {
                 "before:border-black before:transition-colors group-data-[selected=true]:before:border-transparent",
               icon: "text-black",
             }}
+            className="flex items-center"
             key={addon.name}
             value={addon.name}
           >
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full ">
               <span className="flex-1 w-[200px] md:w-[400px] font-normal">{addon.name}</span>
               <span className="ml-8 font-semibold text-right w-24">${addon.price}</span>
             </div>
