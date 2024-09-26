@@ -7,7 +7,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
   const stripe = useStripe()
   const elements = useElements()
 
-  const [message, setMessage] = React.useState(null)
+  const [message, setMessage] = React.useState<string | null>()
   const [isLoading, setIsLoading] = React.useState(false)
   const [clientSecret, setClientSecret] = React.useState("")
   const [errorMessage, setErrorMessage] = React.useState<string | null>()
@@ -50,6 +50,11 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
         return_url: "http://localhost:3000",
       },
     })
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message)
+    } else {
+      setMessage("An unexpected error occurred.")
+    }
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
@@ -65,11 +70,9 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
     setIsLoading(false)
   }
 
-  const paymentElementOptions = {
-    layout: "tabs",
-  }
   return (
     <div className="max-w-[900px] my-16 sm:my-24 p-8 sm:p-12 bg-white border border-gray-300 rounded-lg shadow-md mx-auto">
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       <form id="payment-form" onSubmit={handleSubmit} className="space-y-6">
         <div id="payment-element" className="space-y-4">
           <PaymentElement />

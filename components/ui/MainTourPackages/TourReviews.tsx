@@ -19,7 +19,7 @@ const TourReviews = ({ rating, totalRatings }: PropType) => {
         </div>
 
         <p className="font-normal text-lg leading-8 text-gray-500">
-          I recently had the opportunity to explore Pagedone's UI design system, and it left a
+          I recently had the opportunity to explore Pagedones UI design system, and it left a
           lasting impression on my workflow. The system seamlessly blends user-friendly features
           with a robust set of design components, making it a go-to for creating visually stunning
           and consistent interfaces.
