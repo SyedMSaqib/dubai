@@ -61,11 +61,11 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setErrorMessage(error.message)
-    } else {
-      setErrorMessage("An unexpected error occurred.")
-    }
+    // if (error.type === "card_error" || error.type === "validation_error") {
+    //   setErrorMessage(error.message)
+    // } else {
+    //   setErrorMessage("An unexpected error occurred.")
+    // }
 
     setIsLoading(false)
   }

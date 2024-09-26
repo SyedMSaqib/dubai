@@ -7,7 +7,7 @@ import formatAmountForStripe from "@/utils/stripe-helper"
 const stripePromise = getStripe()
 
 export default function Checkout() {
-  const amount = 523
+  const amount = 100
   return (
     <Elements
       options={{ mode: "payment", amount: formatAmountForStripe(amount), currency: "aed" }}
