@@ -42,7 +42,7 @@ export default function Home() {
         <h3 className=" text-center text-xl sm:text-2xl lg:text-3xl font-bold mt-[50px]">
           Tour Categories
         </h3>
-        <div className=" gap-y-7 gap-x-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:max-w-[60vw] xl:mx-auto  mt-[20px]">
+        <div className=" gap-y-7 gap-x-3 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 xl:max-w-[60vw] xl:mx-auto  mt-[20px]">
           {tourPackages.map(({ src, text }, index) => (
             <Link key={index} href={`/packages/${createSlug(text)}`}>
               <TourPackages src={src} text={text} />

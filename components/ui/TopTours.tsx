@@ -27,9 +27,9 @@ const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating, totalRat
 
         <CardFooter className="text-small flex flex-col items-start p-4">
           <div>
-            <b className="text-lg">{title}</b>
+            <b className=" text-sm md:text-lg">{title}</b>
           </div>
-          <div className="text-default-500">
+          <div className="text-default-500 ">
             {<Ratings rating={rating} totalRatings={totalRatings} />}
           </div>
           <div className="font-semibold text-lg">${price}</div>
