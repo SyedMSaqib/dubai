@@ -12,7 +12,7 @@ const Packages = ({ params }: { params: { allPackages: string } }) => {
 
   const packageName = slugToText(allPackages)
   return (
-    <div className="mx-auto  2xl:max-w-[90vw] px-4 sm:px-6 lg:px-8 mt-10">
+    <div className="mx-auto  2xl:max-w-[80vw] px-4 sm:px-6 lg:px-8 mt-10">
       <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold">{packageName}</h3>
       <div className="flex items-center ">
         <Ratings rating={3.5} totalRatings={10023} />
