@@ -29,7 +29,7 @@ const ImageCarousel = ({ items }: { items: string[] }) => {
           <div
             key={index}
             className={`relative w-full h-[106px] cursor-pointer border-2 rounded-lg overflow-hidden ${
-              activeIndex === index ? "bg-transparent" : "bg-no-repeat brightness-50"
+              activeIndex === index ? "bg-transparent brightness-100" : "bg-no-repeat brightness-50"
             }`}
             onClick={() => setActiveIndex(index)}
           >

@@ -4,6 +4,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextu
 import { Button } from "@nextui-org/button"
 import TransportType from "./TransportType"
 import AdOns from "./AddOns"
+import Link from "next/link"
 
 export const PeopleModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -76,7 +77,7 @@ export const PeopleModal = () => {
                     </button>
                   </div>
                   <div className="flex items-center gap-4">
-                    <p className="">Childs: </p>
+                    <p className="">Child: </p>
                     <button
                       className="bg-black text-white text-2xl font-bold w-6 h-6 rounded-full flex items-center justify-center"
                       onClick={handleDecrementChildrens}
@@ -107,9 +108,11 @@ export const PeopleModal = () => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Button className="bg-[#F1C40F]" onPress={onClose}>
-                    Book Now
-                  </Button>
+                  <Link href={"/checkout"}>
+                    <Button className="bg-[#F1C40F]" onPress={onClose}>
+                      Book Now
+                    </Button>
+                  </Link>
                 </div>
               </ModalFooter>
             </>

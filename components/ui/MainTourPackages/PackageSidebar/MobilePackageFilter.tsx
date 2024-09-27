@@ -91,7 +91,7 @@ const MobilePackageFilter = () => {
       <Modal isOpen={isOpen} onOpenChange={setIsOpen} scrollBehavior="inside">
         <ModalContent>
           <>
-            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+            {/* <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader> */}
             <ModalBody>
               <TimeOfDay />
               <Duration />

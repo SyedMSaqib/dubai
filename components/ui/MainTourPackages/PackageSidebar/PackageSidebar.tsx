@@ -6,7 +6,7 @@ import Duration from "./Duration"
 
 const PackageSidebar = () => {
   return (
-    <Card className="lg:w-[250px] w-[200px] rounded-lg border  border-zinc-300 mt-[20px] shadow-lg">
+    <Card className="lg:w-[270px] xl:w-[300px] rounded-lg border  border-zinc-300 mt-[20px] shadow-lg">
       <CardBody>
         <TimeOfDay />
         <Duration />

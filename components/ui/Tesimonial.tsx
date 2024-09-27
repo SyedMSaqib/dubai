@@ -42,7 +42,7 @@ const Tesimonial = ({ comment, personName }: PropType) => {
                 </svg>
               ))}
             </div>
-            <p className="text-lg text-gray-500 leading-8 mb-4 transition-all duration-500 hover:text-gray-800 select-none">
+            <p className="text-sm md:text-lg text-gray-500 leading-8 mb-4 transition-all duration-500 hover:text-gray-800 select-none">
               {isExpanded ? comment : truncatedComment}
               {comment.length > MAX_CHARACTERS && (
                 <span
