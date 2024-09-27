@@ -15,7 +15,7 @@ type PropType = {
 
 const PackagesItem = ({ src, title, price, rating, totalRatings, time, description }: PropType) => {
   return (
-    <Card className="shadow-lg rounded-lg md:border md:border-zinc-300">
+    <Card className="shadow-lg rounded-lg border md:border-zinc-300">
       <CardBody className="p-0">
         <div className="flex flex-row gap-4 w-full rounded-lg overflow-hidden">
           <div className="flex-shrink-0 w-[160px] h-[190px] md:w-[250px] md:h-[250px]  md:p-4">
