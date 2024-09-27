@@ -30,7 +30,7 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
         <div className="w-full   lg:mb-0 ">
           <PackageDetailsCarousel items={items} />
         </div>
-        <div className=" w-full lg:w-[500px]  rounded-lg lg:border lg:border-zinc-400 ">
+        <div className=" w-full lg:w-[500px]  rounded-lg lg:border lg:border-gray-200 lg:bg-gray-200 ">
           <div className="px-3 py-3 space-y-3">
             <p className="text-xl font-semibold ">
               From <span className="md:text-3xl text-2xl ">$999</span>
