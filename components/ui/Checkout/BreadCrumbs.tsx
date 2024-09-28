@@ -1,3 +1,4 @@
+"use client"
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/breadcrumbs"
 import React from "react"
 

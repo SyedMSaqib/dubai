@@ -1,6 +1,3 @@
-"use client"
-import React from "react"
-
 import { PriceModalMobile } from "@/components/ui/Checkout/PriceModalMobile"
 import CheckoutPackageDetails from "@/components/ui/Checkout/CheckoutPackageDetails"
 import ContactForm from "@/components/ui/Checkout/ContactForm"

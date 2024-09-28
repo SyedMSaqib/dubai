@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import getStripe from "@/utils/getStripejs"
 import { Elements } from "@stripe/react-stripe-js"
