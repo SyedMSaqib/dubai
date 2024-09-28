@@ -11,7 +11,7 @@ export const PriceModalMobile = () => {
 
   return (
     <div className="lg:hidden mt-[10px]">
-      <div onClick={onOpen} className="flex justify-between bg-green-200 px-2 py-1 ">
+      <div onClick={onOpen} className="flex justify-between bg-green-200 px-2 py-4 ">
         <p className="text-black font-semibold flex items-center space-x-1">
           <span>Package Details</span>
           <span className="inline-block">{DownwardArrow}</span>

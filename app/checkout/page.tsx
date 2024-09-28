@@ -11,18 +11,18 @@ export default function Checkout() {
   const currentPage: string = "Contact Details"
 
   return (
-    <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4 mb-[1000px]  ">
+    <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4 lg:mb-[100px]  ">
       <BreadCrumbs />
       <PriceModalMobile />
-      <div className="">
-        <div>
+      <div className="lg:flex lg:justify-center gap-4 lg:mt-[30px]">
+        <div className="lg:w-[600px] lg:border border-gray-300 lg:px-8 lg:py-8 lg:rounded-lg">
           {currentPage === "Contact Details" ? <ContactForm /> : ""}
           {currentPage === "Activity Details" ? <p>Activity Details</p> : ""}
           {currentPage === "Payment Details" ? <StripeElements /> : ""}
         </div>
-        {/* <div className="hidden lg:block">
+        <div className="hidden lg:block border border-gray-300 rounded-lg lg:h-[350px]">
           <CheckoutPackageDetails />
-        </div> */}
+        </div>
       </div>
     </div>
   )

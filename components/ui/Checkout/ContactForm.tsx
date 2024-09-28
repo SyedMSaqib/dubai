@@ -98,7 +98,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-10 md:max-w-[700px] mx-auto">
+    <form onSubmit={handleSubmit} className="p-10 lg:p-0  mx-auto ">
       <div className="md:flex md:gap-5 ">
         <div className="mb-2 md:flex-1">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
