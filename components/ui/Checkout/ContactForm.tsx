@@ -88,7 +88,7 @@ const ContactForm = () => {
     setErrors(newErrors)
 
     // Console log all form values
-    console.log(formValues)
+    // console.log(formValues)
 
     // Check if there are any errors
     if (Object.values(newErrors).some((error) => error)) return
