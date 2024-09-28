@@ -10,6 +10,15 @@ const regexPatterns = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Email pattern: basic email format
 }
 
+/**
+ * A form to collect contact details from the user.
+ *
+ * The form includes fields for first name, last name, email, phone number, pick up point (area) and room or apartment.
+ * The form validates the input fields client-side and displays error messages if the input is invalid.
+ * The form also prevents submission if the input is invalid.
+ * The form is submitted when the user clicks the "Next" button.
+ */
+
 const ContactForm = () => {
   // State to hold form values
   const [formValues, setFormValues] = useState({
@@ -89,37 +98,38 @@ const ContactForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-[300px] mx-auto">
-      <div className="mb-5">
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          First Name
-        </label>
-        <input
-          type="text"
-          id="firstName"
-          value={formValues.firstName}
-          onChange={handleChange}
-          className={`bg-gray-50 border ${
-            errors.firstName ? "border-red-500" : "border-gray-300"
-          } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
-        />
-        {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
-      </div>
-
-      <div className="mb-5">
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Last Name
-        </label>
-        <input
-          type="text"
-          id="lastName"
-          value={formValues.lastName}
-          onChange={handleChange}
-          className={`bg-gray-50 border ${
-            errors.lastName ? "border-red-500" : "border-gray-300"
-          } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
-        />
-        {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
+    <form onSubmit={handleSubmit} className="p-10 md:max-w-[700px] mx-auto">
+      <div className="md:flex md:gap-5 ">
+        <div className="mb-2 md:flex-1">
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            First Name
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            value={formValues.firstName}
+            onChange={handleChange}
+            className={`bg-gray-50 border ${
+              errors.firstName ? "border-red-500" : "border-gray-300"
+            } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+          />
+          {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
+        </div>
+        <div className="mb-5 flex-1">
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Last Name
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            value={formValues.lastName}
+            onChange={handleChange}
+            className={`bg-gray-50 border ${
+              errors.lastName ? "border-red-500" : "border-gray-300"
+            } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+          />
+          {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
+        </div>
       </div>
 
       <div className="mb-5">
