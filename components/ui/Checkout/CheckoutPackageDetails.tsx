@@ -7,21 +7,19 @@ const CheckoutPackageDetails = () => {
   return (
     <div className="w-full max-w-sm mx-auto p-4">
       <Card className="shadow-none bg-transparent">
-        <CardBody className="p-0 space-y-4">
+        <CardBody className="p-2 space-y-4">
           <div className="flex flex-row gap-2 w-full overflow-hidden">
-            <div className="w-[130px] h-[90px]">
+            <div className="w-[120px] h-[90px]">
               <Image
                 alt="image"
-                className="w-full object-cover h-[80px] md:h-[90px] rounded-lg"
-                src={"/images/atlantas.jpg"}
+                className="w-full object-cover h-[80px] md:h-[90px] rounded-md"
+                src={"/images/hotAir.jpg"}
                 width={600}
                 height={400}
                 sizes="33vw"
               />
             </div>
-            <p className="font-bold flex-1">
-              Dubai Atlantis City of Stars Dubai Atlantis City of Stars
-            </p>
+            <p className="font-bold flex-1">Dubai hot air ballon ride over the atlantis city</p>
           </div>
 
           <Divider className="my-2" />

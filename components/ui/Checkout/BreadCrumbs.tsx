@@ -27,7 +27,7 @@ const BreadCrumbs = () => {
         </span>
       </BreadcrumbItem>
 
-      <BreadcrumbItem
+      {/* <BreadcrumbItem
         key="Activity Details"
         isCurrent={currentPage === "Activity Details"}
         className={`text-lg ${
@@ -42,7 +42,7 @@ const BreadCrumbs = () => {
           )}
           <span>Activity Details</span>
         </span>
-      </BreadcrumbItem>
+      </BreadcrumbItem> */}
 
       <BreadcrumbItem
         key="Payment Details"
@@ -54,7 +54,7 @@ const BreadCrumbs = () => {
         <span className="flex items-center space-x-1">
           {currentPage === "Payment Details" && (
             <span className="bg-black text-white rounded-full w-4 h-4 md:w-6 md:h-6 flex text-xs items-center justify-center">
-              3
+              2
             </span>
           )}
           <span>Payment Details</span>
