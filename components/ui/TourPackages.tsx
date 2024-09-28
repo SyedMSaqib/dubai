@@ -9,7 +9,7 @@ interface TourPackagesProps {
 const TourPackages: React.FC<TourPackagesProps> = ({ src, text }) => {
   return (
     <div className="flex flex-col items-center">
-      <Card className="w-[100%] h-[150px]  relative rounded-lg">
+      <Card className="w-[100%] h-[120px] sm:h-[160px] lg:h-[200px]   relative rounded-lg">
         <Image
           alt="packages image"
           className="z-0 w-full h-full scale-125 object-cover"

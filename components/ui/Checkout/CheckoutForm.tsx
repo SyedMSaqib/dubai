@@ -60,7 +60,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
       clientSecret,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "http://192.168.10.12:3000/checkout/paymentSuccess",
       },
     })
     if (error.type === "card_error" || error.type === "validation_error") {
