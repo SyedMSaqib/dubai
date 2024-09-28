@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react"
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/modal"
+import { Modal, ModalContent, ModalBody, ModalFooter } from "@nextui-org/modal"
 import { Button } from "@nextui-org/button"
 
 import PriceRangeSlider from "./PriceRangeSlider"

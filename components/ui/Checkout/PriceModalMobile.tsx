@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react"
-import { Modal, ModalContent, ModalBody, ModalFooter } from "@nextui-org/modal"
+import { Modal, ModalContent, ModalBody } from "@nextui-org/modal"
 import CheckoutPackageDetails from "./CheckoutPackageDetails"
 import { DownwardArrow } from "@/utils/StaticSvgs"
 
