@@ -3,7 +3,6 @@ import React, { useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import formatAmountForStripe from "@/utils/stripe-helper"
 import { Spinner } from "@/utils/StaticSvgs"
-import Loading from "@/app/loading"
 
 /**
  * CheckoutForm
