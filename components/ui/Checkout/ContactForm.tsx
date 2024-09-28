@@ -111,7 +111,7 @@ const ContactForm = () => {
             onChange={handleChange}
             className={`bg-gray-50 border ${
               errors.firstName ? "border-red-500" : "border-gray-300"
-            } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+            } text-gray-900 text-sm rounded-lg block w-full p-2.5`}
           />
           {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
         </div>
@@ -126,7 +126,7 @@ const ContactForm = () => {
             onChange={handleChange}
             className={`bg-gray-50 border ${
               errors.lastName ? "border-red-500" : "border-gray-300"
-            } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+            } text-gray-900 text-sm rounded-lg block w-full p-2.5`}
           />
           {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
         </div>
@@ -143,7 +143,7 @@ const ContactForm = () => {
           onChange={handleChange}
           className={`bg-gray-50 border ${
             errors.email ? "border-red-500" : "border-gray-300"
-          } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+          } text-gray-900 text-sm rounded-lg  block w-full p-2.5`}
         />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
@@ -159,7 +159,7 @@ const ContactForm = () => {
           defaultCountry="AE"
           className={`bg-gray-50 border ${
             errors.phone ? "border-red-500" : "border-gray-300"
-          } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+          } text-gray-900 text-sm rounded-lg block w-full p-2.5`}
         />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
@@ -175,7 +175,7 @@ const ContactForm = () => {
           onChange={handleChange}
           className={`bg-gray-50 border ${
             errors.area ? "border-red-500" : "border-gray-300"
-          } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+          } text-gray-900 text-sm rounded-lg block w-full p-2.5`}
         />
         {errors.area && <p className="text-red-500 text-xs mt-1">{errors.area}</p>}
       </div>
@@ -191,7 +191,7 @@ const ContactForm = () => {
           onChange={handleChange}
           className={`bg-gray-50 border ${
             errors.roomOrApartment ? "border-red-500" : "border-gray-300"
-          } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`}
+          } text-gray-900 text-sm rounded-lg block w-full p-2.5`}
           placeholder="Or Update Upon Arrival"
         />
         {errors.roomOrApartment && (

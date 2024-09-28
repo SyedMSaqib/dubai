@@ -2,6 +2,19 @@
 import React, { useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import formatAmountForStripe from "@/utils/stripe-helper"
+import { Spinner } from "@/utils/StaticSvgs"
+import Loading from "@/app/loading"
+
+/**
+ * CheckoutForm
+ *
+ * A React component that renders a payment form for making a payment with
+ * Stripe.
+ *
+ * @param {number} amount - The amount to charge the customer.
+ *
+ * @returns {React.ReactElement} - The rendered payment form.
+ */
 
 const CheckoutForm = ({ amount }: { amount: number }) => {
   const stripe = useStripe()
@@ -71,7 +84,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
   }
 
   return (
-    <div className="max-w-[900px] my-16 sm:my-24 p-8 sm:p-12 bg-white border border-gray-300 rounded-lg shadow-md mx-auto">
+    <div className="p-10 lg:p-0 pb-[100px] mx-auto">
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       <form id="payment-form" onSubmit={handleSubmit} className="space-y-6">
         <div id="payment-element" className="space-y-4">
@@ -80,12 +93,21 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
         <button
           disabled={isLoading || !stripe || !elements}
           id="submit"
-          className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:bg-gray-400 disabled:cursor-not-allowed transition duration-300"
+          className="w-full bg-black text-white font-semibold py-3 rounded-lg  disabled:bg-gray-700 disabled:cursor-not-allowed transition duration-300"
         >
           <span id="button-text">
-            {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+            {isLoading ? (
+              <div className="flex justify-center items-center" id="spinner">
+                {Spinner}
+              </div>
+            ) : (
+              <div className="flex justify-center items-center" id="spinner">
+                Pay
+              </div>
+            )}
           </span>
         </button>
+
         {/* Show any error or success messages */}
         {message && (
           <div id="payment-message" className="mt-4 text-center text-red-600 font-medium">
@@ -93,7 +115,6 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
           </div>
         )}
       </form>
-      {/* [DEV]: For demo purposes only, display dynamic payment methods annotation and integration checker */}
     </div>
   )
 }

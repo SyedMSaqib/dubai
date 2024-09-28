@@ -8,7 +8,7 @@ import BreadCrumbs from "@/components/ui/Checkout/BreadCrumbs"
 import StripeElements from "@/components/ui/Checkout/StripeElements"
 
 export default function Checkout() {
-  const currentPage: string = "Contact Details"
+  const currentPage: string = "Payment Details"
 
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4 lg:mb-[100px]  ">
