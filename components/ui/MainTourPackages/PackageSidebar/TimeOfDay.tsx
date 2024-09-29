@@ -8,7 +8,7 @@ import { AddTime } from "@/lib/Redux/features/sidebarSlice"
 const TimeOfDay = () => {
   const dispatch = useAppDispatch()
   const time = useAppSelector((state) => state.sidebar)
-  console.log(time)
+
   return (
     <>
       <h4 className="font-bold text-large">Time of Day</h4>
