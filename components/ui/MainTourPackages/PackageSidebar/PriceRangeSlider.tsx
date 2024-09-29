@@ -1,9 +1,18 @@
 "use client"
 import React from "react"
 import { Slider, SliderValue } from "@nextui-org/slider"
+import { AddPrice } from "@/lib/Redux/features/sidebarSlice"
+import { useAppDispatch } from "@/lib/Redux/hooks"
 
 export default function App() {
-  const [value, setValue] = React.useState<SliderValue>([100, 3000])
+  const dispatch = useAppDispatch()
+
+  const [value, setValue] = React.useState<SliderValue>([0, 5000])
+  React.useEffect(() => {
+    if (Array.isArray(value)) {
+      dispatch(AddPrice([value[0], value[1]])) // Dispatch the price range (min and max)
+    }
+  }, [value, dispatch])
 
   return (
     <div className="flex flex-col gap-2 pt-4">

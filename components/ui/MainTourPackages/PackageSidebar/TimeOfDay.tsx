@@ -1,13 +1,20 @@
+"use client"
 import React from "react"
 import { Checkbox } from "@nextui-org/checkbox"
 import { Divider } from "@nextui-org/divider"
+import { useAppDispatch, useAppSelector } from "@/lib/Redux/hooks"
+import { AddTime } from "@/lib/Redux/features/sidebarSlice"
 
 const TimeOfDay = () => {
+  const dispatch = useAppDispatch()
+  const time = useAppSelector((state) => state.sidebar)
+  console.log(time)
   return (
     <>
       <h4 className="font-bold text-large">Time of Day</h4>
       <div className="flex flex-col gap-2 pt-4">
         <Checkbox
+          onClick={() => dispatch(AddTime("morning"))}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -21,6 +28,7 @@ const TimeOfDay = () => {
         </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts before 12pm</p>
         <Checkbox
+          onClick={() => dispatch(AddTime("afternoon"))}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -34,6 +42,7 @@ const TimeOfDay = () => {
         </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts after 12pm</p>
         <Checkbox
+          onClick={() => dispatch(AddTime("evening"))}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:

@@ -1,11 +1,11 @@
 
 import { configureStore } from '@reduxjs/toolkit'
-import timeReducer from '../Redux/features/timeSlice'
+import sidbarReducer from '../Redux/features/sidebarSlice'
 
 
 export const makeStore = () => {
     return configureStore({
-      reducer: {time: timeReducer},
+      reducer: {sidebar: sidbarReducer},
     })
   }
 // Infer the type of makeStore
