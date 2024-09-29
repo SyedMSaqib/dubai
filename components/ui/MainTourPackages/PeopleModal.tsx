@@ -109,9 +109,7 @@ export const PeopleModal = () => {
                     Close
                   </Button>
                   <Link href={"/checkout"}>
-                    <Button className="bg-[#F1C40F]" onPress={onClose}>
-                      Book Now
-                    </Button>
+                    <button className="bg-[#F1C40F] p-2 rounded-lg">Book Now</button>
                   </Link>
                 </div>
               </ModalFooter>
