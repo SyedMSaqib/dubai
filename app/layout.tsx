@@ -4,6 +4,7 @@ import "./globals.css"
 import { Providers } from "./providers"
 import Navbar from "../components/layout/navbar"
 import Footer from "@/components/layout/Footer"
+import StoreProvider from "./StoreProvider"
 
 const tripSans = localFont({
   src: [
@@ -29,12 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={tripSans.variable}>
-        <Providers>
-          <Navbar />
-          {children}
-          <Footer />
-        </Providers>
-        <div></div>
+        <StoreProvider>
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
+        </StoreProvider>
       </body>
     </html>
   )
