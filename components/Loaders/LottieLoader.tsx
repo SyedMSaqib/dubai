@@ -1,19 +1,17 @@
 "use client"
 import React from "react"
-import { useLottie } from "lottie-react"
-import loadingSpinner from "@/utils/loadingSpinner.json"
+import Lottie from "lottie-react"
+
+import loadingSpinner from "@/utils/lottieDotsLoading.json"
 
 const App = () => {
-  const options = {
-    animationData: loadingSpinner,
-    loop: true,
-  }
-
-  const { View } = useLottie(options)
-
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="w-[500px] ">{View}</div>
+      <Lottie
+        animationData={loadingSpinner}
+        loop={true}
+        style={{ width: "80px", height: "80px" }}
+      />
     </div>
   )
 }

@@ -2,7 +2,8 @@
 import React, { useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import formatAmountForStripe from "@/utils/stripe-helper"
-import { Spinner } from "@/utils/StaticSvgs"
+import lottieSpinner from "@/utils/lottieSpinner.json"
+import Lottie from "lottie-react"
 
 /**
  * CheckoutForm
@@ -20,7 +21,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
   const elements = useElements()
 
   const [message, setMessage] = React.useState<string | null>()
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(true)
   const [clientSecret, setClientSecret] = React.useState("")
   const [errorMessage, setErrorMessage] = React.useState<string | null>()
 
@@ -34,6 +35,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret)
+        setIsLoading(false)
       })
   }, [amount])
 
@@ -92,12 +94,16 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
         <button
           disabled={isLoading || !stripe || !elements}
           id="submit"
-          className="w-full bg-black text-white font-semibold py-3 rounded-lg  disabled:bg-gray-700 disabled:cursor-not-allowed transition duration-300"
+          className="w-full bg-black text-white font-semibold py-3 rounded-lg   disabled:cursor-not-allowed transition duration-300"
         >
           <span id="button-text">
             {isLoading ? (
               <div className="flex justify-center items-center" id="spinner">
-                {Spinner}
+                <Lottie
+                  animationData={lottieSpinner}
+                  loop={true}
+                  style={{ width: "36px", height: "36px" }}
+                />
               </div>
             ) : (
               <div className="flex justify-center items-center" id="spinner">

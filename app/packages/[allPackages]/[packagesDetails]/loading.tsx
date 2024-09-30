@@ -1,7 +1,9 @@
-import React from "react"
+import LottieLoader from "../../../../components/Loaders/LottieLoader"
 
-const loading = () => {
-  return <div>loading</div>
+export default function Loading() {
+  return (
+    <div>
+      <LottieLoader />
+    </div>
+  )
 }
-
-export default loading
