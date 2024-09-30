@@ -11,7 +11,7 @@ export default function Checkout({ params }: { params: { data: string } }) {
   const { data } = params
 
   // Decode the data
-  const decodedData = decodeData(data)
+  // const decodedData = decodeData(data)
 
   const currentPage = useAppSelector((state) => state.formData.setCurrentPage)
 
