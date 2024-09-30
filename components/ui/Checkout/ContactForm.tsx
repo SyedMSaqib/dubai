@@ -2,7 +2,7 @@
 import { AddData, setCurrentPage, setFormState } from "@/lib/Redux/features/contactSlice"
 import { useAppDispatch, useAppSelector } from "@/lib/Redux/hooks"
 import React, { useState } from "react"
-import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input"
+import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input"
 import "react-phone-number-input/style.css"
 
 // Define regex patterns for validation
@@ -96,7 +96,7 @@ const ContactForm = () => {
     }
 
     // Phone number validation
-    if (!formValues.phone || !isValidPhoneNumber(formValues.phone)) {
+    if (!formValues.phone || !isPossiblePhoneNumber(formValues.phone)) {
       newErrors.phone = "Invalid phone number"
     }
 
