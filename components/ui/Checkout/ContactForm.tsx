@@ -1,6 +1,6 @@
 "use client"
 import { AddData, setCurrentPage, setFormState } from "@/lib/Redux/features/contactSlice"
-import { useAppDispatch } from "@/lib/Redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/lib/Redux/hooks"
 import React, { useState } from "react"
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input"
 import "react-phone-number-input/style.css"
@@ -23,6 +23,11 @@ const regexPatterns = {
 
 const ContactForm = () => {
   const dispatch = useAppDispatch()
+  const formDataFromRedux = useAppSelector((state) => state.formData.formData)
+
+  React.useEffect(() => {
+    setFormValues(formDataFromRedux)
+  }, [formDataFromRedux])
 
   // State to hold form values
   const [formValues, setFormValues] = useState({
