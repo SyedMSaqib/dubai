@@ -2,12 +2,11 @@
 import React from "react"
 import { Checkbox } from "@nextui-org/checkbox"
 import { Divider } from "@nextui-org/divider"
-import { useAppDispatch, useAppSelector } from "@/lib/Redux/hooks"
+import { useAppDispatch } from "@/lib/Redux/hooks"
 import { AddTime } from "@/lib/Redux/features/sidebarSlice"
 
 const TimeOfDay = () => {
   const dispatch = useAppDispatch()
-  const time = useAppSelector((state) => state.sidebar)
 
   return (
     <>

@@ -1,8 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+export interface FormData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    area: string;
+    roomOrApartment: string;
+}
+
 export interface constactSlice {
-    formData: {},
+    formData: FormData,
     formState: string[],
     isContactFormValid: boolean,
     setCurrentPage:string
@@ -26,7 +35,7 @@ export const formData = createSlice({
   name: 'formData',
   initialState,
   reducers: {
-    AddData: (state, action: PayloadAction<{}>) => {
+    AddData: (state, action: PayloadAction<FormData>) => {
       state.formData = action.payload,
       state.isContactFormValid = true;
     },
