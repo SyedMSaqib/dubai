@@ -35,6 +35,7 @@ const ContactForm = () => {
     lastName: "",
     email: "",
     phone: "",
+    whatsApp: "",
     area: "",
     roomOrApartment: "",
   })
@@ -44,6 +45,7 @@ const ContactForm = () => {
     lastName: "",
     email: "",
     phone: "",
+    whatsApp: "",
     area: "",
     roomOrApartment: "",
   })
@@ -56,6 +58,9 @@ const ContactForm = () => {
   const handlePhoneChange = (value: string | undefined) => {
     setFormValues({ ...formValues, phone: value || "" })
   }
+  const handleWhatsAppChange = (value: string | undefined) => {
+    setFormValues({ ...formValues, whatsApp: value || "" })
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,6 +70,7 @@ const ContactForm = () => {
       lastName: "",
       email: "",
       phone: "",
+      whatsApp: "",
       area: "",
       roomOrApartment: "",
     }
@@ -161,12 +167,27 @@ const ContactForm = () => {
 
       <div className="mb-5">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Phone No / WhatsApp No
+          Phone No
         </label>
         <PhoneInput
-          placeholder="Enter phone number"
+          placeholder="971 50 123 4567"
           value={formValues.phone}
           onChange={handlePhoneChange}
+          defaultCountry="AE"
+          className={`bg-gray-50 border ${
+            errors.phone ? "border-red-500" : "border-gray-300"
+          } text-gray-900 text-sm rounded-lg block w-full p-2.5`}
+        />
+        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+      </div>
+      <div className="mb-5">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          WhatsApp No (optional)
+        </label>
+        <PhoneInput
+          placeholder="971 50 123 4567"
+          value={formValues.whatsApp}
+          onChange={handleWhatsAppChange}
           defaultCountry="AE"
           className={`bg-gray-50 border ${
             errors.phone ? "border-red-500" : "border-gray-300"

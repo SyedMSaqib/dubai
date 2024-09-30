@@ -5,8 +5,14 @@ import ContactForm from "@/components/ui/Checkout/ContactForm"
 import BreadCrumbs from "@/components/ui/Checkout/BreadCrumbs"
 import StripeElements from "@/components/ui/Checkout/StripeElements"
 import { useAppSelector } from "@/lib/Redux/hooks"
+import { decodeData } from "@/utils/urlEncoders"
 
-export default function Checkout() {
+export default function Checkout({ params }: { params: { data: string } }) {
+  const { data } = params
+
+  // Decode the data
+  const decodedData = decodeData(data)
+
   const currentPage = useAppSelector((state) => state.formData.setCurrentPage)
 
   return (
@@ -19,7 +25,7 @@ export default function Checkout() {
           {currentPage === "Activity Details" ? <p>Activity Details</p> : ""}
           {currentPage === "Payment Details" ? <StripeElements /> : ""}
         </div>
-        <div className="hidden lg:block border border-gray-300 rounded-lg lg:h-[350px]">
+        <div className="hidden lg:block border border-gray-300 rounded-lg lg:h-[440px]">
           <CheckoutPackageDetails />
         </div>
       </div>

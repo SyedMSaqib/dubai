@@ -46,8 +46,19 @@ const CheckoutPackageDetails = () => {
           <Divider className="my-2" />
 
           <div className="flex justify-between">
+            <p className="">Package</p>
+            <p className="">$382</p>
+          </div>
+
+          <div className="flex justify-between">
+            <p className="">Add-Ons</p>
+            <p className="">$0</p>
+          </div>
+          <Divider className="my-2" />
+
+          <div className="flex justify-between">
             <p className="font-bold">Total</p>
-            <p className="font-bold">$382 (incl Tax)</p>
+            <p className="font-bold">$429 (incl Tax)</p>
           </div>
         </CardBody>
       </Card>

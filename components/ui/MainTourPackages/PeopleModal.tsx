@@ -5,8 +5,21 @@ import { Button } from "@nextui-org/button"
 import TransportType from "./TransportType"
 import AdOns from "./AddOns"
 import Link from "next/link"
+import { encodeData } from "@/utils/urlEncoders"
 
 export const PeopleModal = () => {
+  const data = {
+    array: ["item1", "item2", "item3"],
+    date: new Date().toISOString(),
+    name: "saqib", // Use a standard format for dates
+  }
+
+  // Serialize and encode data
+  const encodedData = encodeData(data)
+
+  // Create URL with encoded data
+  const url = `/checkout/${encodedData}`
+
   const [isOpen, setIsOpen] = useState(false)
 
   const [Adults, setAdults] = useState(1)
@@ -108,7 +121,7 @@ export const PeopleModal = () => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Link href={"/checkout"}>
+                  <Link href={url}>
                     <button className="bg-[#F1C40F] p-2 rounded-lg">Book Now</button>
                   </Link>
                 </div>

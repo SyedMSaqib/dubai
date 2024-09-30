@@ -6,6 +6,7 @@ export interface FormData {
     lastName: string;
     email: string;
     phone: string;
+    whatsApp: string;
     area: string;
     roomOrApartment: string;
 }
@@ -23,6 +24,7 @@ const initialState: constactSlice = {
         lastName: "",
         email: "",
         phone: "",
+        whatsApp: "",
         area: "",
         roomOrApartment: "",
     },
