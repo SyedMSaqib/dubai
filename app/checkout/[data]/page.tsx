@@ -5,13 +5,14 @@ import ContactForm from "@/components/ui/Checkout/ContactForm"
 import BreadCrumbs from "@/components/ui/Checkout/BreadCrumbs"
 import StripeElements from "@/components/ui/Checkout/StripeElements"
 import { useAppSelector } from "@/lib/Redux/hooks"
-// import { decodeData } from "@/utils/urlEncoders"
+import { decodeData } from "@/utils/urlEncoders"
 
 export default function Checkout({ params }: { params: { data: string } }) {
-  // const { data } = params
+  const { data } = params
 
   // Decode the data
-  // const decodedData = decodeData(data)
+  const decodedData = decodeData(data)
+  console.log(decodedData)
 
   const currentPage = useAppSelector((state) => state.formData.setCurrentPage)
 
