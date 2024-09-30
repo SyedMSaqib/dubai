@@ -1,15 +1,26 @@
 "use client"
+import { setCurrentPage } from "@/lib/Redux/features/contactSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/Redux/hooks"
+
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/breadcrumbs"
+
 import React from "react"
 
 const BreadCrumbs = () => {
-  const [currentPage, setCurrentPage] = React.useState<React.Key>("Contact Details")
-
+  const dispatch = useAppDispatch()
+  const currentPage = useAppSelector((state) => state.formData.setCurrentPage)
+  const isContactFormValid = useAppSelector((state) => state.formData.isContactFormValid)
+  const handleNavigation = (page: React.Key) => {
+    if (page === "Payment Details" && !isContactFormValid) {
+      return
+    }
+    dispatch(setCurrentPage(page.toString()))
+  }
   return (
     <Breadcrumbs
       className="flex justify-center items-center space-x-4 py-4"
       aria-label="Checkout Steps"
-      onAction={(key) => setCurrentPage(key)}
+      onAction={handleNavigation}
     >
       <BreadcrumbItem
         key="Contact Details"

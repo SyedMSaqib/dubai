@@ -1,11 +1,14 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import sidbarReducer from '../Redux/features/sidebarSlice'
+import  formData  from '../Redux/features/contactSlice'
 
 
 export const makeStore = () => {
     return configureStore({
-      reducer: {sidebar: sidbarReducer},
+      reducer: {sidebar: sidbarReducer,
+        formData:formData
+      },
     })
   }
 // Infer the type of makeStore

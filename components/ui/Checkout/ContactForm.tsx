@@ -1,4 +1,6 @@
 "use client"
+import { AddData, setCurrentPage, setFormState } from "@/lib/Redux/features/contactSlice"
+import { useAppDispatch } from "@/lib/Redux/hooks"
 import React, { useState } from "react"
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input"
 import "react-phone-number-input/style.css"
@@ -20,6 +22,8 @@ const regexPatterns = {
  */
 
 const ContactForm = () => {
+  const dispatch = useAppDispatch()
+
   // State to hold form values
   const [formValues, setFormValues] = useState({
     firstName: "",
@@ -94,7 +98,9 @@ const ContactForm = () => {
     if (Object.values(newErrors).some((error) => error)) return
 
     // Form is valid, handle form submission
-    alert("Form submitted successfully!")
+    dispatch(AddData(formValues))
+    dispatch(setFormState("Payment Details"))
+    dispatch(setCurrentPage("Payment Details"))
   }
 
   return (

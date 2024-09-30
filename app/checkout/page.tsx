@@ -1,11 +1,13 @@
+"use client"
 import { PriceModalMobile } from "@/components/ui/Checkout/PriceModalMobile"
 import CheckoutPackageDetails from "@/components/ui/Checkout/CheckoutPackageDetails"
 import ContactForm from "@/components/ui/Checkout/ContactForm"
 import BreadCrumbs from "@/components/ui/Checkout/BreadCrumbs"
 import StripeElements from "@/components/ui/Checkout/StripeElements"
+import { useAppSelector } from "@/lib/Redux/hooks"
 
 export default function Checkout() {
-  const currentPage: string = "Payment Details"
+  const currentPage = useAppSelector((state) => state.formData.setCurrentPage)
 
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4 lg:mb-[100px]  ">
