@@ -48,8 +48,8 @@ model SubToursRating {
   id            String       @id @default(uuid())
   rating        Float
   comment       String
-  SubTourInfo   SubTourInfo? @relation(fields: [SubTourInfoId], references: [id])
-  SubTourInfoId String?
+  subTourInfo   SubTourInfo? @relation(fields: [subTourInfoId], references: [id])
+  subTourInfoId String?
   createdAt     DateTime     @default(now())
 
   @@index([rating])
@@ -60,42 +60,44 @@ model SubTourInfo {
   subTour        SubTours         @relation(fields: [subTourSlug], references: [slug])
   subTourSlug    String           @unique
   description    String
-  dateTime       DateTime
   duration       Int
-  time           Int
-  Rating         SubToursRating[]
-  highlights     Highlights[]
-  WhatsIncluded  WhatsIncluded[]
-  WhatToExpect   WhatToExpect?
-  AdditionalInfo AdditionalInfo[]
-  AddOns         AddOns[]
+  time           DateTime
+  price          Int
+  rating         SubToursRating[]
+  Highlight      Highlight[]
+  whatsIncluded  WhatsIncluded[]
+  whatToExpect   WhatToExpect?
+  additionalInfo AdditionalInfo[]
+  addOns         AddOns[]
+
+  @@index([time, duration, price])
 }
 
-model Highlights {
+model Highlight {
   id            String       @id @default(uuid())
   highlight     String
-  SubTourInfo   SubTourInfo? @relation(fields: [subTourInfoId], references: [id])
+  subTourInfo   SubTourInfo? @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String?
 }
 
 model WhatsIncluded {
   id            String      @id @default(uuid())
   included      String
-  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String
 }
 
 model WhatToExpect {
   id            String      @id @default(uuid())
   expectation   String
-  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String      @unique
 }
 
 model AdditionalInfo {
   id            String      @id @default(uuid())
   info          String
-  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String
 }
 
@@ -103,7 +105,7 @@ model AddOns {
   id            String      @id @default(uuid())
   name          String
   price         Int
-  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String
 }
 
