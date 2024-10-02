@@ -27,12 +27,8 @@ model TourImages {
 
 model SubTours {
   id          String          @id @default(uuid())
-  name        String
   tour        Tours           @relation(fields: [tourSlug], references: [slug]) // Each sub-tour belongs to one tour
   tourSlug    String // Foreign key to Tours
-  price       Int
-  duration    Int
-  rating      Float
   slug        String          @unique
   images      SubTourImages[] // A sub-tour can have many images
   SubTourInfo SubTourInfo?
@@ -55,12 +51,14 @@ model SubToursRating {
   SubTourInfo   SubTourInfo? @relation(fields: [SubTourInfoId], references: [id])
   SubTourInfoId String?
   createdAt     DateTime     @default(now())
+
+  @@index([rating])
 }
 
 model SubTourInfo {
   id             String           @id @default(uuid())
-  subTour        SubTours         @relation(fields: [subTourId], references: [id])
-  subTourId      String           @unique
+  subTour        SubTours         @relation(fields: [subTourSlug], references: [slug])
+  subTourSlug    String           @unique
   description    String
   dateTime       DateTime
   duration       Int

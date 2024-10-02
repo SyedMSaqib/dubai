@@ -1,230 +1,113 @@
-// prisma/seed.ts
-
 import { PrismaClient } from '@prisma/client';
+import slugify from 'slugify';
 
 const prisma = new PrismaClient();
 
+// Dummy data for images
+const images = [
+  { src: '/images/desertSafari.jpg', text: 'Desert Safari' },
+  { src: '/images/heliride.jpg', text: 'Helicopter Ride' },
+  { src: '/images/dowCuise.jpg', text: 'Dhow Cruise Dinner' },
+  { src: '/images/burjKhalifa.jpg', text: 'Burj Khalifa Tour' },
+  { src: '/images/dubaiCity.jpg', text: 'Dubai City Tour' },
+  { src: '/images/atlantas.jpg', text: 'Atlantis Aquaventure' },
+  { src: '/images/hotAir.jpg', text: 'Hot Air Balloon Ride' },
+  { src: '/images/marinaYacht.jpg', text: 'Dubai Marina Yacht Cruise' },
+  { src: '/images/garden.jpg', text: 'Dubai Miracle Garden' },
+  { src: '/images/dubai5.jpg', text: 'Dubai Frame Experience' },
+  { src: '/images/dubai1.jpg', text: 'Ski Dubai Adventure' },
+  { src: '/images/dubai2.jpg', text: 'Ferrari World Tour' },
+];
+
+// Seed function
 async function main() {
-  // Array of image data to be used
-  const tourImages = [
-    { src: '/images/desertSafari.jpg', text: 'Desert Safari' },
-    { src: '/images/heliride.jpg', text: 'Helicopter Ride' },
-    { src: '/images/dowCuise.jpg', text: 'Dhow Cruise Dinner' },
-    { src: '/images/burjKhalifa.jpg', text: 'Burj Khalifa Tour' },
-    { src: '/images/dubaiCity.jpg', text: 'Dubai City Tour' },
-    { src: '/images/atlantas.jpg', text: 'Atlantis Aquaventure' },
-    { src: '/images/hotAir.jpg', text: 'Hot Air Balloon Ride' },
-    { src: '/images/marinaYacht.jpg', text: 'Dubai Marina Yacht Cruise' },
-    { src: '/images/garden.jpg', text: 'Dubai Miracle Garden' },
-    { src: '/images/dubai5.jpg', text: 'Dubai Frame Experience' },
-    { src: '/images/dubai1.jpg', text: 'Ski Dubai Adventure' },
-    { src: '/images/dubai2.jpg', text: 'Ferrari World Tour' },
-  ];
-
-  // Create Tours and associate Tour Images
-  const tour1 = await prisma.tours.create({
-    data: {
-      name: 'Adventure Tours',
-      image: {
-        create: {
-          src: tourImages[0].src,
-          altText: tourImages[0].text,
+  // Create tours
+  const tours = await Promise.all(
+    images.map(async (image) => {
+      const tour = await prisma.tours.create({
+        data: {
+          name: image.text,
+          slug: slugify(image.text, { lower: true }), // Using slugify to generate slug
+          image: {
+            create: {
+              src: image.src,
+              altText: `${image.text} Image`,
+            },
+          },
         },
-      },
-      subTours: {
-        create: [
-          {
-            name: 'Desert Safari Adventure',
-            images: {
-              create: [
-                {
-                  src: tourImages[0].src,
-                  altText: tourImages[0].text,
-                },
-                {
-                  src: tourImages[1].src,
-                  altText: tourImages[1].text,
-                },
-              ],
-            },
-          },
-          {
-            name: 'Helicopter Ride Experience',
-            images: {
-              create: [
-                {
-                  src: tourImages[2].src,
-                  altText: tourImages[2].text,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
+      });
 
-  const tour2 = await prisma.tours.create({
-    data: {
-      name: 'City Tours',
-      image: {
-        create: {
-          src: tourImages[3].src,
-          altText: tourImages[3].text,
-        },
-      },
-      subTours: {
-        create: [
-          {
-            name: 'Burj Khalifa Tour',
-            images: {
-              create: [
-                {
-                  src: tourImages[3].src,
-                  altText: tourImages[3].text,
+      // Create sub-tours for each tour
+      const subTours = await Promise.all(
+        Array.from({ length: 3 }).map(async (_, index) => {
+          const subTourName = `${image.text} Sub-Tour ${index + 1}`;
+          return prisma.subTours.create({
+            data: {
+              slug: slugify(subTourName, { lower: true }), // Using slugify for sub-tour slug
+              tourSlug: tour.slug,
+              
+              images: {
+                create: [
+                  {
+                    src: image.src,
+                    altText: `${subTourName} Image`,
+                  },
+                ],
+              },
+              SubTourInfo: {
+                create: {
+                  description: `${subTourName} is an amazing experience.`,
+                  dateTime: new Date(),
+                  duration: 120,
+                  time: 10,
+                  highlights: {
+                    create: [
+                      { highlight: 'Highlight 1' },
+                      { highlight: 'Highlight 2' },
+                    ],
+                  },
+                  WhatsIncluded: {
+                    create: [
+                      { included: 'Transportation' },
+                      { included: 'Meals' },
+                    ],
+                  },
+                  WhatToExpect: {
+                    create: {
+                      expectation: 'Expect a great adventure!',
+                    },
+                  },
+                  AdditionalInfo: {
+                    create: [
+                      { info: 'Bring your camera.' },
+                      { info: 'Wear comfortable shoes.' },
+                    ],
+                  },
+                  AddOns: {
+                    create: [
+                      { name: 'Extra Tour Guide', price: 50 },
+                      { name: 'Photography Package', price: 100 },
+                    ],
+                  },
                 },
-                {
-                  src: tourImages[4].src,
-                  altText: tourImages[4].text,
-                },
-              ],
+              },
             },
-          },
-          {
-            name: 'Atlantis Aquaventure',
-            images: {
-              create: [
-                {
-                  src: tourImages[5].src,
-                  altText: tourImages[5].text,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
+          });
+        })
+      );
 
-  const tour3 = await prisma.tours.create({
-    data: {
-      name: 'Unique Experiences',
-      image: {
-        create: {
-          src: tourImages[6].src,
-          altText: tourImages[6].text,
-        },
-      },
-      subTours: {
-        create: [
-          {
-            name: 'Hot Air Balloon Ride',
-            images: {
-              create: [
-                {
-                  src: tourImages[6].src,
-                  altText: tourImages[6].text,
-                },
-              ],
-            },
-          },
-          {
-            name: 'Dubai Marina Yacht Cruise',
-            images: {
-              create: [
-                {
-                  src: tourImages[7].src,
-                  altText: tourImages[7].text,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
+      return { tour, subTours };
+    })
+  );
 
-  const tour4 = await prisma.tours.create({
-    data: {
-      name: 'Family Fun',
-      image: {
-        create: {
-          src: tourImages[8].src,
-          altText: tourImages[8].text,
-        },
-      },
-      subTours: {
-        create: [
-          {
-            name: 'Dubai Miracle Garden',
-            images: {
-              create: [
-                {
-                  src: tourImages[8].src,
-                  altText: tourImages[8].text,
-                },
-              ],
-            },
-          },
-          {
-            name: 'Dubai Frame Experience',
-            images: {
-              create: [
-                {
-                  src: tourImages[9].src,
-                  altText: tourImages[9].text,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
-
-  const tour5 = await prisma.tours.create({
-    data: {
-      name: 'Adventure Thrills',
-      image: {
-        create: {
-          src: tourImages[10].src,
-          altText: tourImages[10].text,
-        },
-      },
-      subTours: {
-        create: [
-          {
-            name: 'Ski Dubai Adventure',
-            images: {
-              create: [
-                {
-                  src: tourImages[10].src,
-                  altText: tourImages[10].text,
-                },
-              ],
-            },
-          },
-          {
-            name: 'Ferrari World Tour',
-            images: {
-              create: [
-                {
-                  src: tourImages[11].src,
-                  altText: tourImages[11].text,
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
-
-  console.log({ tour1, tour2, tour3, tour4, tour5 });
+  console.log('Tours and sub-tours created:', tours);
 }
 
 main()
-  .catch((e) => console.error(e))
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
   .finally(async () => {
     await prisma.$disconnect();
   });

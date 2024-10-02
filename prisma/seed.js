@@ -1,5 +1,4 @@
 "use strict";
-// prisma/seed.ts
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38,238 +37,151 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var client_1 = require("@prisma/client");
+var slugify_1 = require("slugify");
 var prisma = new client_1.PrismaClient();
+var images = [
+    { src: '/images/desertSafari.jpg', text: 'Desert Safari' },
+    { src: '/images/heliride.jpg', text: 'Helicopter Ride' },
+    { src: '/images/dowCuise.jpg', text: 'Dhow Cruise Dinner' },
+    { src: '/images/burjKhalifa.jpg', text: 'Burj Khalifa Tour' },
+    { src: '/images/dubaiCity.jpg', text: 'Dubai City Tour' },
+    { src: '/images/atlantas.jpg', text: 'Atlantis Aquaventure' },
+    { src: '/images/hotAir.jpg', text: 'Hot Air Balloon Ride' },
+    { src: '/images/marinaYacht.jpg', text: 'Dubai Marina Yacht Cruise' },
+    { src: '/images/garden.jpg', text: 'Dubai Miracle Garden' },
+    { src: '/images/dubai5.jpg', text: 'Dubai Frame Experience' },
+    { src: '/images/dubai1.jpg', text: 'Ski Dubai Adventure' },
+    { src: '/images/dubai2.jpg', text: 'Ferrari World Tour' },
+];
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var tourImages, tour1, tour2, tour3, tour4, tour5;
+        var toursData, _loop_1, _i, toursData_1, tour;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    tourImages = [
-                        { src: '/images/desertSafari.jpg', text: 'Desert Safari' },
-                        { src: '/images/heliride.jpg', text: 'Helicopter Ride' },
-                        { src: '/images/dowCuise.jpg', text: 'Dhow Cruise Dinner' },
-                        { src: '/images/burjKhalifa.jpg', text: 'Burj Khalifa Tour' },
-                        { src: '/images/dubaiCity.jpg', text: 'Dubai City Tour' },
-                        { src: '/images/atlantas.jpg', text: 'Atlantis Aquaventure' },
-                        { src: '/images/hotAir.jpg', text: 'Hot Air Balloon Ride' },
-                        { src: '/images/marinaYacht.jpg', text: 'Dubai Marina Yacht Cruise' },
-                        { src: '/images/garden.jpg', text: 'Dubai Miracle Garden' },
-                        { src: '/images/dubai5.jpg', text: 'Dubai Frame Experience' },
-                        { src: '/images/dubai1.jpg', text: 'Ski Dubai Adventure' },
-                        { src: '/images/dubai2.jpg', text: 'Ferrari World Tour' },
-                    ];
-                    return [4 /*yield*/, prisma.tours.create({
-                            data: {
-                                name: 'Adventure Tours',
-                                image: {
-                                    create: {
-                                        src: tourImages[0].src,
-                                        altText: tourImages[0].text,
-                                    },
-                                },
-                                subTours: {
-                                    create: [
-                                        {
-                                            name: 'Desert Safari Adventure',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[0].src,
-                                                        altText: tourImages[0].text,
-                                                    },
-                                                    {
-                                                        src: tourImages[1].src,
-                                                        altText: tourImages[1].text,
-                                                    },
-                                                ],
+                    toursData = [
+                        'Dubai City Tour',
+                        'Burj Khalifa Tour',
+                        'Atlantis Aquaventure',
+                        'Desert Safari',
+                        'Dhow Cruise Dinner',
+                        'Helicopter Ride',
+                        'Dubai Marina Yacht Cruise',
+                        'Dubai Miracle Garden',
+                        'Dubai Frame Experience',
+                        'Ski Dubai Adventure',
+                        'Ferrari World Tour',
+                        'Hot Air Balloon Ride',
+                    ].map(function (tourName) {
+                        var slug = (0, slugify_1.default)(tourName, { lower: true });
+                        return { name: tourName, slug: slug };
+                    });
+                    _loop_1 = function (tour) {
+                        var createdTour, subToursData, _b, subToursData_1, subTour, createdSubTour;
+                        return __generator(this, function (_c) {
+                            switch (_c.label) {
+                                case 0: return [4 /*yield*/, prisma.tours.create({
+                                        data: {
+                                            name: tour.name,
+                                            slug: tour.slug,
+                                            image: {
+                                                create: {
+                                                    src: getRandomImage().src,
+                                                    altText: getRandomImage().text,
+                                                },
                                             },
                                         },
-                                        {
-                                            name: 'Helicopter Ride Experience',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[2].src,
-                                                        altText: tourImages[2].text,
-                                                    },
-                                                ],
+                                    })
+                                    // Create a random number of sub-tours for each tour
+                                ];
+                                case 1:
+                                    createdTour = _c.sent();
+                                    subToursData = [
+                                        'Morning Tour',
+                                        'Afternoon Tour',
+                                        'Evening Tour',
+                                        'VIP Tour',
+                                        'Exclusive Experience',
+                                    ].map(function (subTourName) {
+                                        var slug = (0, slugify_1.default)("".concat(tour.name, " ").concat(subTourName), { lower: true });
+                                        return { name: subTourName, slug: slug, tourSlug: createdTour.slug };
+                                    });
+                                    _b = 0, subToursData_1 = subToursData;
+                                    _c.label = 2;
+                                case 2:
+                                    if (!(_b < subToursData_1.length)) return [3 /*break*/, 6];
+                                    subTour = subToursData_1[_b];
+                                    return [4 /*yield*/, prisma.subTours.create({
+                                            data: {
+                                                slug: subTour.slug,
+                                                tourSlug: subTour.tourSlug,
+                                                images: {
+                                                    create: [
+                                                        {
+                                                            src: getRandomImage().src,
+                                                            altText: getRandomImage().text,
+                                                        },
+                                                        {
+                                                            src: getRandomImage().src,
+                                                            altText: getRandomImage().text,
+                                                        },
+                                                    ],
+                                                },
                                             },
-                                        },
-                                    ],
-                                },
-                            },
-                        })];
+                                        })
+                                        // Create associated SubTourInfo for each sub-tour
+                                    ];
+                                case 3:
+                                    createdSubTour = _c.sent();
+                                    // Create associated SubTourInfo for each sub-tour
+                                    return [4 /*yield*/, prisma.subTourInfo.create({
+                                            data: {
+                                                subTourSlug: createdSubTour.slug,
+                                                description: "This is the ".concat(subTour.name, " of ").concat(tour.name, "."),
+                                                dateTime: new Date(),
+                                                duration: Math.floor(Math.random() * 4) + 1, // Random duration 1-4 hours
+                                                time: Math.floor(Math.random() * 24), // Random start time between 0 and 23
+                                            },
+                                        })];
+                                case 4:
+                                    // Create associated SubTourInfo for each sub-tour
+                                    _c.sent();
+                                    _c.label = 5;
+                                case 5:
+                                    _b++;
+                                    return [3 /*break*/, 2];
+                                case 6: return [2 /*return*/];
+                            }
+                        });
+                    };
+                    _i = 0, toursData_1 = toursData;
+                    _a.label = 1;
                 case 1:
-                    tour1 = _a.sent();
-                    return [4 /*yield*/, prisma.tours.create({
-                            data: {
-                                name: 'City Tours',
-                                image: {
-                                    create: {
-                                        src: tourImages[3].src,
-                                        altText: tourImages[3].text,
-                                    },
-                                },
-                                subTours: {
-                                    create: [
-                                        {
-                                            name: 'Burj Khalifa Tour',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[3].src,
-                                                        altText: tourImages[3].text,
-                                                    },
-                                                    {
-                                                        src: tourImages[4].src,
-                                                        altText: tourImages[4].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                        {
-                                            name: 'Atlantis Aquaventure',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[5].src,
-                                                        altText: tourImages[5].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                    ],
-                                },
-                            },
-                        })];
+                    if (!(_i < toursData_1.length)) return [3 /*break*/, 4];
+                    tour = toursData_1[_i];
+                    return [5 /*yield**/, _loop_1(tour)];
                 case 2:
-                    tour2 = _a.sent();
-                    return [4 /*yield*/, prisma.tours.create({
-                            data: {
-                                name: 'Unique Experiences',
-                                image: {
-                                    create: {
-                                        src: tourImages[6].src,
-                                        altText: tourImages[6].text,
-                                    },
-                                },
-                                subTours: {
-                                    create: [
-                                        {
-                                            name: 'Hot Air Balloon Ride',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[6].src,
-                                                        altText: tourImages[6].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                        {
-                                            name: 'Dubai Marina Yacht Cruise',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[7].src,
-                                                        altText: tourImages[7].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                    ],
-                                },
-                            },
-                        })];
+                    _a.sent();
+                    _a.label = 3;
                 case 3:
-                    tour3 = _a.sent();
-                    return [4 /*yield*/, prisma.tours.create({
-                            data: {
-                                name: 'Family Fun',
-                                image: {
-                                    create: {
-                                        src: tourImages[8].src,
-                                        altText: tourImages[8].text,
-                                    },
-                                },
-                                subTours: {
-                                    create: [
-                                        {
-                                            name: 'Dubai Miracle Garden',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[8].src,
-                                                        altText: tourImages[8].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                        {
-                                            name: 'Dubai Frame Experience',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[9].src,
-                                                        altText: tourImages[9].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                    ],
-                                },
-                            },
-                        })];
+                    _i++;
+                    return [3 /*break*/, 1];
                 case 4:
-                    tour4 = _a.sent();
-                    return [4 /*yield*/, prisma.tours.create({
-                            data: {
-                                name: 'Adventure Thrills',
-                                image: {
-                                    create: {
-                                        src: tourImages[10].src,
-                                        altText: tourImages[10].text,
-                                    },
-                                },
-                                subTours: {
-                                    create: [
-                                        {
-                                            name: 'Ski Dubai Adventure',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[10].src,
-                                                        altText: tourImages[10].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                        {
-                                            name: 'Ferrari World Tour',
-                                            images: {
-                                                create: [
-                                                    {
-                                                        src: tourImages[11].src,
-                                                        altText: tourImages[11].text,
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                    ],
-                                },
-                            },
-                        })];
-                case 5:
-                    tour5 = _a.sent();
-                    console.log({ tour1: tour1, tour2: tour2, tour3: tour3, tour4: tour4, tour5: tour5 });
+                    console.log('Seeding complete!');
                     return [2 /*return*/];
             }
         });
     });
 }
+// Helper function to get a random image
+function getRandomImage() {
+    return images[Math.floor(Math.random() * images.length)];
+}
 main()
-    .catch(function (e) { return console.error(e); })
+    .catch(function (e) {
+    console.error(e);
+    process.exit(1);
+})
     .finally(function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
