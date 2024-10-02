@@ -11,7 +11,8 @@ model Tours {
   id       String      @id @default(uuid())
   name     String
   image    TourImages? // A tour can have one image
-  subTours SubTours[] // A tour can have many sub-tours
+  subTours SubTours[]
+  slug     String      @unique // A tour can have many sub-tours
 }
 
 model TourImages {
@@ -25,11 +26,16 @@ model TourImages {
 }
 
 model SubTours {
-  id     String          @id @default(uuid())
-  name   String
-  tour   Tours           @relation(fields: [tourId], references: [id]) // Each sub-tour belongs to one tour
-  tourId String // Foreign key to Tours
-  images SubTourImages[] // A sub-tour can have many images
+  id          String          @id @default(uuid())
+  name        String
+  tour        Tours           @relation(fields: [tourSlug], references: [slug]) // Each sub-tour belongs to one tour
+  tourSlug    String // Foreign key to Tours
+  price       Int
+  duration    Int
+  rating      Float
+  slug        String          @unique
+  images      SubTourImages[] // A sub-tour can have many images
+  SubTourInfo SubTourInfo?
 }
 
 model SubTourImages {
@@ -40,4 +46,90 @@ model SubTourImages {
   subTourId String // Foreign key to the SubTours model
   createdAt DateTime @default(now()) // Timestamp for when the image was added
   updatedAt DateTime @updatedAt // Timestamp for the last update
+}
+
+model SubToursRating {
+  id            String       @id @default(uuid())
+  rating        Float
+  comment       String
+  SubTourInfo   SubTourInfo? @relation(fields: [SubTourInfoId], references: [id])
+  SubTourInfoId String?
+  createdAt     DateTime     @default(now())
+}
+
+model SubTourInfo {
+  id             String           @id @default(uuid())
+  subTour        SubTours         @relation(fields: [subTourId], references: [id])
+  subTourId      String           @unique
+  description    String
+  dateTime       DateTime
+  duration       Int
+  time           Int
+  Rating         SubToursRating[]
+  highlights     Highlights[]
+  WhatsIncluded  WhatsIncluded[]
+  WhatToExpect   WhatToExpect?
+  AdditionalInfo AdditionalInfo[]
+  AddOns         AddOns[]
+}
+
+model Highlights {
+  id            String       @id @default(uuid())
+  highlight     String
+  SubTourInfo   SubTourInfo? @relation(fields: [subTourInfoId], references: [id])
+  subTourInfoId String?
+}
+
+model WhatsIncluded {
+  id            String      @id @default(uuid())
+  included      String
+  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfoId String
+}
+
+model WhatToExpect {
+  id            String      @id @default(uuid())
+  expectation   String
+  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfoId String      @unique
+}
+
+model AdditionalInfo {
+  id            String      @id @default(uuid())
+  info          String
+  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfoId String
+}
+
+model AddOns {
+  id            String      @id @default(uuid())
+  name          String
+  price         Int
+  SubTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
+  subTourInfoId String
+}
+
+model Booking {
+  id            String      @id @default(uuid())
+  adults        Int
+  child         Int
+  transportType String
+  totalPrice    Int
+  addOns        String[]
+  user          BookingUser @relation(fields: [bookingUserId], references: [id])
+  bookingUserId String      @unique
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model BookingUser {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  phone       String
+  whatsApp    String?
+  pickUpPoint String
+  room        String?
+  email       String
+  booking     Booking?
 }
