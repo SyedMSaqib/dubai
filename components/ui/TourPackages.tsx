@@ -1,19 +1,31 @@
 import { Card } from "@nextui-org/card"
 import Image from "next/image"
 
-interface TourPackagesProps {
+type Image = {
+  id: string
   src: string
-  text: string
+  altText: string | null
+  tourId: string
+  createdAt: Date
+  updatedAt: Date
 }
 
-const TourPackages: React.FC<TourPackagesProps> = ({ src, text }) => {
+const TourPackages = ({
+  image,
+  name,
+  count,
+}: {
+  image: Image | null
+  name: string
+  count: number
+}) => {
   return (
     <div className="flex flex-col items-center">
       <Card className="w-[100%] h-[120px] sm:h-[160px] lg:h-[200px]   relative rounded-lg">
         <Image
-          alt="packages image"
+          alt={(image && image.altText) || "image"}
           className="z-0 w-full h-full scale-125 object-cover"
-          src={src}
+          src={image?.src || ""}
           fill
           blurDataURL="data:..."
           placeholder="blur"
@@ -21,10 +33,10 @@ const TourPackages: React.FC<TourPackagesProps> = ({ src, text }) => {
         />
       </Card>
       <p className="mt-2 text-center text-xs lg:text-medium font-semibold uppercase break-words">
-        {text}
+        {name}
       </p>
       <p className=" text-center text-gray-500 text-xs lg:text-medium font-semibold uppercase break-words">
-        (200 tours)
+        ({count} tours)
       </p>
     </div>
   )

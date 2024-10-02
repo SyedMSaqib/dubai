@@ -9,8 +9,11 @@ import { tourPackages, topTours, topTours2 } from "../utils/ToursStatic"
 import Tesimonial from "@/components/ui/Tesimonial"
 import testimonials from "@/utils/TestimonialStatic"
 import { createSlug } from "@/utils/slug"
+import { getAllTours } from "@/lib/db"
 
-export default function Home() {
+export default async function Home() {
+  const tours = await getAllTours()
+  console.log(tours)
   return (
     <>
       <ImageCarousel />
@@ -43,9 +46,9 @@ export default function Home() {
           Tour Categories
         </h3>
         <div className=" gap-y-7 gap-x-3 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 2xl:max-w-[1500px] xl:mx-auto  mt-[20px]">
-          {tourPackages.map(({ src, text }, index) => (
-            <Link key={index} href={`/packages/${createSlug(text)}`}>
-              <TourPackages src={src} text={text} />
+          {tours.map(({ image, name, slug, _count }, index) => (
+            <Link key={index} href={`/packages/${slug}`}>
+              <TourPackages image={image} name={name} count={_count.subTours} />
             </Link>
           ))}
         </div>
