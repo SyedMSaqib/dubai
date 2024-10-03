@@ -6,9 +6,24 @@ import PackagePagination from "@/components/ui/MainTourPackages/PackagePaginatio
 import Link from "next/link"
 import { createSlug, slugToText } from "@/utils/slug"
 import Ratings from "@/components/ui/Ratings"
+import { getAllSubTours } from "@/lib/db"
 
-const Packages = ({ params }: { params: { allPackages: string } }) => {
+type searchParams = { [key: string]: string }
+const Packages = async ({
+  params,
+  searchParams,
+}: {
+  params: { allPackages: string }
+  searchParams: searchParams
+}) => {
   const { allPackages } = params
+  const { page } = searchParams
+
+  const getAllSubToursFunction = getAllSubTours(page, allPackages)
+  const { totalCount, subTours } = await getAllSubToursFunction()
+
+  // Now you can use totalCount and subTours
+  console.log(totalCount, subTours)
 
   const packageName = slugToText(allPackages)
   return (
@@ -27,22 +42,22 @@ const Packages = ({ params }: { params: { allPackages: string } }) => {
         </div>
 
         <div className="lg:mt-[20px] flex flex-col gap-2 w-full">
-          {packagesData.map((item) => (
-            <Link href={`/packages/${allPackages}/${createSlug(item.title)}`} key={item.title}>
+          {subTours.map((subtour) => (
+            <Link href={`/packages/${allPackages}/${subtour.slug}`} key={subtour.id}>
               <PackagesItem
-                key={item.title} // Use a unique key, here we can use title or any unique identifier
-                src={item.src}
-                title={item.title}
-                price={item.price}
-                rating={item.rating}
-                totalRatings={item.totalRatings}
-                time={item.time}
-                description={item.description}
+                key={subtour.id} // Use a unique key, here we can use title or any unique identifier
+                src={subtour.thumbnail}
+                title={subtour.name}
+                price={subtour.SubTourInfo?.price || 0}
+                rating={4.5}
+                totalRatings={100}
+                time={0}
+                description={subtour.SubTourInfo?.description || ""}
               />
             </Link>
           ))}
           <div className="flex justify-center mt-[50px] mb-[20px]">
-            <PackagePagination />
+            <PackagePagination totalCount={totalCount} />
           </div>
         </div>
       </div>
