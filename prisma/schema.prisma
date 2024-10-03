@@ -8,8 +8,9 @@ datasource db {
 }
 
 model Tours {
-  id       String      @id @default(uuid())
-  name     String
+  id   String @id @default(uuid())
+  name String
+
   image    TourImages? // A tour can have one image
   subTours SubTours[]
   slug     String      @unique // A tour can have many sub-tours
@@ -26,12 +27,17 @@ model TourImages {
 }
 
 model SubTours {
-  id          String          @id @default(uuid())
-  tour        Tours           @relation(fields: [tourSlug], references: [slug]) // Each sub-tour belongs to one tour
+  id          String           @id @default(uuid())
+  name        String
+  thumbnail   String
+  tour        Tours            @relation(fields: [tourSlug], references: [slug]) // Each sub-tour belongs to one tour
   tourSlug    String // Foreign key to Tours
-  slug        String          @unique
+  slug        String           @unique
   images      SubTourImages[] // A sub-tour can have many images
   SubTourInfo SubTourInfo?
+  rating      SubToursRating[]
+
+  @@index([slug])
 }
 
 model SubTourImages {
@@ -45,12 +51,14 @@ model SubTourImages {
 }
 
 model SubToursRating {
-  id            String       @id @default(uuid())
-  rating        Float
-  comment       String
-  subTourInfo   SubTourInfo? @relation(fields: [subTourInfoId], references: [id])
+  id      String @id @default(uuid())
+  rating  Float
+  comment String
+
   subTourInfoId String?
-  createdAt     DateTime     @default(now())
+  createdAt     DateTime  @default(now())
+  SubTours      SubTours? @relation(fields: [subToursId], references: [id])
+  subToursId    String?
 
   @@index([rating])
 }
@@ -63,7 +71,6 @@ model SubTourInfo {
   duration       Int
   time           DateTime
   price          Int
-  rating         SubToursRating[]
   Highlight      Highlight[]
   whatsIncluded  WhatsIncluded[]
   whatToExpect   WhatToExpect?
