@@ -8,12 +8,11 @@ import TopTours from "../components/ui/TopTours"
 import { tourPackages, topTours, topTours2 } from "../utils/ToursStatic"
 import Tesimonial from "@/components/ui/Tesimonial"
 import testimonials from "@/utils/TestimonialStatic"
-import { createSlug } from "@/utils/slug"
 import { getAllTours } from "@/lib/db"
 
 export default async function Home() {
   const tours = await getAllTours()
-  console.log(tours)
+
   return (
     <>
       <ImageCarousel />

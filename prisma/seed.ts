@@ -1,113 +1,132 @@
-import { PrismaClient } from '@prisma/client';
-import slugify from 'slugify';
+import { PrismaClient } from '@prisma/client'
+import slugify from 'slugify'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
-// Dummy data for images
-const images = [
-  { src: '/images/desertSafari.jpg', text: 'Desert Safari' },
-  { src: '/images/heliride.jpg', text: 'Helicopter Ride' },
-  { src: '/images/dowCuise.jpg', text: 'Dhow Cruise Dinner' },
-  { src: '/images/burjKhalifa.jpg', text: 'Burj Khalifa Tour' },
-  { src: '/images/dubaiCity.jpg', text: 'Dubai City Tour' },
-  { src: '/images/atlantas.jpg', text: 'Atlantis Aquaventure' },
-  { src: '/images/hotAir.jpg', text: 'Hot Air Balloon Ride' },
-  { src: '/images/marinaYacht.jpg', text: 'Dubai Marina Yacht Cruise' },
-  { src: '/images/garden.jpg', text: 'Dubai Miracle Garden' },
-  { src: '/images/dubai5.jpg', text: 'Dubai Frame Experience' },
-  { src: '/images/dubai1.jpg', text: 'Ski Dubai Adventure' },
-  { src: '/images/dubai2.jpg', text: 'Ferrari World Tour' },
-];
+const tours = [
+  { name: "Desert Safari Adventure", image: "/images/desertSafari.jpg" },
+  { name: "Helicopter City Views", image: "/images/heliride.jpg" },
+  { name: "Dhow Cruise Dinner Experience", image: "/images/dowCuise.jpg" },
+  { name: "Burj Khalifa Observation Deck", image: "/images/burjKhalifa.jpg" },
+  { name: "Dubai City Tour Deluxe", image: "/images/dubaiCity.jpg" },
+  { name: "Atlantis Aquaventure Waterpark", image: "/images/atlantas.jpg" },
+  { name: "Hot Air Balloon Desert Ride", image: "/images/hotAir.jpg" },
+  { name: "Dubai Marina Luxury Yacht Tour", image: "/images/marinaYacht.jpg" },
+  { name: "Dubai Miracle Garden Visit", image: "/images/garden.jpg" },
+  { name: "Dubai Frame Spectacular", image: "/images/dubai5.jpg" },
+  { name: "Ski Dubai Snow Adventure", image: "/images/dubai1.jpg" },
+  { name: "Ferrari World Abu Dhabi Tour", image: "/images/dubai2.jpg" },
+]
 
-// Seed function
+const allImages = [
+  "/images/desertSafari.jpg",
+  "/images/heliride.jpg",
+  "/images/dowCuise.jpg",
+  "/images/burjKhalifa.jpg",
+  "/images/dubaiCity.jpg",
+  "/images/atlantas.jpg",
+  "/images/hotAir.jpg",
+  "/images/marinaYacht.jpg",
+  "/images/garden.jpg",
+  "/images/dubai5.jpg",
+  "/images/dubai1.jpg",
+  "/images/dubai2.jpg",
+]
+
 async function main() {
-  // Create tours
-  const tours = await Promise.all(
-    images.map(async (image) => {
-      const tour = await prisma.tours.create({
-        data: {
-          name: image.text,
-          slug: slugify(image.text, { lower: true }), // Using slugify to generate slug
-          image: {
-            create: {
-              src: image.src,
-              altText: `${image.text} Image`,
-            },
-          },
-        },
-      });
 
-      // Create sub-tours for each tour
-      const subTours = await Promise.all(
-        Array.from({ length: 3 }).map(async (_, index) => {
-          const subTourName = `${image.text} Sub-Tour ${index + 1}`;
-          return prisma.subTours.create({
-            data: {
-              slug: slugify(subTourName, { lower: true }), // Using slugify for sub-tour slug
-              tourSlug: tour.slug,
-              
-              images: {
+
+  // Create tours
+  for (const tour of tours) {
+    const slug = slugify(tour.name, { lower: true })
+    
+    const createdTour = await prisma.tours.create({
+      data: {
+        name: tour.name,
+        slug: slug,
+        
+        image: {
+          create: {
+            src: tour.image,
+            altText: tour.name,
+          }
+        },
+      },
+    })
+
+    // Create 12 sub-tours for each tour
+    for (let i = 1; i <= 12; i++) {
+      const subTourName = `${tour.name} - Package ${i}`
+      const subTourSlug = slugify(subTourName, { lower: true })
+      
+      const subTour = await prisma.subTours.create({
+        data: {
+          name: subTourName,
+          slug: subTourSlug,
+          thumbnail: allImages[i % 12], // Cycle through all images
+          tourSlug: createdTour.slug,
+          images: {
+            create: allImages.slice(0, 3).map(img => ({
+              src: img,
+              altText: `${subTourName} image`,
+            })),
+          },
+          SubTourInfo: {
+            create: {
+              description: `Experience the incredible ${subTourName}. This package offers an unforgettable adventure in Dubai.`,
+              duration: Math.floor(Math.random() * 5) + 2, // 2-6 hours
+              time: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1),
+              price: Math.floor(Math.random() * 500) + 100, // 100-600 AED
+              Highlight: {
                 create: [
-                  {
-                    src: image.src,
-                    altText: `${subTourName} Image`,
-                  },
+                  { highlight: "Professional guide" },
+                  { highlight: "Hotel pickup and drop-off" },
+                  { highlight: "All necessary equipment" },
                 ],
               },
-              SubTourInfo: {
+              whatsIncluded: {
+                create: [
+                  { included: "Transport by air-conditioned vehicle" },
+                  { included: "Bottled water" },
+                  { included: "Insurance" },
+                ],
+              },
+              whatToExpect: {
                 create: {
-                  description: `${subTourName} is an amazing experience.`,
-                  price:100,
-                  duration: 120,
-                  time: new Date(),
-                  Highlight: {
-                    create: [
-                      { highlight: 'Highlight 1' },
-                      { highlight: 'Highlight 2' },
-                    ],
-                  },
-                  whatsIncluded: {
-                    create: [
-                      { included: 'Transportation' },
-                      { included: 'Meals' },
-                    ],
-                  },
-                  whatToExpect: {
-                    create: {
-                      expectation: 'Expect a great adventure!',
-                    },
-                  },
-                  additionalInfo: {
-                    create: [
-                      { info: 'Bring your camera.' },
-                      { info: 'Wear comfortable shoes.' },
-                    ],
-                  },
-                  addOns: {
-                    create: [
-                      { name: 'Extra Tour Guide', price: 50 },
-                      { name: 'Photography Package', price: 100 },
-                    ],
-                  },
+                  expectation: "An amazing adventure with breathtaking views and unforgettable experiences.",
                 },
               },
+              additionalInfo: {
+                create: [
+                  { info: "Comfortable walking shoes are recommended" },
+                  { info: "Not recommended for participants with heart complaints or other serious medical conditions" },
+                ],
+              },
+              addOns: {
+                create: [
+                  { name: "VIP upgrade", price: 200 },
+                  { name: "Photo package", price: 100 },
+                ],
+              },
             },
-          });
-        })
-      );
-
-      return { tour, subTours };
-    })
-  );
-
-  console.log('Tours and sub-tours created:', tours);
+          },
+          rating: {
+            create: [
+              { rating: 4.5, comment: "Excellent experience!" },
+              { rating: 5.0, comment: "Would highly recommend!" },
+            ],
+          },
+        },
+      })
+    }
+  }
 }
 
 main()
   .catch((e) => {
-    console.error(e);
-    process.exit(1);
+    console.error(e)
+    process.exit(1)
   })
   .finally(async () => {
-    await prisma.$disconnect();
-  });
+    await prisma.$disconnect()
+  })
