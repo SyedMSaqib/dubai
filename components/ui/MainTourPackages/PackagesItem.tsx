@@ -30,10 +30,14 @@ const PackagesItem = ({ src, title, price, rating, totalRatings, time, descripti
           </div>
           <div className="flex flex-col w-full py-3 gap-2 pr-4 relative ">
             <div className="flex justify-between items-start">
-              <p className="text-sm md:text-medium flex items-center gap-2">
-                <span>{FullStar}</span>
-                {rating} ({totalRatings})
+              <p className="text-sm md:text-base flex items-center gap-2">
+                <span className="text-yellow-500 font-bold">{FullStar}</span>
+                <span className="font-semibold text-gray-800">{rating.toFixed(1)}</span>
+                <span className="text-gray-600 text-xs md:text-sm">
+                  ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
+                </span>
               </p>
+
               <p className="font-bold text-medium md:text-xl m-0 hidden md:block">${price}</p>
             </div>
             <p className="text-sm md:text-xl font-semibold m-0">{title}</p>

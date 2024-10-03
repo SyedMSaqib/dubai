@@ -3,6 +3,7 @@ import { unstable_cache } from 'next/cache';
 
 const prisma = new PrismaClient();
 
+
 export const getAllTours = unstable_cache(async () => {
   try {
     const tours = await prisma.tours.findMany({
@@ -11,6 +12,7 @@ export const getAllTours = unstable_cache(async () => {
             _count: {
                 select: {
                     subTours: true
+                    
                 }
             }
         },
@@ -32,7 +34,7 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
     async () => {
       try {
         // Use Promise.all() to run both queries in parallel
-        const [totalCount, subTours] = await Promise.all([
+        const [totalCount, subTours,ratingStats] = await Promise.all([
           // Total count query
           prisma.subTours.count({
             where: {
@@ -47,17 +49,51 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
             },
             include: {
               SubTourInfo:true,
-              
+              rating: true,
+              _count: {
+                select: {
+                  rating: true, // Count of ratings for each subtour
+                },
+              },
             },
+            
             skip: (+page - 1) * 5,  // Pagination logic: skip previous pages
             take: 5,  // Fetch 1 record per page (adjust as needed)
-          })
+          }),
+
+
+            prisma.subToursRating.aggregate({
+            _avg: {
+              rating: true, // Average rating
+            },
+            _count: {
+              rating: true, 
+            },
+            where: {
+              SubTours: {
+                tourSlug: slug,
+              },
+            },
+          }),
         ]);
+        const subToursWithAvgRating = subTours.map(subtour => {
+          const ratings = subtour.rating;
+          const avgRating = ratings.length > 0
+            ? ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length
+            : 0;
+
+          return {
+            ...subtour,
+            averageRating: avgRating,
+            totalRatings: subtour._count.rating,
+          };
+        });
 
         // Return both the paginated subTours and total count
         return {
-          subTours,
+          subTours: subToursWithAvgRating,
           totalCount,
+          ratingStats
         };
       } catch (error) {
         console.error('Database error:', error);
@@ -69,3 +105,6 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
       tags:["subTours"],
     } // Cache key depending on page and slug
   );
+
+
+  

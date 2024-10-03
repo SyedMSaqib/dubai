@@ -20,18 +20,17 @@ const Packages = async ({
   const { page } = searchParams
 
   const getAllSubToursFunction = getAllSubTours(page, allPackages)
-  const { totalCount, subTours } = await getAllSubToursFunction()
-
-  // Now you can use totalCount and subTours
-  console.log(totalCount, subTours)
+  const { totalCount, subTours, ratingStats } = await getAllSubToursFunction()
 
   const packageName = slugToText(allPackages)
   return (
     <div className="mx-auto  2xl:max-w-[80vw] px-4 sm:px-6 lg:px-8 mt-10">
       <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold">{packageName}</h3>
       <div className="flex items-center ">
-        <Ratings rating={3.5} totalRatings={10023} />
-        <p className=" ml-2"> Reviews</p>
+        <Ratings
+          rating={ratingStats._avg?.rating || 0}
+          totalRatings={ratingStats._count?.rating || 0}
+        />
       </div>
       <div>
         <MobilePackageFilter />
@@ -49,8 +48,8 @@ const Packages = async ({
                 src={subtour.thumbnail}
                 title={subtour.name}
                 price={subtour.SubTourInfo?.price || 0}
-                rating={4.5}
-                totalRatings={100}
+                rating={subtour.averageRating || 0}
+                totalRatings={subtour.totalRatings}
                 time={0}
                 description={subtour.SubTourInfo?.description || ""}
               />

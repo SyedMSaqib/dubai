@@ -18,6 +18,7 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
   const isFloat = (num: number) => {
     return num !== Math.floor(num)
   }
+
   const getRatings = (rating: number) => {
     let fullStar = 0
     let halfStar = 0
@@ -41,23 +42,33 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
   const { fullStar, halfStar, emptyStar } = getRatings(rating)
 
   const generateFullStars = Array.from({ length: fullStar }, (_, index) => (
-    <p key={index}>{FullStar}</p>
+    <span key={index} className="text-yellow-500">
+      {FullStar}
+    </span>
   ))
   const generateHalfStars = Array.from({ length: halfStar }, (_, index) => (
-    <p key={index}>{HalfStar}</p>
+    <span key={index} className="text-yellow-500">
+      {HalfStar}
+    </span>
   ))
   const generateEmptyStars = Array.from({ length: emptyStar }, (_, index) => (
-    <p key={index}>{EmptyStar}</p>
+    <span key={index} className="text-gray-300">
+      {EmptyStar}
+    </span>
   ))
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row items-center">
       <div className="flex flex-row items-center">
         {generateFullStars}
         {generateHalfStars}
         {generateEmptyStars}
       </div>
-      {totalRatings && <p className="pl-2">{totalRatings}</p>}
+      {totalRatings && (
+        <p className="pl-2 text-gray-600 text-sm md:text-base">
+          ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
+        </p>
+      )}
     </div>
   )
 }
