@@ -1,12 +1,12 @@
 
-/* @font-face { */
-  /* font-family: 'Trip Sans'; */
-  /* src:  */
-  /* url('/fonts/TripSans-Regular.woff2') format('woff2'), */
-       /* url('/fonts/TripSans-Regular.woff') format('woff'); */
-  /* font-weight: normal; */
-  /* font-style: normal; */
-/* } */
+@font-face {
+  font-family: 'Trip Sans';
+  src: 
+  url('/fonts/TripSans-Regular.woff2') format('woff2'),
+       url('/fonts/TripSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 @tailwind base;

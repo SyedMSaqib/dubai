@@ -12,19 +12,6 @@ export const getAllTours = unstable_cache(async () => {
                 select: {
                     subTours: true
                 }
-            },
-            subTours:{
-                include:{
-                    SubTourInfo:{
-                        include:{
-                            Rating:
-                                
-                                    true
-                                
-                            
-                        }
-                    }
-                }
             }
         },
     });

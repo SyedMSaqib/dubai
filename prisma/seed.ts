@@ -57,33 +57,33 @@ async function main() {
               SubTourInfo: {
                 create: {
                   description: `${subTourName} is an amazing experience.`,
-                  dateTime: new Date(),
+                  price:100,
                   duration: 120,
-                  time: 10,
-                  highlights: {
+                  time: new Date(),
+                  Highlight: {
                     create: [
                       { highlight: 'Highlight 1' },
                       { highlight: 'Highlight 2' },
                     ],
                   },
-                  WhatsIncluded: {
+                  whatsIncluded: {
                     create: [
                       { included: 'Transportation' },
                       { included: 'Meals' },
                     ],
                   },
-                  WhatToExpect: {
+                  whatToExpect: {
                     create: {
                       expectation: 'Expect a great adventure!',
                     },
                   },
-                  AdditionalInfo: {
+                  additionalInfo: {
                     create: [
                       { info: 'Bring your camera.' },
                       { info: 'Wear comfortable shoes.' },
                     ],
                   },
-                  AddOns: {
+                  addOns: {
                     create: [
                       { name: 'Extra Tour Guide', price: 50 },
                       { name: 'Photography Package', price: 100 },
