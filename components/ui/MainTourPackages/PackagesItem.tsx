@@ -1,3 +1,4 @@
+import { subTourRatingsCount } from "@/lib/db"
 import ClockIcon from "@/utils/ClockIcon"
 import { FullStar } from "@/utils/StaticSvgs"
 import { Card, CardBody } from "@nextui-org/card"
@@ -7,13 +8,15 @@ type PropType = {
   src: string
   title: string
   price: number
-  rating: number
-  totalRatings: number
+
   time: number
   description: string
+  slug: string
 }
 
-const PackagesItem = ({ src, title, price, rating, totalRatings, time, description }: PropType) => {
+const PackagesItem = async ({ src, title, price, time, description, slug }: PropType) => {
+  const ratings = await subTourRatingsCount(slug)
+
   return (
     <Card className="shadow-lg rounded-lg border md:border-zinc-300">
       <CardBody className="p-0">
@@ -31,14 +34,14 @@ const PackagesItem = ({ src, title, price, rating, totalRatings, time, descripti
           <div className="flex flex-col w-full py-3 gap-y-6 md:gap-y-2 pr-4 relative ">
             <div className="flex justify-between items-start">
               <div className="text-sm md:text-base flex items-center gap-2">
-                {rating > 0 && (
+                {ratings._count.rating > 0 && (
                   <div className="flex items-center space-x-1 md:space-x-2">
                     <span className="text-yellow-500 font-bold">{FullStar}</span>
                     <span className="font-semibold text-gray-800 text-sm md:text-base">
-                      {rating.toFixed(1)}
+                      {ratings._avg.rating?.toFixed(1)}
                     </span>
                     <span className="text-gray-600 text-xs md:text-sm">
-                      ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
+                      ({ratings._count.rating} {ratings._count.rating === 1 ? "review" : "reviews"})
                     </span>
                   </div>
                 )}

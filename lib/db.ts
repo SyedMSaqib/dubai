@@ -49,12 +49,7 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
             },
             include: {
               SubTourInfo:true,
-              rating: true,
-              _count: {
-                select: {
-                  rating: true, // Count of ratings for each subtour
-                },
-              },
+              
             },
             
             skip: (+page - 1) * 5,  // Pagination logic: skip previous pages
@@ -76,22 +71,11 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
             },
           }),
         ]);
-        const subToursWithAvgRating = subTours.map(subtour => {
-          const ratings = subtour.rating;
-          const avgRating = ratings.length > 0
-            ? ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length
-            : 0;
-
-          return {
-            ...subtour,
-            averageRating: avgRating,
-            totalRatings: subtour._count.rating,
-          };
-        });
+        
 
         // Return both the paginated subTours and total count
         return {
-          subTours: subToursWithAvgRating,
+          subTours,
           totalCount,
           ratingStats
         };
@@ -107,4 +91,107 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
   );
 
 
+  export const subTourRatingsCount = unstable_cache(
+    async (slug: string) => {
+      try {
+        const subToursRating = await prisma.subToursRating.aggregate({
+          _avg: {
+            rating: true, // Average rating
+          },
+          _count: {
+            rating: true, 
+          },
+          where: {
+            SubTours: {
+              slug: slug,
+            },
+          },
+        });
+        return subToursRating;
+      } catch (error) {
+        console.error('Database error:', error);
+        throw new Error('Failed to fetch tours');
+      }
+    },
+    ['subTourRatings'],
+    {
+      tags: ['subTourRatings'], 
+    }
+  );
+
+
+  // async function filterSubTours({
+  //   minPrice,
+  //   maxPrice,
+  //   minRating,
+  //   startTime,
+  //   endTime,
+  //   tourSlug,
+  // }: {
+  //   minPrice?: number;
+  //   maxPrice?: number;
+  //   minRating?: number;
+  //   startTime?: Date;
+  //   endTime?: Date;
+  //   tourSlug: string; // Optional, filter by tour if needed
+  // }) {
+  //   const subtours = await prisma.subTours.findMany({
+  //     where: {
+  //       AND: [
+  //         {
+  //           tourSlug: tourSlug,
+  //         },
+  //         minPrice !== undefined || maxPrice !== undefined
+  //           ? {
+  //               SubTourInfo: {
+  //                 price: {
+  //                   gte: minPrice,
+  //                   lte: maxPrice,
+  //                 },
+  //               },
+  //             }
+  //           : {},
+  //         minRating !== undefined
+  //           ? {
+  //               rating: {
+  //                 some: {
+  //                   rating: {
+  //                     gte: minRating,
+  //                   },
+  //                 },
+  //               },
+  //             }
+  //           : {},
+  //         startTime !== undefined || endTime !== undefined
+  //           ? {
+  //               SubTourInfo: {
+  //                 time: {
+  //                   gte: startTime,
+  //                   lte: endTime,
+  //                 },
+  //               },
+  //             }
+  //           : {},
+  //       ],
+  //     },
+  //     include: {
+  //       SubTourInfo: true,
+  //       rating: true,
+  //     },
+  //   });
   
+  //   return subtours;
+  // }
+  
+  // export const subtoursfilter = filterSubTours({
+  //   minPrice: 0,
+  //   maxPrice: 150,
+  //   minRating: 4.5,
+  //   // startTime: new Date('2024-01-01'),
+  //   // endTime: new Date('2024-12-31'),
+  //   tourSlug: "ski-dubai-snow-adventure",
+  // });
+  
+  
+  
+

@@ -1,10 +1,9 @@
 import PackageSidebar from "@/components/ui/MainTourPackages/PackageSidebar/PackageSidebar"
 import MobilePackageFilter from "@/components/ui/MainTourPackages/PackageSidebar/MobilePackageFilter"
 import PackagesItem from "@/components/ui/MainTourPackages/PackagesItem"
-import { packagesData } from "@/utils/ToursStatic"
 import PackagePagination from "@/components/ui/MainTourPackages/PackagePagination"
 import Link from "next/link"
-import { createSlug, slugToText } from "@/utils/slug"
+import { slugToText } from "@/utils/slug"
 import Ratings from "@/components/ui/Ratings"
 import { getAllSubTours } from "@/lib/db"
 
@@ -48,10 +47,9 @@ const Packages = async ({
                 src={subtour.thumbnail}
                 title={subtour.name}
                 price={subtour.SubTourInfo?.price || 0}
-                rating={subtour.averageRating || 0}
-                totalRatings={subtour.totalRatings}
                 time={subtour.SubTourInfo?.duration || 0}
                 description={subtour.SubTourInfo?.description || ""}
+                slug={subtour.slug}
               />
             </Link>
           ))}
