@@ -15,7 +15,8 @@ type PropType = {
 }
 
 const PackagesItem = async ({ src, title, price, time, description, slug }: PropType) => {
-  const ratings = await subTourRatingsCount(slug)
+  const subTourRatingsCounts = subTourRatingsCount(slug)
+  const ratings = await subTourRatingsCounts()
 
   return (
     <Card className="shadow-lg rounded-lg border md:border-zinc-300">

@@ -9,32 +9,37 @@ import TourInfo from "@/components/ui/MainTourPackages/TourInfo"
 import { Divider } from "@nextui-org/divider"
 import TourInclusions from "@/components/ui/MainTourPackages/TourInclusions"
 import TourReviews from "@/components/ui/MainTourPackages/TourReviews"
-const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) => {
+import { SubTourInfo, subTourRatingsCount } from "@/lib/db"
+
+const PackagesDetails = async ({ params }: { params: { packagesDetails: string } }) => {
   const { packagesDetails } = params
-  const items: string[] = [
-    "/images/dubai4.jpg",
-    "/images/dubai.jpg",
-    "/images/dubai2.jpg",
-    "/images/dubai3.jpg",
-    "/images/dubai5.jpg",
-  ]
+  const subTourInfo = SubTourInfo(packagesDetails)
+  const tourInfo = await subTourInfo()
+  const rating = subTourRatingsCount(packagesDetails)
+  const totalRating = await rating()
 
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4">
       <h1 className="text-xl lg:text-3xl font-bold  p-4">{slugToText(packagesDetails)}</h1>
       <div className="flex pl-4 ">
-        <Ratings rating={3.5} totalRatings={100} />
-        <p className=" ml-2"> Reviews</p>
+        <Ratings
+          rating={totalRating._avg?.rating || 0}
+          totalRatings={totalRating._count?.rating || 0}
+        />
       </div>
       <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between mt-2">
         <div className="w-full   lg:mb-0 ">
-          <PackageDetailsCarousel items={items} />
+          <PackageDetailsCarousel items={tourInfo?.subTour.images || []} />
         </div>
         <div className=" w-full lg:w-[500px] xl:w-[600px] lg:shadow-lg  rounded-lg lg:border lg:border-gray-300 lg:bg-gray-200 ">
           <div className="px-8 py-6 space-y-3">
-            <p className="text-xl font-semibold ">
-              From <span className="md:text-3xl text-2xl ">$999</span>
+            <p className="text-xl font-semibold">
+              From{" "}
+              <span className="md:text-3xl text-2xl font-bold text-black">
+                AED {tourInfo?.price.toLocaleString()}
+              </span>
             </p>
+
             <div className="space-y-3">
               <p className="text-md ">Select Date</p>
               <DateInput />
@@ -50,20 +55,18 @@ const PackagesDetails = ({ params }: { params: { packagesDetails: string } }) =>
         <Divider />
         <div>
           <p className="font-bold text-xl ">Overview</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur corrupti quo totam
-            enim illo! Eveniet quibusdam cupiditate quidem tenetur deserunt error asperiores fugit
-            eaque ullam vitae! Ut esse, aspernatur pariatur ea quod alias est consectetur error
-            officiis exercitationem magni, voluptate non, excepturi earum at? Aspernatur
-            consequuntur odio minima ullam magnam suscipit unde voluptatum saepe voluptatem non
-            recusandae molestias eius magni quo vel et esse repellat tenetur facilis dicta, culpa
-            blanditiis! Illo eveniet, sint dolor maxime numquam doloribus reiciendis ex veritatis
-            ea! Voluptates similique itaque quidem sit, culpa reiciendis tenetur fugit aliquam
-            perspiciatis dignissimos non repudiandae amet, omnis sunt illo doloribus!
-          </p>
+          <p>{tourInfo?.description}</p>
         </div>
         <Divider />
-        <TourInclusions />
+
+        <TourInclusions
+          highlights={tourInfo?.Highlight || []}
+          whatsIncluded={tourInfo?.whatsIncluded || []}
+          whatToExpect={tourInfo?.whatToExpect || null}
+          additionalInfo={tourInfo?.additionalInfo || []}
+          addOns={tourInfo?.addOns || []}
+        />
+
         <Divider />
         <div>
           <p className="font-bold text-xl mt-[50px] ">Reviews</p>
