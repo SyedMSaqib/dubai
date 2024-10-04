@@ -43,7 +43,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
             <div className="space-y-3">
               <p className="text-md ">Select Date</p>
               <DateInput />
-              <PeopleModal />
+              <PeopleModal addOns={tourInfo?.addOns || []} />
               <FullRefundChip />
             </div>
           </div>

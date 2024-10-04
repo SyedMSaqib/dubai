@@ -7,7 +7,13 @@ import AdOns from "./AddOns"
 import Link from "next/link"
 import { encodeData } from "@/utils/urlEncoders"
 
-export const PeopleModal = () => {
+type addOns = {
+  id: string
+  price: number
+  name: string
+  subTourInfoId: string
+}
+export const PeopleModal = ({ addOns }: { addOns: addOns[] }) => {
   const data = {
     array: ["item1", "item2", "item3"],
     date: new Date().toISOString(),
@@ -112,7 +118,7 @@ export const PeopleModal = () => {
                 </div>
                 <div className="font-bold mt-4">
                   <p className="text-xl mb-2">Add-ons</p>
-                  <AdOns />
+                  <AdOns addOns={addOns} />
                 </div>
               </ModalBody>
               <ModalFooter className="flex justify-between items-center border-t border-zinc-300">

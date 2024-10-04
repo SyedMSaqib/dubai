@@ -1,25 +1,38 @@
 import React from "react"
 import { CheckboxGroup, Checkbox } from "@nextui-org/checkbox"
 
-export default function AdOns() {
-  const [selected, setSelected] = React.useState([""])
-  const addons = [
-    { name: "Exciting Quad Bike Adventure", price: 50 },
-    { name: "Traditional Camel Caravan Experience", price: 30 },
-    { name: "Thrilling Dune Bashing Expedition", price: 70 },
-    { name: "Adventurous Sandboarding on Golden Dunes", price: 20 },
-    { name: "Breathtaking Hot Air Balloon Ride", price: 200 },
-    { name: "Enchanting Desert Dinner Under the Stars", price: 60 },
-    { name: "Intricate Henna Painting Session", price: 15 },
-    { name: "Captivating Traditional Dance Performance", price: 40 },
-    { name: "Personalized Photography Session in the Desert", price: 100 },
-    { name: "Stunning Stargazing Experience Amidst the Dunes", price: 25 },
-  ]
+type AddOn = {
+  id: string
+  price: number
+  name: string
+  subTourInfoId: string
+}
+
+interface AdOnsProps {
+  addOns: AddOn[]
+}
+
+export default function AdOns({ addOns }: AdOnsProps) {
+  const [selectedIds, setSelectedIds] = React.useState<string[]>([])
+  const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([])
+  // console.log(selectedIds) // New state to store selected addOns
+  console.log(selectedAddOns) // New state to store selected addOns
+
+  // Handle value change
+  const handleValueChange = (selected: string[]) => {
+    setSelectedIds(selected)
+
+    // Map selected ids to corresponding add-ons to get the prices and names
+    const selectedSet = new Set(selected)
+    const selectedDetails = addOns.filter((addon) => selectedSet.has(addon.id))
+
+    setSelectedAddOns(selectedDetails) // Store selected add-ons in state
+  }
 
   return (
     <div className="flex flex-col gap-3 relative">
-      <CheckboxGroup color="warning" value={selected} onValueChange={setSelected}>
-        {addons.map((addon) => (
+      <CheckboxGroup color="warning" value={selectedIds} onValueChange={handleValueChange}>
+        {addOns.map((addon) => (
           <Checkbox
             classNames={{
               base: "",
@@ -28,10 +41,10 @@ export default function AdOns() {
               icon: "text-black",
             }}
             className="flex items-center"
-            key={addon.name}
-            value={addon.name}
+            key={addon.id}
+            value={addon.id}
           >
-            <div className="flex justify-between items-center w-full ">
+            <div className="flex justify-between items-center w-full">
               <span className="flex-1 w-[200px] md:w-[400px] font-normal">{addon.name}</span>
               <span className="ml-8 font-semibold text-right w-24">${addon.price}</span>
             </div>
@@ -40,11 +53,11 @@ export default function AdOns() {
       </CheckboxGroup>
       <p className="text-default-500 text-small">
         Selected:
-        {selected.length > 0 ? (
+        {selectedAddOns.length > 0 ? (
           <span>
-            {selected.map((item, index) => (
-              <span key={index}>
-                {item}
+            {selectedAddOns.map((addon) => (
+              <span key={addon.id}>
+                {addon.name} - ${addon.price}
                 <br />
               </span>
             ))}
