@@ -50,7 +50,7 @@ const Packages = async ({
                 price={subtour.SubTourInfo?.price || 0}
                 rating={subtour.averageRating || 0}
                 totalRatings={subtour.totalRatings}
-                time={0}
+                time={subtour.SubTourInfo?.duration || 0}
                 description={subtour.SubTourInfo?.description || ""}
               />
             </Link>

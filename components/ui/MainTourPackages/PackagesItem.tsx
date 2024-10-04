@@ -14,6 +14,7 @@ type PropType = {
 }
 
 const PackagesItem = ({ src, title, price, rating, totalRatings, time, description }: PropType) => {
+  console.log(time)
   return (
     <Card className="shadow-lg rounded-lg border md:border-zinc-300">
       <CardBody className="p-0">
