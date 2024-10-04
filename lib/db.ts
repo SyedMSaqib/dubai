@@ -91,33 +91,72 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
   );
 
 
-  export const subTourRatingsCount = unstable_cache(
-    async (slug: string) => {
-      try {
-        const subToursRating = await prisma.subToursRating.aggregate({
-          _avg: {
-            rating: true, // Average rating
-          },
-          _count: {
-            rating: true, 
-          },
-          where: {
-            SubTours: {
-              slug: slug,
+
+
+  export const subTourRatingsCount =(slug:string)=> 
+    unstable_cache(
+      async () => {
+        try {
+          const subToursRating = await prisma.subToursRating.aggregate({
+            _avg: {
+              rating: true,
             },
+            _count: {
+              rating: true,
+            },
+            where: {
+              SubTours: {
+                slug: slug,
+              },
+            },
+          });
+          return subToursRating;
+        } catch (error) {
+          console.error('Database error:', error);
+          throw new Error('Failed to fetch tours');
+        }
+      },
+      
+      [`subTourRatings-${slug}`], // Dynamic cache key
+      {
+        tags: [`subTourRatings-${slug}`], // Optional: use a tag per slug for finer cache control
+      }
+    
+    );
+  
+
+  export const SubTourInfo =(slug: string)=> unstable_cache(
+    async () => {
+      try {
+        const subTourInfo = await prisma.subTourInfo.findUnique({
+          where: {
+            subTourSlug: slug
           },
+          include: {      
+            Highlight: true,     
+            whatsIncluded: true,
+            whatToExpect: true,
+            additionalInfo: true,
+            addOns: true,
+            subTour: {
+              select: {
+                images:true // Include images from the related SubTour model
+              }
+            }
+          }
         });
-        return subToursRating;
+        return subTourInfo;
       } catch (error) {
         console.error('Database error:', error);
         throw new Error('Failed to fetch tours');
       }
     },
-    ['subTourRatings'],
+    [`subTourInfo_${slug}`], // Dynamic cache key
     {
-      tags: ['subTourRatings'], 
+      tags: ['subTourInfo'], 
     }
   );
+
 
 
   // async function filterSubTours({
