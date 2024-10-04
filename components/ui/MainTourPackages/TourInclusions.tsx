@@ -2,43 +2,72 @@
 import { Dot, DoubleTick, DropOff, PickUp } from "@/utils/StaticSvgs"
 import { Accordion, AccordionItem } from "@nextui-org/accordion"
 
-const TourInclusions = () => {
-  const defaultContent =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+// Types for the data models related to SubTourInfo
 
+type HighlightType = {
+  id: string // Unique identifier for the highlight
+  highlight: string // The actual highlight text
+}
+
+type WhatsIncludedType = {
+  id: string // Unique identifier for the included item
+  included: string // Description of what's included
+}
+
+type WhatToExpectType = {
+  id: string // Unique identifier for the expectation
+  expectation: string // Description of what to expect
+}
+
+type AdditionalInfoType = {
+  id: string // Unique identifier for the additional info
+  info: string // Description of additional information
+}
+
+type AddOnType = {
+  id: string // Unique identifier for the add-on
+  name: string // Name of the add-on
+  price: number // Price of the add-on
+}
+
+type TourInclusionsProps = {
+  highlights: HighlightType[] // Array of highlights
+  whatsIncluded: WhatsIncludedType[] // Array of what's included
+  whatToExpect: WhatToExpectType | null // Optional expectation info
+  additionalInfo: AdditionalInfoType[] // Array of additional info
+  addOns: AddOnType[] // Array of add-ons
+}
+
+// The complete SubTourInfo type, including all inclusions
+
+const TourInclusions = ({
+  highlights,
+  whatsIncluded,
+  whatToExpect,
+  additionalInfo,
+  addOns,
+}: TourInclusionsProps) => {
   return (
     <Accordion defaultSelectedKeys="all" selectionMode="multiple">
       <AccordionItem key="6" aria-label="Accordion 6" title={<strong>Highlights</strong>}>
-        <div className="flex">
-          <div>{Dot}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
-        <div className="flex mt-2">
-          <div>{Dot}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
-        <div className="flex mt-2">
-          <div>{Dot}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
+        {highlights.map(({ id, highlight }) => (
+          <div key={id} className="flex mt-2">
+            <div>{Dot}</div>
+            <div className="ml-2">{highlight}</div>
+          </div>
+        ))}
       </AccordionItem>
       <AccordionItem key="1" aria-label="Accordion 1" title={<strong>What&apos;s included</strong>}>
-        <div className="flex">
-          <div>{DoubleTick}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
-        <div className="flex mt-2">
-          <div>{DoubleTick}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
-        <div className="flex mt-2">
-          <div>{DoubleTick}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
+        {whatsIncluded.map(({ id, included }) => (
+          <div key={id} className="flex mt-2">
+            <div>{DoubleTick}</div>
+            <div className="ml-2">{included}</div>
+          </div>
+        ))}
       </AccordionItem>
 
       <AccordionItem key="2" aria-label="Accordion 2" title={<strong>What to expect</strong>}>
-        {defaultContent}
+        {whatToExpect ? whatToExpect.expectation : "No expectations provided."}
       </AccordionItem>
       <AccordionItem
         key="3"
@@ -61,18 +90,12 @@ const TourInclusions = () => {
         aria-label="Accordion 4"
         title={<strong>Additional information</strong>}
       >
-        <div className="flex">
-          <div>{Dot}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
-        <div className="flex mt-2">
-          <div>{Dot}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
-        <div className="flex mt-2">
-          <div>{Dot}</div>
-          <div className="ml-2">{defaultContent}</div>
-        </div>
+        {additionalInfo.map(({ id, info }) => (
+          <div key={id} className="flex mt-2">
+            <div>{Dot}</div>
+            <div className="ml-2">{info}</div>
+          </div>
+        ))}
       </AccordionItem>
       <AccordionItem key="5" aria-label="Accordion 5" title={<strong>Cancellation</strong>}>
         <div className="flex">
