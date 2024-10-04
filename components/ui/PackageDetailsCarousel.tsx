@@ -3,7 +3,16 @@ import { useState } from "react"
 import Image from "next/image"
 import { useSwipeable } from "react-swipeable"
 
-const ImageCarousel = ({ items }: { items: string[] }) => {
+type SubTourImageType = {
+  id: string // Unique identifier for the image
+  src: string // URL of the image
+  altText?: string | null // Optional alt text for accessibility
+  subTourId: string // Foreign key to the SubTours model
+  createdAt: Date // Timestamp for when the image was added
+  updatedAt: Date // Timestamp for the last update
+}
+
+const ImageCarousel = ({ items }: { items: SubTourImageType[] | [] }) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const handlePrev = () => {
@@ -34,8 +43,8 @@ const ImageCarousel = ({ items }: { items: string[] }) => {
             onClick={() => setActiveIndex(index)}
           >
             <Image
-              src={item}
-              alt={item.slice(item.lastIndexOf("/") + 1)}
+              src={item.src}
+              alt={item.altText || "image"}
               fill
               style={{ objectFit: "cover" }}
               draggable="false"
@@ -57,8 +66,8 @@ const ImageCarousel = ({ items }: { items: string[] }) => {
               data-carousel-item
             >
               <Image
-                src={item}
-                alt={item.slice(item.lastIndexOf("/") + 1)}
+                src={item.src}
+                alt={item.altText || "image"}
                 fill
                 blurDataURL="data:..."
                 placeholder="blur"
