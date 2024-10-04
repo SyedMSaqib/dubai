@@ -14,7 +14,6 @@ type PropType = {
 }
 
 const PackagesItem = ({ src, title, price, rating, totalRatings, time, description }: PropType) => {
-  console.log(time)
   return (
     <Card className="shadow-lg rounded-lg border md:border-zinc-300">
       <CardBody className="p-0">
@@ -29,19 +28,27 @@ const PackagesItem = ({ src, title, price, rating, totalRatings, time, descripti
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
-          <div className="flex flex-col w-full py-3 gap-2 pr-4 relative ">
+          <div className="flex flex-col w-full py-3 gap-y-6 md:gap-y-2 pr-4 relative ">
             <div className="flex justify-between items-start">
-              <p className="text-sm md:text-base flex items-center gap-2">
-                <span className="text-yellow-500 font-bold">{FullStar}</span>
-                <span className="font-semibold text-gray-800">{rating.toFixed(1)}</span>
-                <span className="text-gray-600 text-xs md:text-sm">
-                  ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
-                </span>
-              </p>
+              <div className="text-sm md:text-base flex items-center gap-2">
+                {rating > 0 && (
+                  <div className="flex items-center space-x-1 md:space-x-2">
+                    <span className="text-yellow-500 font-bold">{FullStar}</span>
+                    <span className="font-semibold text-gray-800 text-sm md:text-base">
+                      {rating.toFixed(1)}
+                    </span>
+                    <span className="text-gray-600 text-xs md:text-sm">
+                      ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
+                    </span>
+                  </div>
+                )}
+              </div>
 
               <p className="font-bold text-medium md:text-xl m-0 hidden md:block">${price}</p>
             </div>
-            <p className="text-sm md:text-xl font-semibold m-0">{title}</p>
+            <p className="text-sm md:text-xl font-semibold m-0 line-clamp-4 md:line-clamp-2">
+              {title}
+            </p>
             <p className="line-clamp-3 text-sm  hidden md:block m-0  text-justify max-h-[2.5rem] lg:max-h-[4rem] text-[#4d4d4d]">
               {description}
             </p>

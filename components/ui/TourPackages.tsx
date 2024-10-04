@@ -36,7 +36,7 @@ const TourPackages = ({
         {name}
       </p>
       <p className=" text-center text-gray-500 text-xs lg:text-medium font-semibold uppercase break-words">
-        ({count} tours)
+        (<span className="text-black ">{count}</span>)
       </p>
     </div>
   )
