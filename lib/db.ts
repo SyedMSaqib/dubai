@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-import { unstable_cache } from 'next/cache';
 
-const prisma = new PrismaClient();
+import { unstable_cache } from 'next/cache';
+import prisma from './prisma';
+
 
 
 export const getAllTours = unstable_cache(async () => {
