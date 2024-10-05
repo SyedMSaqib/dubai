@@ -72,7 +72,6 @@ export const PeopleModal = ({
   const basicAdultPrice = adultPrice + sharedRide
   const basicChildPrice = childPrice + sharedRide
   const totalPeople = Adults + Childrens
-  console.log(totalAddOnPrice)
 
   React.useEffect(() => {
     const calculateTotal = () => {
