@@ -6,6 +6,7 @@ import TransportType from "./TransportType"
 import AdOns from "./AddOns"
 import Link from "next/link"
 import { encodeData } from "@/utils/urlEncoders"
+import { useAppSelector } from "@/lib/Redux/hooks"
 
 type addOns = {
   id: string
@@ -13,7 +14,19 @@ type addOns = {
   name: string
   subTourInfoId: string
 }
-export const PeopleModal = ({ addOns, price }: { addOns: addOns[]; price: number }) => {
+export const PeopleModal = ({
+  addOns,
+  adultPrice,
+  childPrice,
+  privateRide,
+  sharedRide,
+}: {
+  addOns: addOns[]
+  adultPrice: number
+  childPrice: number
+  privateRide: number
+  sharedRide: number
+}) => {
   const data = {
     array: ["item1", "item2", "item3"],
     date: new Date().toISOString(),
@@ -52,6 +65,27 @@ export const PeopleModal = ({ addOns, price }: { addOns: addOns[]; price: number
     setChildrens(Childrens + 1)
   }
 
+  const [totalPrice, setTotalPrice] = useState(0)
+  const transportType = useAppSelector((state) => state.peopleModal.ride)
+  const addons = useAppSelector((state) => state.peopleModal.addOns)
+  const totalAddOnPrice = addons.reduce((sum, addon) => sum + addon.price, 0)
+  const basicAdultPrice = adultPrice + sharedRide
+  const basicChildPrice = childPrice + sharedRide
+  const totalPeople = Adults + Childrens
+  console.log(totalAddOnPrice)
+
+  React.useEffect(() => {
+    const calculateTotal = () => {
+      let total =
+        basicAdultPrice * Adults + basicChildPrice * Childrens + totalAddOnPrice * totalPeople
+      if (transportType === "private") {
+        total += (Adults + Childrens) * privateRide
+      }
+      setTotalPrice(total)
+    }
+    calculateTotal()
+  }, [Adults, Childrens, adultPrice, childPrice, transportType, totalAddOnPrice])
+
   return (
     <>
       <Button
@@ -77,6 +111,14 @@ export const PeopleModal = ({ addOns, price }: { addOns: addOns[]; price: number
               <ModalBody>
                 <div className="flex"></div>
                 <p className="font-bold">Select Visitors</p>
+                <p>
+                  Per Adult:{" "}
+                  <span className="font-bold">AED {basicAdultPrice?.toLocaleString()}</span>
+                </p>
+                <p>
+                  Per Child:{" "}
+                  <span className="font-bold">AED {basicChildPrice?.toLocaleString()}</span>
+                </p>
                 <div className="flex flex-row justify-between md:justify-start md:gap-[300px]">
                   <div className="flex items-center gap-4">
                     <p className="">Adults: </p>
@@ -122,7 +164,9 @@ export const PeopleModal = ({ addOns, price }: { addOns: addOns[]; price: number
                 </div>
               </ModalBody>
               <ModalFooter className="flex justify-between items-center border-t border-zinc-300">
-                <p className="font-bold text-xl">AED {price?.toLocaleString()}</p>
+                <p className="font-bold text-xl">
+                  <span className="px-1">Total:</span>AED {totalPrice?.toLocaleString()}
+                </p>
                 <div className="flex gap-2">
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
