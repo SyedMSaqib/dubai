@@ -13,7 +13,7 @@ type addOns = {
   name: string
   subTourInfoId: string
 }
-export const PeopleModal = ({ addOns }: { addOns: addOns[] }) => {
+export const PeopleModal = ({ addOns, price }: { addOns: addOns[]; price: number }) => {
   const data = {
     array: ["item1", "item2", "item3"],
     date: new Date().toISOString(),
@@ -122,7 +122,7 @@ export const PeopleModal = ({ addOns }: { addOns: addOns[] }) => {
                 </div>
               </ModalBody>
               <ModalFooter className="flex justify-between items-center border-t border-zinc-300">
-                <p className="font-bold text-xl">${999}</p>
+                <p className="font-bold text-xl">AED {price?.toLocaleString()}</p>
                 <div className="flex gap-2">
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close

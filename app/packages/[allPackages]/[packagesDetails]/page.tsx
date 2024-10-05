@@ -43,7 +43,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
             <div className="space-y-3">
               <p className="text-md ">Select Date</p>
               <DateInput />
-              <PeopleModal addOns={tourInfo?.addOns || []} />
+              <PeopleModal addOns={tourInfo?.addOns || []} price={tourInfo?.price || 0} />
               <FullRefundChip />
             </div>
           </div>
@@ -51,7 +51,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
       </div>
       <div className="p-4 space-y-4 lg:max-w-[80vw]  mx-auto">
         <Divider />
-        <TourInfo />
+        <TourInfo time={tourInfo?.time ?? new Date()} duration={tourInfo?.duration ?? 0} />
         <Divider />
         <div>
           <p className="font-bold text-xl ">Overview</p>

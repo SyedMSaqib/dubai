@@ -46,7 +46,9 @@ export default function AdOns({ addOns }: AdOnsProps) {
           >
             <div className="flex justify-between items-center w-full">
               <span className="flex-1 w-[200px] md:w-[400px] font-normal">{addon.name}</span>
-              <span className="ml-8 font-semibold text-right w-24">${addon.price}</span>
+              <span className="ml-8 font-semibold text-right w-24">
+                AED {addon?.price.toLocaleString()}
+              </span>
             </div>
           </Checkbox>
         ))}
@@ -57,7 +59,7 @@ export default function AdOns({ addOns }: AdOnsProps) {
           <span>
             {selectedAddOns.map((addon) => (
               <span key={addon.id}>
-                {addon.name} - ${addon.price}
+                {addon.name} - AED {addon?.price.toLocaleString()}
                 <br />
               </span>
             ))}
