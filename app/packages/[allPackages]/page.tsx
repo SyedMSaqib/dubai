@@ -47,6 +47,7 @@ const Packages = async ({
                 src={subtour.thumbnail}
                 title={subtour.name}
                 price={subtour.SubTourInfo?.adultPrice || 0}
+                sharedRide={subtour.SubTourInfo?.sharedPrice || 0}
                 time={subtour.SubTourInfo?.duration || 0}
                 description={subtour.SubTourInfo?.description || ""}
                 slug={subtour.slug}

@@ -1,11 +1,16 @@
 "use client"
+import { AddRideType } from "@/lib/Redux/features/peopleModal"
+import { useAppDispatch } from "@/lib/Redux/hooks"
 import { RadioGroup, Radio } from "@nextui-org/radio"
 import React from "react"
 
 export default function TransportType() {
-  const [value, setValue] = React.useState("private")
+  const dispatch = useAppDispatch()
+
+  const [value, setValue] = React.useState("shared")
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
+    dispatch(AddRideType(e.target.value))
   }
 
   return (

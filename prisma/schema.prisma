@@ -72,6 +72,8 @@ model SubTourInfo {
   time           DateTime
   adultPrice     Int
   childPrice     Int
+  privatePrice   Int
+  sharedPrice    Int
   Highlight      Highlight[]
   whatsIncluded  WhatsIncluded[]
   whatToExpect   WhatToExpect?

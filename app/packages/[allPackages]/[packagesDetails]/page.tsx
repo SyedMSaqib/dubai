@@ -17,6 +17,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
   const tourInfo = await subTourInfo()
   const rating = subTourRatingsCount(packagesDetails)
   const totalRating = await rating()
+  const totalPrice = (tourInfo?.adultPrice || 0) + (tourInfo?.sharedPrice || 0)
 
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4">
@@ -36,14 +37,20 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
             <p className="text-xl font-semibold">
               From{" "}
               <span className="md:text-3xl text-2xl font-bold text-black">
-                AED {tourInfo?.adultPrice.toLocaleString()}
+                AED {totalPrice.toLocaleString()}
               </span>
             </p>
 
             <div className="space-y-3">
               <p className="text-md ">Select Date</p>
               <DateInput />
-              <PeopleModal addOns={tourInfo?.addOns || []} price={tourInfo?.adultPrice || 0} />
+              <PeopleModal
+                addOns={tourInfo?.addOns || []}
+                adultPrice={tourInfo?.adultPrice || 0}
+                childPrice={tourInfo?.childPrice || 0}
+                privateRide={tourInfo?.privatePrice || 0}
+                sharedRide={tourInfo?.sharedPrice || 0}
+              />
               <FullRefundChip />
             </div>
           </div>

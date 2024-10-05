@@ -1,5 +1,7 @@
-import React from "react"
+import React, { use } from "react"
 import { CheckboxGroup, Checkbox } from "@nextui-org/checkbox"
+import { useAppDispatch } from "@/lib/Redux/hooks"
+import { AddaddOns } from "@/lib/Redux/features/peopleModal"
 
 type AddOn = {
   id: string
@@ -15,10 +17,9 @@ interface AdOnsProps {
 export default function AdOns({ addOns }: AdOnsProps) {
   const [selectedIds, setSelectedIds] = React.useState<string[]>([])
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([])
-  // console.log(selectedIds) // New state to store selected addOns
-  console.log(selectedAddOns) // New state to store selected addOns
 
-  // Handle value change
+  const dispatch = useAppDispatch()
+
   const handleValueChange = (selected: string[]) => {
     setSelectedIds(selected)
 
@@ -27,6 +28,7 @@ export default function AdOns({ addOns }: AdOnsProps) {
     const selectedDetails = addOns.filter((addon) => selectedSet.has(addon.id))
 
     setSelectedAddOns(selectedDetails) // Store selected add-ons in state
+    dispatch(AddaddOns(selectedDetails))
   }
 
   return (
