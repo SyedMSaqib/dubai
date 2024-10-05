@@ -43,10 +43,10 @@ const Packages = async ({
           {subTours.map((subtour) => (
             <Link href={`/packages/${allPackages}/${subtour.slug}`} key={subtour.id}>
               <PackagesItem
-                key={subtour.id} // Use a unique key, here we can use title or any unique identifier
+                key={subtour.id}
                 src={subtour.thumbnail}
                 title={subtour.name}
-                price={subtour.SubTourInfo?.price || 0}
+                price={subtour.SubTourInfo?.adultPrice || 0}
                 time={subtour.SubTourInfo?.duration || 0}
                 description={subtour.SubTourInfo?.description || ""}
                 slug={subtour.slug}

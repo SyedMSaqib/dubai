@@ -34,8 +34,6 @@ const allImages = [
 ]
 
 async function main() {
-
-
   // Create tours
   for (const tour of tours) {
     const slug = slugify(tour.name, { lower: true })
@@ -76,7 +74,8 @@ async function main() {
               description: `Experience the incredible ${subTourName}. This package offers an unforgettable adventure in Dubai.`,
               duration: Math.floor(Math.random() * 5) + 2, // 2-6 hours
               time: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1),
-              price: Math.floor(Math.random() * 500) + 100, // 100-600 AED
+              adultPrice: Math.floor(Math.random() * 500) + 100, // 100-600 AED
+              childPrice: Math.floor(Math.random() * 300) + 50, // 50-350 AED
               Highlight: {
                 create: [
                   { highlight: "Professional guide" },

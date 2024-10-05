@@ -70,14 +70,15 @@ model SubTourInfo {
   description    String
   duration       Int
   time           DateTime
-  price          Int
+  adultPrice     Int
+  childPrice     Int
   Highlight      Highlight[]
   whatsIncluded  WhatsIncluded[]
   whatToExpect   WhatToExpect?
   additionalInfo AdditionalInfo[]
   addOns         AddOns[]
 
-  @@index([time, duration, price])
+  @@index([time, duration, adultPrice, subTourSlug])
 }
 
 model Highlight {
@@ -85,6 +86,8 @@ model Highlight {
   highlight     String
   subTourInfo   SubTourInfo? @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String?
+
+  @@index([subTourInfoId])
 }
 
 model WhatsIncluded {
@@ -92,6 +95,8 @@ model WhatsIncluded {
   included      String
   subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String
+
+  @@index([subTourInfoId])
 }
 
 model WhatToExpect {
@@ -99,6 +104,8 @@ model WhatToExpect {
   expectation   String
   subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String      @unique
+
+  @@index([subTourInfoId])
 }
 
 model AdditionalInfo {
@@ -106,6 +113,8 @@ model AdditionalInfo {
   info          String
   subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String
+
+  @@index([subTourInfoId])
 }
 
 model AddOns {
@@ -114,6 +123,8 @@ model AddOns {
   price         Int
   subTourInfo   SubTourInfo @relation(fields: [subTourInfoId], references: [id])
   subTourInfoId String
+
+  @@index([subTourInfoId])
 }
 
 model Booking {

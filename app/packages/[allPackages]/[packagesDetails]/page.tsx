@@ -36,14 +36,14 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
             <p className="text-xl font-semibold">
               From{" "}
               <span className="md:text-3xl text-2xl font-bold text-black">
-                AED {tourInfo?.price.toLocaleString()}
+                AED {tourInfo?.adultPrice.toLocaleString()}
               </span>
             </p>
 
             <div className="space-y-3">
               <p className="text-md ">Select Date</p>
               <DateInput />
-              <PeopleModal addOns={tourInfo?.addOns || []} price={tourInfo?.price || 0} />
+              <PeopleModal addOns={tourInfo?.addOns || []} price={tourInfo?.adultPrice || 0} />
               <FullRefundChip />
             </div>
           </div>
