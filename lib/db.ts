@@ -140,7 +140,10 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
             addOns: true,
             subTour: {
               select: {
-                images:true // Include images from the related SubTour model
+                images:true,
+                id:true,
+                thumbnail:true,
+                name:true // Include images from the related SubTour model
               }
             }
           }

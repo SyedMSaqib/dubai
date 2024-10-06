@@ -49,6 +49,9 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
                 adultPrice={tourInfo?.adultPrice || 0}
                 childPrice={tourInfo?.childPrice || 0}
                 privateRide={tourInfo?.privatePrice || 0}
+                subTourId={tourInfo?.subTour.id || ""}
+                subtourThumbnail={tourInfo?.subTour.thumbnail || ""}
+                subTourName={tourInfo?.subTour.name || ""}
               />
               <FullRefundChip />
             </div>

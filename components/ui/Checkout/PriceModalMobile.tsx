@@ -3,11 +3,13 @@ import React, { useState } from "react"
 import { Modal, ModalContent, ModalBody } from "@nextui-org/modal"
 import CheckoutPackageDetails from "./CheckoutPackageDetails"
 import { DownwardArrow } from "@/utils/StaticSvgs"
+import { useAppSelector } from "@/lib/Redux/hooks"
 
 export const PriceModalMobile = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const onOpen = () => setIsOpen(true)
+  const data = useAppSelector((state) => state.booking.Data)
 
   return (
     <div className="lg:hidden mt-[10px]">
@@ -16,7 +18,7 @@ export const PriceModalMobile = () => {
           <span>Package Details</span>
           <span className="inline-block">{DownwardArrow}</span>
         </p>
-        <p className="text-black font-semibold">$345</p>
+        <p className="text-black font-semibold">AED {data[0]?.totalPrice.toLocaleString()}</p>
       </div>
 
       <Modal isOpen={isOpen} onOpenChange={setIsOpen} scrollBehavior="inside">
