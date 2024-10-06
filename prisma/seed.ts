@@ -76,8 +76,7 @@ async function main() {
                   time: new Date(),
                   adultPrice: getRandomNumber(150, 500),
                   childPrice: getRandomNumber(100, 300),
-                  privatePrice: getRandomNumber(500, 1500),
-                  sharedPrice: getRandomNumber(300, 1000),
+                  privatePrice: 500,
                   Highlight: {
                     create: highlights.map((highlight) => ({
                       highlight,
@@ -142,7 +141,7 @@ async function main() {
         create: {
           adults: 2,
           child: 1,
-          transportType: 'Private',
+          transportType: 'private',
           totalPrice: 800,
           addOns: ['Quad Bike', 'VIP Lounge'],
         },

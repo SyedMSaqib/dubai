@@ -7,6 +7,7 @@ import AdOns from "./AddOns"
 import Link from "next/link"
 import { encodeData } from "@/utils/urlEncoders"
 import { useAppSelector } from "@/lib/Redux/hooks"
+import { TotalPrice } from "@/utils/priceCalculations"
 
 type addOns = {
   id: string
@@ -19,13 +20,11 @@ export const PeopleModal = ({
   adultPrice,
   childPrice,
   privateRide,
-  sharedRide,
 }: {
   addOns: addOns[]
   adultPrice: number
   childPrice: number
   privateRide: number
-  sharedRide: number
 }) => {
   const data = {
     array: ["item1", "item2", "item3"],
@@ -68,21 +67,20 @@ export const PeopleModal = ({
   const [totalPrice, setTotalPrice] = useState(0)
   const transportType = useAppSelector((state) => state.peopleModal.ride)
   const addons = useAppSelector((state) => state.peopleModal.addOns)
-  const totalAddOnPrice = addons.reduce((sum, addon) => sum + addon.price, 0)
-  const basicAdultPrice = adultPrice + sharedRide
-  const basicChildPrice = childPrice + sharedRide
-  const totalPeople = Adults + Childrens
+  const totalAddOnPrice = addons.reduce((sum, addon) => sum + addon.price * addon.quantity, 0)
 
   React.useEffect(() => {
-    const calculateTotal = () => {
-      let total =
-        basicAdultPrice * Adults + basicChildPrice * Childrens + totalAddOnPrice * totalPeople
-      if (transportType === "private") {
-        total += (Adults + Childrens) * privateRide
-      }
-      setTotalPrice(total)
-    }
-    calculateTotal()
+    const total = TotalPrice(
+      adultPrice,
+      childPrice,
+      Adults,
+      Childrens,
+      totalAddOnPrice,
+      transportType,
+      privateRide
+    )
+
+    setTotalPrice(total)
   }, [Adults, Childrens, adultPrice, childPrice, transportType, totalAddOnPrice])
 
   return (
@@ -111,12 +109,10 @@ export const PeopleModal = ({
                 <div className="flex"></div>
                 <p className="font-bold">Select Visitors</p>
                 <p>
-                  Per Adult:{" "}
-                  <span className="font-bold">AED {basicAdultPrice?.toLocaleString()}</span>
+                  Per Adult: <span className="font-bold">AED {adultPrice?.toLocaleString()}</span>
                 </p>
                 <p>
-                  Per Child:{" "}
-                  <span className="font-bold">AED {basicChildPrice?.toLocaleString()}</span>
+                  Per Child: <span className="font-bold">AED {childPrice?.toLocaleString()}</span>
                 </p>
                 <div className="flex flex-row justify-between md:justify-start md:gap-[300px]">
                   <div className="flex items-center gap-4">

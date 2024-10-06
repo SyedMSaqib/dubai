@@ -17,7 +17,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
   const tourInfo = await subTourInfo()
   const rating = subTourRatingsCount(packagesDetails)
   const totalRating = await rating()
-  const totalPrice = (tourInfo?.adultPrice || 0) + (tourInfo?.sharedPrice || 0)
+  const totalPrice = tourInfo?.adultPrice || 0
 
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4">
@@ -49,7 +49,6 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
                 adultPrice={tourInfo?.adultPrice || 0}
                 childPrice={tourInfo?.childPrice || 0}
                 privateRide={tourInfo?.privatePrice || 0}
-                sharedRide={tourInfo?.sharedPrice || 0}
               />
               <FullRefundChip />
             </div>

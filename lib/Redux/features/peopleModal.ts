@@ -7,6 +7,8 @@ type addOns = {
     price: number
     name: string
     subTourInfoId: string
+    quantity: number
+    
   }
 export interface peopleModal {
   ride:string,

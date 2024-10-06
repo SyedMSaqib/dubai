@@ -73,7 +73,6 @@ model SubTourInfo {
   adultPrice     Int
   childPrice     Int
   privatePrice   Int
-  sharedPrice    Int
   Highlight      Highlight[]
   whatsIncluded  WhatsIncluded[]
   whatToExpect   WhatToExpect?
@@ -130,16 +129,16 @@ model AddOns {
 }
 
 model Booking {
-  id            String      @id @default(uuid())
+  id            String        @id @default(uuid())
   adults        Int
   child         Int
-  transportType String
+  transportType transportType
   totalPrice    Int
   addOns        String[]
-  user          BookingUser @relation(fields: [bookingUserId], references: [id])
-  bookingUserId String      @unique
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  user          BookingUser   @relation(fields: [bookingUserId], references: [id])
+  bookingUserId String        @unique
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model BookingUser {
@@ -152,4 +151,9 @@ model BookingUser {
   room        String?
   email       String
   booking     Booking?
+}
+
+enum transportType {
+  private
+  shared
 }
