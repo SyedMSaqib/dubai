@@ -2,8 +2,15 @@ import React from "react"
 import { Card, CardBody } from "@nextui-org/card"
 import Image from "next/image"
 import { Divider } from "@nextui-org/divider"
+import { useAppSelector } from "@/lib/Redux/hooks"
 
 const CheckoutPackageDetails = () => {
+  const packageDetails = useAppSelector((state) => state.booking.Data)
+  const totalPrice = packageDetails[0]?.totalPrice || 0
+  const taxRate = 0.05 // 5%
+  const taxAmount = totalPrice * taxRate
+  const finalTotal = totalPrice + taxAmount
+
   return (
     <div className="w-full max-w-sm mx-auto p-4">
       <Card className="shadow-none bg-transparent">
@@ -13,13 +20,13 @@ const CheckoutPackageDetails = () => {
               <Image
                 alt="image"
                 className="w-full object-cover h-[80px] md:h-[90px] rounded-md"
-                src={"/images/hotAir.jpg"}
+                src={packageDetails[0]?.subtourThumbnail ?? "/"}
                 width={600}
                 height={400}
                 sizes="33vw"
               />
             </div>
-            <p className="font-bold flex-1">Dubai hot air ballon ride over the atlantis city</p>
+            <p className="font-bold flex-1">{packageDetails[0]?.subTourName}</p>
           </div>
 
           <Divider className="my-2" />
@@ -27,11 +34,11 @@ const CheckoutPackageDetails = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <p className="text-gray-600">Adults</p>
-              <p>2</p>
+              <p>{packageDetails[0]?.adults}</p>
             </div>
             <div className="flex justify-between">
               <p className="text-gray-600">Child</p>
-              <p>1</p>
+              <p>{packageDetails[0]?.child}</p>
             </div>
             <div className="flex justify-between">
               <p className="text-gray-600">Date</p>
@@ -47,18 +54,17 @@ const CheckoutPackageDetails = () => {
 
           <div className="flex justify-between">
             <p className="">Package</p>
-            <p className="">$382</p>
+            <p className="">AED {packageDetails[0]?.packagePrice?.toLocaleString()}</p>
           </div>
 
-          <div className="flex justify-between">
-            <p className="">Add-Ons</p>
-            <p className="">$0</p>
-          </div>
           <Divider className="my-2" />
-
+          <div className="flex justify-between">
+            <p className="">Tax (5% VAT)</p>
+            <p className="">AED {taxAmount.toLocaleString()}</p>
+          </div>
           <div className="flex justify-between">
             <p className="font-bold">Total</p>
-            <p className="font-bold">$429 (incl Tax)</p>
+            <p className="font-bold">AED {finalTotal.toLocaleString()}</p>
           </div>
         </CardBody>
       </Card>

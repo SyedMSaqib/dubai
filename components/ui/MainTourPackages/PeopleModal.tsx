@@ -20,24 +20,18 @@ export const PeopleModal = ({
   adultPrice,
   childPrice,
   privateRide,
+  subTourId,
+  subtourThumbnail,
+  subTourName,
 }: {
   addOns: addOns[]
   adultPrice: number
   childPrice: number
   privateRide: number
+  subTourId: string
+  subtourThumbnail: string
+  subTourName: string
 }) => {
-  const data = {
-    array: ["item1", "item2", "item3"],
-    date: new Date().toISOString(),
-    name: "saqib", // Use a standard format for dates
-  }
-
-  // Serialize and encode data
-  const encodedData = encodeData(data)
-
-  // Create URL with encoded data
-  const url = `/checkout/${encodedData}`
-
   const [isOpen, setIsOpen] = useState(false)
 
   const [Adults, setAdults] = useState(1)
@@ -82,6 +76,30 @@ export const PeopleModal = ({
 
     setTotalPrice(total)
   }, [Adults, Childrens, adultPrice, childPrice, transportType, totalAddOnPrice])
+
+  const data = {
+    Data: [
+      {
+        adults: Adults,
+        child: Childrens,
+        transportType: transportType,
+        totalPrice: totalPrice,
+        addOns: addons,
+        subTourId: subTourId,
+        subtourThumbnail: subtourThumbnail,
+        subTourName: subTourName,
+        packagePrice: totalPrice,
+      },
+    ],
+    date: new Date().toISOString(),
+    name: "saqib", // Use a standard format for dates
+  }
+
+  // Serialize and encode data
+  const encodedData = encodeData(data)
+
+  // Create URL with encoded data
+  const url = `/checkout/${encodedData}`
 
   return (
     <>
