@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import sidbarReducer from '../Redux/features/sidebarSlice'
 import  formData  from '../Redux/features/contactSlice'
 import peopleModal from './features/peopleModal'
+import booking from './features/bookingSlice'
 
 
 
@@ -10,7 +11,8 @@ export const makeStore = () => {
     return configureStore({
       reducer: {sidebar: sidbarReducer,
         formData:formData,
-        peopleModal:peopleModal
+        peopleModal:peopleModal,
+        booking:booking
       },
     })
   }
