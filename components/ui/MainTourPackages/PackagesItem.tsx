@@ -12,21 +12,11 @@ type PropType = {
   time: number
   description: string
   slug: string
-  sharedRide: number
 }
 
-const PackagesItem = async ({
-  src,
-  title,
-  price,
-  time,
-  description,
-  slug,
-  sharedRide,
-}: PropType) => {
+const PackagesItem = async ({ src, title, price, time, description, slug }: PropType) => {
   const subTourRatingsCounts = subTourRatingsCount(slug)
   const ratings = await subTourRatingsCounts()
-  const totalPrice = price + sharedRide
 
   return (
     <Card className="shadow-lg rounded-lg border md:border-zinc-300">
@@ -59,7 +49,7 @@ const PackagesItem = async ({
               </div>
 
               <p className="font-bold text-medium md:text-xl m-0 hidden md:block">
-                AED {totalPrice?.toLocaleString()}
+                AED {price?.toLocaleString()}
               </p>
             </div>
             <p className="text-sm md:text-xl font-semibold m-0 line-clamp-4 md:line-clamp-2">
@@ -75,7 +65,7 @@ const PackagesItem = async ({
               <span>{time} hrs</span>
             </p>
             <p className="font-bold text-lg md:text-xl m-0 md:hidden absolute bottom-0 right-4 mb-4">
-              AED {totalPrice?.toLocaleString()}
+              AED {price?.toLocaleString()}
             </p>
           </div>
         </div>
