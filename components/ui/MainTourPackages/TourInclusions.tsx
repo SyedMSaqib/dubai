@@ -24,18 +24,11 @@ type AdditionalInfoType = {
   info: string // Description of additional information
 }
 
-type AddOnType = {
-  id: string // Unique identifier for the add-on
-  name: string // Name of the add-on
-  price: number // Price of the add-on
-}
-
 type TourInclusionsProps = {
   highlights: HighlightType[] // Array of highlights
   whatsIncluded: WhatsIncludedType[] // Array of what's included
   whatToExpect: WhatToExpectType | null // Optional expectation info
   additionalInfo: AdditionalInfoType[] // Array of additional info
-  addOns: AddOnType[] // Array of add-ons
 }
 
 // The complete SubTourInfo type, including all inclusions
@@ -45,7 +38,6 @@ const TourInclusions = ({
   whatsIncluded,
   whatToExpect,
   additionalInfo,
-  addOns,
 }: TourInclusionsProps) => {
   return (
     <Accordion defaultSelectedKeys="all" selectionMode="multiple">

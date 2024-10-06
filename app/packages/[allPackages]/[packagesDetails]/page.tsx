@@ -73,7 +73,6 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
           whatsIncluded={tourInfo?.whatsIncluded || []}
           whatToExpect={tourInfo?.whatToExpect || null}
           additionalInfo={tourInfo?.additionalInfo || []}
-          addOns={tourInfo?.addOns || []}
         />
 
         <Divider />

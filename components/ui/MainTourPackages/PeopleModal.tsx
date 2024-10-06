@@ -75,7 +75,7 @@ export const PeopleModal = ({
     )
 
     setTotalPrice(total)
-  }, [Adults, Childrens, adultPrice, childPrice, transportType, totalAddOnPrice])
+  }, [Adults, Childrens, adultPrice, childPrice, transportType, totalAddOnPrice, privateRide])
 
   const data = {
     Data: [

@@ -18,7 +18,7 @@ export default function Checkout({ params }: { params: { data: string } }) {
   const dispatch = useAppDispatch()
   useEffect(() => {
     if (decodedData) dispatch(addData(decodedData))
-  }, [decodeData, dispatch])
+  }, [decodedData, dispatch])
 
   const currentPage = useAppSelector((state) => state.formData.setCurrentPage)
 
