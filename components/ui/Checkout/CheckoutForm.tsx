@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import formatAmountForStripe from "@/utils/stripe-helper"
 import lottieSpinner from "@/utils/lottieSpinner.json"
 import Lottie from "lottie-react"
 import { useAppSelector } from "@/lib/Redux/hooks"
@@ -17,7 +16,7 @@ import { useAppSelector } from "@/lib/Redux/hooks"
  * @returns {React.ReactElement} - The rendered payment form.
  */
 
-const CheckoutForm = ({ amount }: { amount: number }) => {
+const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
   const packageDetails = useAppSelector((state) => state.booking.Data)
@@ -39,7 +38,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
         setClientSecret(data.clientSecret)
         setIsLoading(false)
       })
-  }, [amount, packageDetails])
+  }, [packageDetails])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

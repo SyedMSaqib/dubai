@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     console.log(packageDetails)
     const addOns:AddOn[] = packageDetails[0]?.addOns || []; // Default to empty array if addOns don't exist
 
-    const idsAndQuantities = addOns.map((addon: any) => ({
+    const idsAndQuantities = addOns.map((addon: AddOn) => ({
       id: addon.id,
       quantity: addon.quantity,
     }));
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     let totalAddonsPrice = 0;
     
     // Iterate over each add-on in idsAndQuantities
-    const addonsMap = new Map(addonsFromDb.map((addon: any) => [addon.id, addon]));
+    const addonsMap = new Map(addonsFromDb.map((addon) => [addon.id, addon]));
 
 // Iterate through idsAndQuantities
 idsAndQuantities.forEach(({ id, quantity }: AddOn) => {

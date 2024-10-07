@@ -10,8 +10,6 @@ const stripePromise = getStripe()
 const StripeElements = () => {
   const packageDetails = useAppSelector((state) => state.booking.Data)
 
-  const amount = 100
-
   return (
     <Elements
       options={{
@@ -21,7 +19,7 @@ const StripeElements = () => {
       }}
       stripe={stripePromise}
     >
-      <CheckoutForm amount={packageDetails[0].totalPrice} />
+      <CheckoutForm />
     </Elements>
   )
 }

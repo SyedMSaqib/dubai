@@ -2,7 +2,7 @@
 import React, { useRef } from "react"
 import Lottie from "lottie-react"
 import Success from "@/utils/success.json"
-import html2canvas from "html2canvas"
+
 import { useSearchParams } from "next/navigation"
 import { Divider } from "@nextui-org/divider"
 import { Card, CardBody } from "@nextui-org/card"
