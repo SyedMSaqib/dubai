@@ -63,6 +63,8 @@ export const PeopleModal = ({
   const [totalPrice, setTotalPrice] = useState(0)
   const transportType = useAppSelector((state) => state.peopleModal.ride)
   const addons = useAppSelector((state) => state.peopleModal.addOns)
+  const Bookingdate = useAppSelector((state) => state.booking.date)
+
   const totalAddOnPrice = addons.reduce((sum, addon) => sum + addon.price * addon.quantity, 0)
 
   React.useEffect(() => {
@@ -92,10 +94,9 @@ export const PeopleModal = ({
         subTourName: subTourName,
         packagePrice: totalPrice,
         subTourSlug: subTourSlug,
+        date: Bookingdate,
       },
     ],
-    date: new Date().toISOString(),
-    name: "saqib", // Use a standard format for dates
   }
 
   // Serialize and encode data

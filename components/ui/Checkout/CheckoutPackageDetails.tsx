@@ -6,6 +6,13 @@ import { useAppSelector } from "@/lib/Redux/hooks"
 
 const CheckoutPackageDetails = () => {
   const packageDetails = useAppSelector((state) => state.booking.Data)
+  const date = useAppSelector((state) => state.booking.date)
+  const newDate = new Date(date)
+  const formattedDate = newDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
   const totalPrice = packageDetails[0]?.totalPrice || 0
   const taxRate = 0.05 // 5%
   const taxAmount = totalPrice * taxRate
@@ -42,7 +49,7 @@ const CheckoutPackageDetails = () => {
             </div>
             <div className="flex justify-between">
               <p className="text-gray-600">Date</p>
-              <p>Tue, Oct 01, 2024</p>
+              <p>{formattedDate}</p>
             </div>
             <div className="flex justify-between">
               <p className="text-gray-600">Time</p>

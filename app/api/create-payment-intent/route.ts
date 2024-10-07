@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       quantity: number;
     };
     const { packageDetails } = await request.json();
-    console.log(packageDetails)
+   
     const addOns:AddOn[] = packageDetails[0]?.addOns || []; // Default to empty array if addOns don't exist
 
     const idsAndQuantities = addOns.map((addon: AddOn) => ({

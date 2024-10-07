@@ -1,11 +1,19 @@
 "use client"
-import React from "react"
+import React, { useEffect } from "react"
 import { DatePicker } from "@nextui-org/date-picker"
 import { DateValue, getLocalTimeZone, today } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
+import { useDispatch } from "react-redux"
+import { AddDate } from "@/lib/Redux/features/bookingSlice"
 
 export default function DateInput() {
+  const dispatch = useDispatch()
   const [value, setValue] = React.useState<DateValue>(() => today(getLocalTimeZone()))
+
+  useEffect(() => {
+    // Convert the Date object to an ISO string before dispatching
+    dispatch(AddDate(value.toDate(getLocalTimeZone()).toISOString()))
+  }, [value, dispatch])
   const formatter = useDateFormatter({ dateStyle: "full" })
 
   return (

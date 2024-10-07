@@ -13,12 +13,13 @@ type addOns = {
 export interface peopleModal {
   ride:string,
   addOns:addOns []
-
+  Date:string
 }
 
 const initialState: peopleModal = {
   ride:"shared",
-  addOns:[]
+  addOns:[],
+  Date:""
 
 }
 
@@ -32,6 +33,7 @@ export const peopleModal = createSlice({
     AddaddOns: (state, action: PayloadAction<addOns[]>) => {
         state.addOns = action.payload; // Replace the state with the new array of add-ons
       }
+    
     }
   });
   

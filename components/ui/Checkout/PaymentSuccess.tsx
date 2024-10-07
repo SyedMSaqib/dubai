@@ -8,8 +8,16 @@ import { Divider } from "@nextui-org/divider"
 import { Card, CardBody } from "@nextui-org/card"
 import Image from "next/image"
 import jsPDF from "jspdf"
+import { useAppSelector } from "@/lib/Redux/hooks"
 
 const PaymentSuccess = () => {
+  const date = useAppSelector((state) => state.booking.date)
+  const newDate = new Date(date)
+  const formattedDate = newDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
   const searchParams = useSearchParams()
   const packageDetailsString = searchParams.get("packageDetails")
 
@@ -186,7 +194,7 @@ const PaymentSuccess = () => {
                       </div>
                       <div className="flex justify-between">
                         <p className="text-gray-600">Date</p>
-                        <p>{parsedPackageDetails?.[0]?.date || "N/A"}</p>
+                        <p>{formattedDate}</p>
                       </div>
                       <div className="flex justify-between">
                         <p className="text-gray-600">Time</p>

@@ -18,17 +18,19 @@ type Booking = {
   subtourThumbnail: string
   subTourName: string
   packagePrice: number
+  
 }
 
 export type BookingData = {
   Data: Booking[]
   date: string
+ 
 }
 
 // Define the initial state
 const initialState: BookingData = {
   Data: [],
-  date: '',
+  date: new Date().toISOString(),
 };
 
 // Create the slice
@@ -39,14 +41,15 @@ const bookingSlice = createSlice({
     addData: (state, action: PayloadAction<BookingData>) => {
       // Set the booking data with the incoming payload
       state.Data = action.payload.Data;
-      state.date = action.payload.date;
-     
     },
+    AddDate: (state, action: PayloadAction<string>) => {
+      state.date = action.payload; // Replace the state with the new array of add-ons
+    }
   },
 });
 
 // Export actions
-export const { addData } = bookingSlice.actions;
+export const { addData,AddDate } = bookingSlice.actions;
 
 // Export the reducer
 export default bookingSlice.reducer;
