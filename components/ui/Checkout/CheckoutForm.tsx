@@ -32,7 +32,7 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: formatAmountForStripe(amount), packageDetails }),
+      body: JSON.stringify({ packageDetails }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -63,7 +63,9 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
       clientSecret,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://dubai-seven.vercel.app/checkout/paymentSuccess",
+        return_url: `http://localhost:3000/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
+          JSON.stringify(packageDetails)
+        )}`,
       },
     })
     if (error.type === "card_error" || error.type === "validation_error") {
