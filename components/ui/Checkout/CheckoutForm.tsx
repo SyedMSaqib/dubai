@@ -110,7 +110,11 @@ const CheckoutForm = () => {
               </div>
             ) : (
               <div className="flex justify-center items-center" id="spinner">
-                Pay
+                Pay AED{" "}
+                {(
+                  packageDetails[0].packagePrice +
+                  packageDetails[0].packagePrice * 0.05
+                ).toLocaleString()}
               </div>
             )}
           </span>
