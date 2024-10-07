@@ -159,6 +159,37 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
       tags: ['subTourInfo'], 
     }
   );
+  export const checkOutInfo =async(subTourSlug: string)=>  {
+      try {
+        const subTourInfo = await prisma.subTourInfo.findUnique({
+          where: {
+            subTourSlug: subTourSlug
+          },
+          include: {      
+            addOns: true,
+          }
+        });
+        return subTourInfo;
+      } catch (error) {
+        console.error('Database error:', error);
+        throw new Error('Failed to fetch tours');
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

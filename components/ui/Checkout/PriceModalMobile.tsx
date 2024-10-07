@@ -10,6 +10,10 @@ export const PriceModalMobile = () => {
 
   const onOpen = () => setIsOpen(true)
   const data = useAppSelector((state) => state.booking.Data)
+  const totalPrice = data[0]?.totalPrice
+  const taxRate = 0.05 // 5%
+  const taxAmount = totalPrice * taxRate
+  const finalTotal = totalPrice + taxAmount
 
   return (
     <div className="lg:hidden mt-[10px]">
@@ -18,7 +22,7 @@ export const PriceModalMobile = () => {
           <span>Package Details</span>
           <span className="inline-block">{DownwardArrow}</span>
         </p>
-        <p className="text-black font-semibold">AED {data[0]?.totalPrice.toLocaleString()}</p>
+        <p className="text-black font-semibold">AED {finalTotal.toLocaleString()}</p>
       </div>
 
       <Modal isOpen={isOpen} onOpenChange={setIsOpen} scrollBehavior="inside">

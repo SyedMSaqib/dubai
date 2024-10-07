@@ -52,6 +52,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
                 subTourId={tourInfo?.subTour.id || ""}
                 subtourThumbnail={tourInfo?.subTour.thumbnail || ""}
                 subTourName={tourInfo?.subTour.name || ""}
+                subTourSlug={tourInfo?.subTourSlug || ""}
               />
               <FullRefundChip />
             </div>

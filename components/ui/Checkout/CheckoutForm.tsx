@@ -4,6 +4,7 @@ import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import formatAmountForStripe from "@/utils/stripe-helper"
 import lottieSpinner from "@/utils/lottieSpinner.json"
 import Lottie from "lottie-react"
+import { useAppSelector } from "@/lib/Redux/hooks"
 
 /**
  * CheckoutForm
@@ -19,6 +20,7 @@ import Lottie from "lottie-react"
 const CheckoutForm = ({ amount }: { amount: number }) => {
   const stripe = useStripe()
   const elements = useElements()
+  const packageDetails = useAppSelector((state) => state.booking.Data)
 
   const [message, setMessage] = React.useState<string | null>()
   const [isLoading, setIsLoading] = React.useState(true)
@@ -30,14 +32,14 @@ const CheckoutForm = ({ amount }: { amount: number }) => {
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: formatAmountForStripe(amount) }),
+      body: JSON.stringify({ amount: formatAmountForStripe(amount), packageDetails }),
     })
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret)
         setIsLoading(false)
       })
-  }, [amount])
+  }, [amount, packageDetails])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
