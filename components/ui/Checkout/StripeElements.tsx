@@ -14,7 +14,9 @@ const StripeElements = () => {
     <Elements
       options={{
         mode: "payment",
-        amount: formatAmountForStripe(packageDetails[0].totalPrice),
+        amount: formatAmountForStripe(
+          packageDetails[0].totalPrice + packageDetails[0].totalPrice * 0.05
+        ),
         currency: "aed",
       }}
       stripe={stripePromise}
