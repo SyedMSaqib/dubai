@@ -24,6 +24,7 @@ export const PeopleModal = ({
   subtourThumbnail,
   subTourName,
   subTourSlug,
+  subTourTime,
 }: {
   addOns: addOns[]
   adultPrice: number
@@ -33,6 +34,7 @@ export const PeopleModal = ({
   subtourThumbnail: string
   subTourName: string
   subTourSlug: string
+  subTourTime: Date
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -95,6 +97,7 @@ export const PeopleModal = ({
         packagePrice: totalPrice,
         subTourSlug: subTourSlug,
         date: Bookingdate,
+        time: subTourTime,
       },
     ],
   }

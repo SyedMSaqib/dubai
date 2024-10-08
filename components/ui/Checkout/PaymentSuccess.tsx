@@ -2,22 +2,15 @@
 import React, { useRef } from "react"
 import Lottie from "lottie-react"
 import Success from "@/utils/success.json"
+import { getLocalTimeZone } from "@internationalized/date"
 
 import { useSearchParams } from "next/navigation"
 import { Divider } from "@nextui-org/divider"
 import { Card, CardBody } from "@nextui-org/card"
 import Image from "next/image"
 import jsPDF from "jspdf"
-import { useAppSelector } from "@/lib/Redux/hooks"
 
 const PaymentSuccess = () => {
-  const date = useAppSelector((state) => state.booking.date)
-  const newDate = new Date(date)
-  const formattedDate = newDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
   const searchParams = useSearchParams()
   const packageDetailsString = searchParams.get("packageDetails")
 
@@ -25,6 +18,19 @@ const PaymentSuccess = () => {
   const parsedPackageDetails = packageDetailsString
     ? JSON.parse(decodeURIComponent(packageDetailsString))
     : null
+
+  const time = new Date(parsedPackageDetails[0]?.time)
+  const formattedTime = time.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true, // Change to false for 24-hour format
+  })
+
+  const formatedDate = new Date(parsedPackageDetails[0].date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
 
   const totalPrice = parsedPackageDetails?.[0]?.totalPrice || 0
   const taxRate = 0.05 // 5%
@@ -194,11 +200,11 @@ const PaymentSuccess = () => {
                       </div>
                       <div className="flex justify-between">
                         <p className="text-gray-600">Date</p>
-                        <p>{formattedDate}</p>
+                        <p>{formatedDate}</p>
                       </div>
                       <div className="flex justify-between">
                         <p className="text-gray-600">Time</p>
-                        <p>{parsedPackageDetails?.[0]?.time || "N/A"}</p>
+                        <p>{formattedTime}</p>
                       </div>
                     </div>
 

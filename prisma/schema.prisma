@@ -70,7 +70,7 @@ model SubTourInfo {
   subTourSlug    String           @unique
   description    String
   duration       Int
-  time           DateTime
+  time           DateTime         @db.Time
   adultPrice     Int
   childPrice     Int
   privatePrice   Int

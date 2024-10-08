@@ -1,3 +1,4 @@
+import transporter from '@/lib/nodemailer';
 import prisma from '@/lib/prisma';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
@@ -91,7 +92,29 @@ export async function POST(request: Request) {
             bookingId: booking.id, // The booking ID
           })),
         });
-      
+
+        
+          // Send email to user
+          const mailOptions = {
+            from: process.env.EMAIL_USERNAME!,
+            to: metadata.user_email,
+            subject: 'Booking Confirmation',
+            text: 'Booking Confirmation',
+            html: `
+              <h1>Booking Confirmation</h1>
+              <p>Booking ID: ${booking.id}</p>
+              <p>Tour Date: ${metadata.tour_date}</p>
+              <p>Total Price: ${booking.totalPrice}</p>
+            `,
+          };
+
+          await transporter.sendMail(mailOptions,function (err:any, info:any) {
+            if(err)
+                console.log(err)
+            else
+                console.log(info);
+        })
+        
       
     console.log('Booking created:', booking);
   } catch (error) {

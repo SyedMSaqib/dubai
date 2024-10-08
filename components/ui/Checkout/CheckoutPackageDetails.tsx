@@ -13,6 +13,13 @@ const CheckoutPackageDetails = () => {
     month: "long",
     day: "numeric",
   })
+  const time = new Date(packageDetails[0]?.time)
+  const formattedTime = time.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true, // Change to false for 24-hour format
+  })
+
   const totalPrice = packageDetails[0]?.totalPrice || 0
   const taxRate = 0.05 // 5%
   const taxAmount = totalPrice * taxRate
@@ -53,7 +60,7 @@ const CheckoutPackageDetails = () => {
             </div>
             <div className="flex justify-between">
               <p className="text-gray-600">Time</p>
-              <p>5 AM</p>
+              <p>{formattedTime}</p>
             </div>
           </div>
 

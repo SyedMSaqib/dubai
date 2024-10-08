@@ -73,7 +73,7 @@ async function main() {
                 create: {
                   description: `Explore the exciting ${subTourName}.`,
                   duration: getRandomNumber(2, 8),
-                  time: new Date(),
+                  time: new Date('1970-01-01T13:00:00Z'),
                   adultPrice: getRandomNumber(150, 500),
                   childPrice: getRandomNumber(100, 300),
                   privatePrice: 500,

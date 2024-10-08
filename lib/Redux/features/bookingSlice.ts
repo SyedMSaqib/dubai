@@ -18,6 +18,7 @@ type Booking = {
   subtourThumbnail: string
   subTourName: string
   packagePrice: number
+  time:Date
   
 }
 
