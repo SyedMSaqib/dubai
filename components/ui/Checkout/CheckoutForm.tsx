@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
+import React, { use, useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import lottieSpinner from "@/utils/lottieSpinner.json"
 import Lottie from "lottie-react"
@@ -20,6 +20,7 @@ const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
   const packageDetails = useAppSelector((state) => state.booking.Data)
+  const userDetails = useAppSelector((state) => state.formData.formData)
 
   const [message, setMessage] = React.useState<string | null>()
   const [isLoading, setIsLoading] = React.useState(true)
@@ -31,7 +32,7 @@ const CheckoutForm = () => {
     fetch("/api/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ packageDetails }),
+      body: JSON.stringify({ packageDetails, userDetails }),
     })
       .then((res) => res.json())
       .then((data) => {

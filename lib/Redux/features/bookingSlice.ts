@@ -30,7 +30,7 @@ export type BookingData = {
 // Define the initial state
 const initialState: BookingData = {
   Data: [],
-  date: new Date().toISOString(),
+  date: "",
 };
 
 // Create the slice
