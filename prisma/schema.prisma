@@ -36,6 +36,7 @@ model SubTours {
   images      SubTourImages[] // A sub-tour can have many images
   SubTourInfo SubTourInfo?
   rating      SubToursRating[]
+  Booking     Booking[]
 
   @@index([slug])
 }
@@ -129,16 +130,19 @@ model AddOns {
 }
 
 model Booking {
-  id            String        @id @default(uuid())
-  adults        Int
-  child         Int
-  transportType transportType
-  totalPrice    Int
-  addOns        String[]
-  user          BookingUser   @relation(fields: [bookingUserId], references: [id])
-  bookingUserId String        @unique
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id                       String                     @id @default(uuid())
+  adults                   Int
+  child                    Int
+  transportType            transportType
+  totalPrice               Int
+  BookingAddonWithQuantity BookingAddonWithQuantity[]
+  user                     BookingUser                @relation(fields: [bookingUserId], references: [id])
+  bookingUserId            String                     @unique
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  subTour                  SubTours                   @relation(fields: [subTourId], references: [id])
+  subTourId                String
+  tourDate                 DateTime                   @default(now())
 }
 
 model BookingUser {
@@ -151,6 +155,14 @@ model BookingUser {
   room        String?
   email       String
   booking     Booking?
+}
+
+model BookingAddonWithQuantity {
+  id        String   @id @default(uuid())
+  addonId   String
+  quantity  Int
+  Booking   Booking? @relation(fields: [bookingId], references: [id])
+  bookingId String?
 }
 
 enum transportType {

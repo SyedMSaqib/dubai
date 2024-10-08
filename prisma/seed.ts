@@ -127,29 +127,7 @@ async function main() {
     console.log(`Created tour: ${tour.name}`);
   }
 
-  // Seed for Booking Users and Bookings
-  const bookingUser = await prisma.bookingUser.create({
-    data: {
-      firstName: 'John',
-      lastName: 'Doe',
-      phone: '+1234567890',
-      whatsApp: '+1234567890',
-      pickUpPoint: 'Hotel XYZ, Dubai',
-      room: '102A',
-      email: 'john.doe@example.com',
-      booking: {
-        create: {
-          adults: 2,
-          child: 1,
-          transportType: 'private',
-          totalPrice: 800,
-          addOns: ['Quad Bike', 'VIP Lounge'],
-        },
-      },
-    },
-  });
-
-  console.log({ bookingUser });
+  
 }
 
 main()
