@@ -19,10 +19,11 @@ const PaymentSuccess = () => {
     : null
 
   const time = new Date(parsedPackageDetails[0]?.time)
-  const formattedTime = time.toLocaleTimeString([], {
+  const formattedTime = time.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true, // Change to false for 24-hour format
+    hour12: true, // Set to false for 24-hour format
+    timeZone: "UTC", // Ensure it displays as UTC
   })
 
   const formatedDate = new Date(parsedPackageDetails[0].date).toLocaleDateString("en-US", {
