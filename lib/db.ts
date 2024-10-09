@@ -177,6 +177,62 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
     }
 
 
+    export async function getRandomSubTours(){
+      const randomSubTours = await prisma.$queryRaw`
+        WITH RankedSubTours AS (
+          SELECT 
+            st.*,
+            sti."adultPrice",
+            t.name as "tourName",
+            COALESCE(
+              (SELECT AVG(sr.rating)::NUMERIC(10,1) 
+               FROM "SubToursRating" sr 
+               WHERE sr."subToursId" = st.id),
+              0
+            ) as average_rating,
+            (SELECT COUNT(*) ::INTEGER
+             FROM "SubToursRating" sr 
+             WHERE sr."subToursId" = st.id
+            ) as rating_count,
+            ROW_NUMBER() OVER (
+              PARTITION BY st."tourSlug" 
+              ORDER BY RANDOM()
+            ) as rn
+          FROM "SubTours" st
+          LEFT JOIN "SubTourInfo" sti ON st."slug" = sti."subTourSlug"
+          LEFT JOIN "Tours" t ON st."tourSlug" = t.slug
+        )
+        SELECT 
+          id,
+          name,
+          thumbnail,
+          "tourSlug",
+          "tourName",
+          "adultPrice",
+          "slug",
+          average_rating,
+          rating_count
+        FROM RankedSubTours
+        WHERE rn = 1
+        ORDER BY RANDOM()
+        LIMIT 10;
+      `
+    
+      return randomSubTours as RandomSubTour[];
+    }
+    
+    // TypeScript type for the return value
+    export type RandomSubTour = {
+      id: string
+      name: string
+      thumbnail: string
+      tourSlug: string
+      tourName: string
+      adultPrice: number | null
+      average_rating: number
+      rating_count: number
+      slug:string
+    }
 
 
 
@@ -190,81 +246,4 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
 
 
 
-
-
-
-  // async function filterSubTours({
-  //   minPrice,
-  //   maxPrice,
-  //   minRating,
-  //   startTime,
-  //   endTime,
-  //   tourSlug,
-  // }: {
-  //   minPrice?: number;
-  //   maxPrice?: number;
-  //   minRating?: number;
-  //   startTime?: Date;
-  //   endTime?: Date;
-  //   tourSlug: string; // Optional, filter by tour if needed
-  // }) {
-  //   const subtours = await prisma.subTours.findMany({
-  //     where: {
-  //       AND: [
-  //         {
-  //           tourSlug: tourSlug,
-  //         },
-  //         minPrice !== undefined || maxPrice !== undefined
-  //           ? {
-  //               SubTourInfo: {
-  //                 price: {
-  //                   gte: minPrice,
-  //                   lte: maxPrice,
-  //                 },
-  //               },
-  //             }
-  //           : {},
-  //         minRating !== undefined
-  //           ? {
-  //               rating: {
-  //                 some: {
-  //                   rating: {
-  //                     gte: minRating,
-  //                   },
-  //                 },
-  //               },
-  //             }
-  //           : {},
-  //         startTime !== undefined || endTime !== undefined
-  //           ? {
-  //               SubTourInfo: {
-  //                 time: {
-  //                   gte: startTime,
-  //                   lte: endTime,
-  //                 },
-  //               },
-  //             }
-  //           : {},
-  //       ],
-  //     },
-  //     include: {
-  //       SubTourInfo: true,
-  //       rating: true,
-  //     },
-  //   });
-  
-  //   return subtours;
-  // }
-  
-  // export const subtoursfilter = filterSubTours({
-  //   minPrice: 0,
-  //   maxPrice: 150,
-  //   minRating: 4.5,
-  //   // startTime: new Date('2024-01-01'),
-  //   // endTime: new Date('2024-12-31'),
-  //   tourSlug: "ski-dubai-snow-adventure",
-  // });
-  
-  
-  
 

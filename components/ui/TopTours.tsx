@@ -32,7 +32,7 @@ const TopTours: React.FC<TopToursProps> = ({ src, title, price, rating, totalRat
           <div className="text-default-500 ">
             {<Ratings rating={rating} totalRatings={totalRatings} />}
           </div>
-          <div className="font-semibold text-lg">${price}</div>
+          <div className="font-semibold text-lg">AED {price.toLocaleString()}</div>
         </CardFooter>
       </Card>
     </div>

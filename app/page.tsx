@@ -5,13 +5,14 @@ import { Divider } from "@nextui-org/divider"
 import EmblaCarousel from "@/components/ui/EmblaCarousel/EmblaCarousel"
 import Link from "next/link"
 import TopTours from "../components/ui/TopTours"
-import { topTours, topTours2 } from "../utils/ToursStatic"
 import Tesimonial from "@/components/ui/Tesimonial"
 import testimonials from "@/utils/TestimonialStatic"
-import { getAllTours } from "@/lib/db"
+import { getAllTours, getRandomSubTours } from "@/lib/db"
 
 export default async function Home() {
   const tours = await getAllTours()
+  const topTours = await getRandomSubTours() // Explicitly type as RandomSubTour[]
+  const topTours2 = await getRandomSubTours()
 
   return (
     <>
@@ -67,16 +68,28 @@ export default async function Home() {
         </div>
         <div className=" mt-[20px] ">
           <EmblaCarousel options={{ loop: false }}>
-            {topTours.map(({ src, title, price, rating, totalRatings }, index) => (
-              <TopTours
-                key={index}
-                src={src}
-                title={title}
-                price={price}
-                rating={rating}
-                totalRatings={totalRatings}
-              />
-            ))}
+            {topTours.map(
+              ({
+                name,
+                thumbnail,
+                adultPrice,
+                id,
+                tourSlug,
+                average_rating,
+                rating_count,
+                slug,
+              }) => (
+                <Link href={`/packages/${tourSlug}/${slug}`} key={id}>
+                  <TopTours
+                    src={thumbnail}
+                    title={name}
+                    price={adultPrice || 0}
+                    rating={average_rating}
+                    totalRatings={rating_count}
+                  />
+                </Link>
+              )
+            )}
           </EmblaCarousel>
         </div>
         <div className=" text-center  mt-[50px]">
@@ -86,16 +99,29 @@ export default async function Home() {
 
         <div className=" mt-[20px]">
           <EmblaCarousel options={{ loop: false }}>
-            {topTours2.map(({ src, title, price, rating, totalRatings }, index) => (
-              <TopTours
-                key={index}
-                src={src}
-                title={title}
-                price={price}
-                rating={rating}
-                totalRatings={totalRatings}
-              />
-            ))}
+            {topTours2.map(
+              ({
+                tourSlug,
+                name,
+                thumbnail,
+                adultPrice,
+                id,
+                average_rating,
+                rating_count,
+                slug,
+              }) => (
+                <Link href={`/packages/${tourSlug}/${slug}`} key={id}>
+                  <TopTours
+                    key={id}
+                    src={thumbnail}
+                    title={name}
+                    price={adultPrice || 0}
+                    rating={average_rating}
+                    totalRatings={rating_count}
+                  />
+                </Link>
+              )
+            )}
           </EmblaCarousel>
         </div>
         <div className=" text-center  mt-[50px]">
