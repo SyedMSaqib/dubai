@@ -2,7 +2,6 @@
 import React, { useRef } from "react"
 import Lottie from "lottie-react"
 import Success from "@/utils/success.json"
-import { getLocalTimeZone } from "@internationalized/date"
 
 import { useSearchParams } from "next/navigation"
 import { Divider } from "@nextui-org/divider"

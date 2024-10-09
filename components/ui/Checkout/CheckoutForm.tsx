@@ -1,5 +1,5 @@
 "use client"
-import React, { use, useEffect } from "react"
+import React, { useEffect } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import lottieSpinner from "@/utils/lottieSpinner.json"
 import Lottie from "lottie-react"
@@ -39,7 +39,7 @@ const CheckoutForm = () => {
         setClientSecret(data.clientSecret)
         setIsLoading(false)
       })
-  }, [packageDetails])
+  }, [packageDetails, userDetails])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -63,6 +63,7 @@ const CheckoutForm = () => {
       clientSecret,
       confirmParams: {
         // Make sure to change this to your payment completion page
+        // return_url: `https://dubai-seven.vercel.app/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
         return_url: `http://localhost:3000/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
           JSON.stringify(packageDetails)
         )}`,
