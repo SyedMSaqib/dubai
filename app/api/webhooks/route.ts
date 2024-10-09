@@ -1,8 +1,9 @@
-import transporter from '@/lib/nodemailer';
+// import transporter from '@/lib/nodemailer';
 import prisma from '@/lib/prisma';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { transportType } from '@prisma/client';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
@@ -22,32 +23,36 @@ export async function POST(request: Request) {
       throw new Error('Missing signature or endpoint secret');
     }
     event = stripe.webhooks.constructEvent(body, signature, endpointSecret);
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 400 });
+  } catch (err) {
+    const error = err as Error;
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
-  console.log("Event (stringified):", JSON.stringify(event, null, 2));
-
-  // Extract metadata from the paymentIntent
-  let metadata: Record<string, any> = {};
+  let metadata: Record<string, string> = {};
 
   if (event.type === 'payment_intent.succeeded') {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
     
     if (paymentIntent.metadata) {
-      metadata = paymentIntent.metadata;
+      metadata = paymentIntent.metadata as Record<string, string>;
     }
   } else {
     return NextResponse.json({ error: 'Unhandled event type' }, { status: 400 });
   }
 
-  // Check if metadata is populated
   if (!metadata || !metadata.user_first_name) {
     return NextResponse.json({ error: 'Missing metadata' }, { status: 400 });
   }
 
+  // Validate transport type
+  const transportTypeValue = metadata.booking_transport_type.toLowerCase();
+  if (!isValidTransportType(transportTypeValue)) {
+    return NextResponse.json({ 
+      error: `Invalid transport type. Must be 'private' or 'shared'` 
+    }, { status: 400 });
+  }
+
   try {
-    // Create BookingUser
     const bookingUser = await prisma.bookingUser.create({
       data: {
         firstName: metadata.user_first_name,
@@ -59,62 +64,55 @@ export async function POST(request: Request) {
         email: metadata.user_email,
       },
     });
-   
-    // Then create Booking with reference to BookingUser
-   
-       // Assuming metadata.booking_addons is defined and is an array of objects
 
+    const booking = await prisma.booking.create({
+      data: {
+        adults: parseInt(metadata.booking_adults),
+        child: parseInt(metadata.booking_child),
+        transportType: transportTypeValue as transportType,
+        totalPrice: parseInt(metadata.booking_total_price),
+        bookingUserId: bookingUser.id,
+        subTourId: metadata.booking_subTourId,
+        tourDate: new Date(metadata.tour_date),
+      },
+    });
 
+    const bookingAddons = JSON.parse(metadata.booking_addons) as Array<{
+      id: string;
+      quantity: number;
+    }>;
 
-   
-      const booking = await prisma.booking.create({
-        data: {
-          adults: parseInt(metadata.booking_adults),
-          child: parseInt(metadata.booking_child),
-          transportType: metadata.booking_transport_type,
-          totalPrice: parseInt(metadata.booking_total_price), // Use totalPrice directly from metadata
-          bookingUserId: bookingUser.id,
-          subTourId: metadata.booking_subTourId,
-          tourDate:new Date(metadata.tour_date),
-        },
+    if (bookingAddons.length > 0) {
+      await prisma.bookingAddonWithQuantity.createMany({
+        data: bookingAddons.map((addon) => ({
+          addonId: addon.id,
+          quantity: addon.quantity,
+          bookingId: booking.id,
+        })),
       });
- 
-     
-      let bookingAddons;
+    }
 
-        bookingAddons = JSON.parse(metadata.booking_addons);
-      // Ensure bookingAddons is an array
-     
-        await prisma.bookingAddonWithQuantity.createMany({
-          data: bookingAddons.map((addon: { id: string; quantity: number }) => ({
-            addonId: addon.id, // The ID of the addon
-            quantity: addon.quantity, // The quantity of the addon
-            bookingId: booking.id, // The booking ID
-          })),
-        });
+    // type MailError = Error & { code?: string };
+    
+    // const mailOptions = {
+    //   from: process.env.EMAIL_USERNAME!,
+    //   to: metadata.user_email,
+    //   subject: 'Booking Confirmation',
+    //   text: 'Booking Confirmation',
+    //   html: `
+    //     <h1>Booking Confirmation</h1>
+    //     <p>Booking ID: ${booking.id}</p>
+    //     <p>Tour Date: ${metadata.tour_date}</p>
+    //     <p>Total Price: ${booking.totalPrice}</p>
+    //   `,
+    // };
 
-        
-          // Send email to user
-          const mailOptions = {
-            from: process.env.EMAIL_USERNAME!,
-            to: metadata.user_email,
-            subject: 'Booking Confirmation',
-            text: 'Booking Confirmation',
-            html: `
-              <h1>Booking Confirmation</h1>
-              <p>Booking ID: ${booking.id}</p>
-              <p>Tour Date: ${metadata.tour_date}</p>
-              <p>Total Price: ${booking.totalPrice}</p>
-            `,
-          };
-
-          await transporter.sendMail(mailOptions,function (err:any, info:any) {
-            if(err)
-                console.log(err)
-            else
-                console.log(info);
-        })
-        
+    // await transporter.sendMail(mailOptions, function (err: MailError | null, info: { response: string }) {
+    //   if (err)
+    //     console.log(err);
+    //   else
+    //     console.log(info);
+    // });
       
     console.log('Booking created:', booking);
   } catch (error) {
@@ -123,4 +121,8 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ received: true });
+}
+
+function isValidTransportType(value: string): value is transportType {
+  return ['private', 'shared'].includes(value);
 }
