@@ -5,10 +5,11 @@ const TourInfo = ({ time, duration }: { time: Date; duration: number }) => {
   const date = new Date(time)
 
   // Extract and format the time from the Date object
-  const formattedTime = date.toLocaleTimeString([], {
+  const formattedTime = date.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true, // Change to false for 24-hour format
+    hour12: true, // Set to false for 24-hour format
+    timeZone: "UTC", // Ensure it displays as UTC
   })
 
   return (
