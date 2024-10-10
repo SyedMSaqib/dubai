@@ -15,7 +15,6 @@ export default function DateInput() {
     const dateWithoutTime = new Date(
       Date.UTC(dateOnly.getFullYear(), dateOnly.getMonth(), dateOnly.getDate())
     )
-    console.log(dateWithoutTime.toISOString())
 
     // Dispatch only the date (without the time)
     dispatch(AddDate(dateWithoutTime.toISOString().split("T")[0])) // Send only the date part, e.g., "2024-10-09"
