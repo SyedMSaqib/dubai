@@ -57,7 +57,7 @@ const CheckoutForm = () => {
       setErrorMessage(submitError.message)
       setIsLoading(false)
     }
-
+    const userName: string = userDetails.firstName + " " + userDetails.lastName
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
@@ -65,7 +65,7 @@ const CheckoutForm = () => {
         // Make sure to change this to your payment completion page
         // return_url: `https://dubai-seven.vercel.app/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
         return_url: `http://localhost:3000/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
-          JSON.stringify(packageDetails)
+          JSON.stringify({ ...packageDetails, userName })
         )}`,
       },
     })

@@ -17,7 +17,7 @@ const PaymentSuccess = () => {
   const parsedPackageDetails = packageDetailsString
     ? JSON.parse(decodeURIComponent(packageDetailsString))
     : null
-
+  const userName = parsedPackageDetails?.userName
   const time = new Date(parsedPackageDetails[0]?.time)
   const formattedTime = time.toLocaleTimeString("en-US", {
     hour: "2-digit",
@@ -36,67 +36,85 @@ const PaymentSuccess = () => {
   const taxRate = 0.05 // 5%
   const taxAmount = totalPrice * taxRate
   const finalTotal = totalPrice + taxAmount
+  // Assuming parsedPackageDetails?.[0]?.date is a stringified UTC date
+  const tourDate = new Date(parsedPackageDetails?.[0]?.date)
+
+  // Convert to Dubai time
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone: "Asia/Dubai", // Time zone for Dubai
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    // hour12: true, // Set to true if you want 12-hour format
+  }
+
+  // Format the date
+  const dubaiDateTime = tourDate.toLocaleString("en-US", options)
+
+  // Add a sign that it's in Dubai time
+  const formattedDubaiDateTime = `${dubaiDateTime} (GST)`
 
   const screenshotRef = useRef<HTMLDivElement | null>(null)
 
   const handleDownloadPDF = () => {
-    // Create new PDF document
     const pdf = new jsPDF({
       orientation: "portrait",
       unit: "mm",
-      format: "a4", // A4 size
+      format: "a4",
     })
 
-    // Set font and styles
-    pdf.setFont("helvetica")
-    pdf.setTextColor(40) // Set text color to a dark gray
+    // Header with logo (assuming logo image is in base64 format)
+    // const logo = "data:image/png;base64,..." // Add your logo base64 string here
+    // pdf.addImage(logo, "PNG", 15, 10, 50, 20) // Logo placement and size
 
-    // Header
+    // Company Information
+    pdf.setFont("helvetica", "bold")
     pdf.setFontSize(24)
-    pdf.text("Dubai Adventures", 105, 20, { align: "center" })
+    pdf.text("Dubai Adventures", 105, 30, { align: "center" })
 
     pdf.setFontSize(12)
-    pdf.text("Tourism LLC", 105, 28, { align: "center" })
-
+    pdf.text("Tourism LLC", 105, 40, { align: "center" })
     pdf.setFontSize(10)
-    pdf.text("P.O. Box 123456, Dubai, UAE", 105, 34, { align: "center" })
-    pdf.text("Tel: +971 4 123 4567", 105, 39, { align: "center" })
+    pdf.text("P.O. Box 123456, Dubai, UAE", 105, 45, { align: "center" })
+    pdf.text("Tel: +971 4 123 4567", 105, 50, { align: "center" })
 
-    // Receipt details
-    pdf.setDrawColor(150) // Set color for lines
-    pdf.line(20, 45, 190, 45) // Horizontal line
-
+    // Receipt Details
+    pdf.setDrawColor(150)
+    pdf.line(20, 55, 190, 55) // Horizontal line
     pdf.setFontSize(12)
-    pdf.text("RECEIPT", 20, 55)
+    pdf.text("RECEIPT", 20, 65)
 
     pdf.setFontSize(10)
     const currentDate = new Date().toLocaleDateString()
-    pdf.text(`Date: ${currentDate}`, 20, 62)
-    pdf.text(`Receipt No: #194813421`, 20, 68)
-    pdf.text(`Time: ${parsedPackageDetails?.[0]?.time || "N/A"}`, 20, 74)
+    pdf.text(`Date: ${currentDate}`, 20, 72)
+    pdf.text(`Receipt No: #194813421`, 20, 78)
 
-    // Customer details
-    pdf.text("Bill To:", 120, 62)
-    pdf.text("Walk-in Customer", 120, 68)
+    // Customer Details
+    pdf.text(`Bill To: ${userName}`, 120, 72)
 
-    // Tour details
-    pdf.line(20, 80, 190, 80) // Horizontal line
-
+    // Tour Details
+    pdf.setDrawColor(150)
+    pdf.line(20, 85, 190, 85) // Horizontal line
     pdf.setFontSize(12)
-    pdf.text("Tour Details", 20, 90)
+    pdf.text("Tour Details", 20, 95)
 
     pdf.setFontSize(10)
-    pdf.text(parsedPackageDetails?.[0]?.subTourName || "Desert Safari", 20, 98)
-    pdf.text(`Date: ${parsedPackageDetails?.[0]?.date || "N/A"}`, 20, 104)
+    pdf.text(parsedPackageDetails?.[0]?.subTourName || "Desert Safari", 20, 103)
+    pdf.text(`Date: ${formattedDubaiDateTime}`, 20, 109)
+    pdf.text(`Time: ${formattedTime || "N/A"}`, 20, 115) // Display the original time
 
-    // Item table
-    const tableStart = 115
-    pdf.line(20, tableStart - 5, 190, tableStart - 5)
-    pdf.text("Description", 20, tableStart)
+    // Item Table
+    const tableStart = 125
+    pdf.setDrawColor(0)
+    pdf.setFillColor(255, 255, 255) // White background for the header
+    pdf.rect(20, tableStart - 5, 170, 10, "F") // Header background
+    pdf.setFontSize(10)
+    pdf.text("Description", 22, tableStart)
     pdf.text("Quantity", 150, tableStart)
-    pdf.line(20, tableStart + 2, 190, tableStart + 2)
+    pdf.setDrawColor(150)
+    pdf.line(20, tableStart + 2, 190, tableStart + 2) // Underline
 
-    // Add items
+    // Add Items
     let currentY = tableStart + 10
 
     // Add Adults
@@ -115,9 +133,10 @@ const PaymentSuccess = () => {
 
     // Totals
     currentY += 5
-    pdf.line(20, currentY, 190, currentY)
+    pdf.line(20, currentY, 190, currentY) // Total line
     currentY += 5
 
+    pdf.setFontSize(10)
     pdf.text("Subtotal:", 140, currentY)
     pdf.text(`${totalPrice.toFixed(2)} AED`, 170, currentY)
     currentY += 6
@@ -130,7 +149,7 @@ const PaymentSuccess = () => {
     pdf.text("Total:", 140, currentY)
     pdf.text(`${finalTotal.toFixed(2)} AED`, 170, currentY)
 
-    // Payment details
+    // Payment Details
     currentY += 15
     pdf.setFontSize(10)
     pdf.text("Payment Method: Visa ****1234", 20, currentY)

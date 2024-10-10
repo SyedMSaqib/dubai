@@ -11,9 +11,16 @@ export default function DateInput() {
   const [value, setValue] = React.useState<DateValue>(() => today(getLocalTimeZone()))
 
   useEffect(() => {
-    // Convert the Date object to an ISO string before dispatching
-    dispatch(AddDate(value.toDate(getLocalTimeZone()).toISOString()))
+    const dateOnly = value.toDate(getLocalTimeZone())
+    const dateWithoutTime = new Date(
+      Date.UTC(dateOnly.getFullYear(), dateOnly.getMonth(), dateOnly.getDate())
+    )
+    console.log(dateWithoutTime.toISOString())
+
+    // Dispatch only the date (without the time)
+    dispatch(AddDate(dateWithoutTime.toISOString().split("T")[0])) // Send only the date part, e.g., "2024-10-09"
   }, [value, dispatch])
+
   const formatter = useDateFormatter({ dateStyle: "full" })
 
   return (
