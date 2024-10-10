@@ -93,10 +93,10 @@ const MobilePackageFilter = () => {
           <>
             {/* <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader> */}
             <ModalBody>
-              <TimeOfDay />
+              {/* <TimeOfDay /> */}
               <Duration />
               <PriceRangeSlider />
-              <RatingSelection />
+              {/* <RatingSelection /> */}
             </ModalBody>
             <ModalFooter className="border-t border-zinc-300">
               <Button color="danger" variant="light" onPress={onClose}>

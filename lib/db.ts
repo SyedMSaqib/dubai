@@ -42,6 +42,7 @@ export const getAllSubTours = (
     async () => {
       try {
         // Build the where clause based on filters
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const whereClause: any = {
           tourSlug: slug,
           AND: [],
