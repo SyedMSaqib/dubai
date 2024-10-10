@@ -2,17 +2,8 @@
 import React, { useState } from "react"
 import { Checkbox } from "@nextui-org/checkbox"
 import { FullStar, EmptyStar } from "@/utils/StaticSvgs"
-import { AddRatings } from "@/lib/Redux/features/sidebarSlice"
-import { useAppDispatch } from "@/lib/Redux/hooks"
 const RatingSelection = () => {
-  const dispatch = useAppDispatch()
-
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
-  React.useEffect(() => {
-    if (selectedRating === 1) dispatch(AddRatings(5))
-    else if (selectedRating === 2) dispatch(AddRatings(4))
-    else if (selectedRating === 3) dispatch(AddRatings(3))
-  }, [selectedRating, dispatch])
 
   const handleCheckboxChange = (rating: number) => {
     setSelectedRating(selectedRating === rating ? null : rating)

@@ -29,51 +29,85 @@ export const getAllTours = unstable_cache(async () => {
 }
 );
 
-export const getAllSubTours = (page: string ="1", slug: string) =>
+export const getAllSubTours = (
+  page: string = "1",
+  slug: string,
+  filters: {
+    duration?: number;
+    minPrice?: number;
+    maxPrice?: number;
+  } = {}
+) =>
   unstable_cache(
     async () => {
       try {
-        // Use Promise.all() to run both queries in parallel
-        const [totalCount, subTours,ratingStats] = await Promise.all([
-          // Total count query
-          prisma.subTours.count({
-            where: {
-              tourSlug: slug,  // Count all tours matching the slug
+        // Build the where clause based on filters
+        const whereClause: any = {
+          tourSlug: slug,
+          AND: [],
+        };
+
+        // Add duration filter if provided
+        if (filters.duration) {
+          whereClause.AND.push({
+            SubTourInfo: {
+              duration: {
+                ...(filters.duration === 1 && { lte: 1 }),
+                ...(filters.duration === 2 && { gt: 1, lte: 3 }),
+                ...(filters.duration === 6 && { gt: 3, lte: 6 }),
+                ...(filters.duration === 24 && { gt: 6, lte: 24 }),
+                ...(filters.duration === 26 && { gt: 24 }),
+              },
             },
+          });
+        }
+
+        // Add price filter if provided
+        if ((filters.minPrice !== undefined || filters.maxPrice !== undefined )&& filters.maxPrice !== 0) {
+          whereClause.AND.push({
+            SubTourInfo: {
+              adultPrice: {
+                gte: filters.minPrice || 0,
+                lte: filters.maxPrice || Number.MAX_SAFE_INTEGER,
+              },
+            },
+          });
+        }
+
+        
+
+        // If no filters are applied, remove the empty AND array
+        if (whereClause.AND.length === 0) {
+          delete whereClause.AND;
+        }
+
+        const [totalCount, subTours, ratingStats] = await Promise.all([
+          prisma.subTours.count({
+            where: whereClause,
           }),
           
-          // Paginated query for subTours data
           prisma.subTours.findMany({
-            where: {
-              tourSlug: slug,
-            },
+            where: whereClause,
             include: {
-              SubTourInfo:true,
-              
+              SubTourInfo: true,
             },
-            
-            skip: (+page - 1) * 5,  // Pagination logic: skip previous pages
-            take: 5,  // Fetch 1 record per page (adjust as needed)
+            skip: (+page - 1) * 5,
+            take: 5,
           }),
 
-
-            prisma.subToursRating.aggregate({
+          prisma.subToursRating.aggregate({
             _avg: {
-              rating: true, // Average rating
+              rating: true,
             },
             _count: {
-              rating: true, 
+              rating: true,
             },
             where: {
-              SubTours: {
-                tourSlug: slug,
-              },
+              SubTours: whereClause,
             },
           }),
         ]);
         
-
-        // Return both the paginated subTours and total count
         return {
           subTours,
           totalCount,
@@ -84,10 +118,10 @@ export const getAllSubTours = (page: string ="1", slug: string) =>
         throw new Error('Failed to fetch sub tours');
       }
     },
-    [`getAllSubTours_${page}_${slug}`],
+    [`getAllSubTours_${page}_${slug}_${JSON.stringify(filters)}`],
     {
-      tags:["subTours"],
-    } // Cache key depending on page and slug
+      tags: ["subTours"],
+    }
   );
 
 

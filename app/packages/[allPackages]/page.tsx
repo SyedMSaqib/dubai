@@ -16,9 +16,15 @@ const Packages = async ({
   searchParams: searchParams
 }) => {
   const { allPackages } = params
-  const { page } = searchParams
+  const { page, duration, minPrice, maxPrice } = searchParams
 
-  const allSubTours = getAllSubTours(page, allPackages)
+  const filters = {
+    duration: duration ? parseInt(duration) : undefined,
+    minPrice: minPrice ? parseInt(minPrice) : undefined,
+    maxPrice: maxPrice ? parseInt(maxPrice) : undefined,
+  }
+
+  const allSubTours = getAllSubTours(page, allPackages, filters)
   const { totalCount, subTours, ratingStats } = await allSubTours()
 
   const packageName = slugToText(allPackages)

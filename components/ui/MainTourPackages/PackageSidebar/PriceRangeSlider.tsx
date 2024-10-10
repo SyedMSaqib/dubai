@@ -1,32 +1,44 @@
 "use client"
-import React from "react"
+import React, { useEffect } from "react"
 import { Slider, SliderValue } from "@nextui-org/slider"
-import { AddPrice } from "@/lib/Redux/features/sidebarSlice"
-import { useAppDispatch } from "@/lib/Redux/hooks"
+import { useRouter, useSearchParams } from "next/navigation"
 
-export default function App() {
-  const dispatch = useAppDispatch()
+export default function PriceSlider() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   const [value, setValue] = React.useState<SliderValue>([0, 5000])
-  React.useEffect(() => {
-    if (Array.isArray(value)) {
-      dispatch(AddPrice([value[0], value[1]])) // Dispatch the price range (min and max)
-    }
-  }, [value, dispatch])
 
+  const [hasInteracted, setHasInteracted] = React.useState(false) // Track user interaction
+
+  const handleSliderChange = (newValue: SliderValue) => {
+    setValue(newValue)
+    setHasInteracted(true) // Mark that the user has interacted
+  }
+
+  useEffect(() => {
+    if (hasInteracted && Array.isArray(value)) {
+      // Only update the URL if the user has interacted
+      //Now it doesn't allow it to update the URL if the user hasn't interacted i.e initial load
+      const params = new URLSearchParams(searchParams)
+      params.set("minPrice", value[0].toString())
+      params.set("maxPrice", value[1].toString())
+      router.push(`?${params.toString()}`)
+    }
+  }, [value, hasInteracted, router, searchParams])
   return (
     <div className="flex flex-col gap-2 pt-4">
       <h4 className="font-bold text-large">Price</h4>
       <div className="flex flex-col gap-2 w-full h-full max-w-md items-start justify-center">
         <Slider
           label="Select a budget"
-          formatOptions={{ style: "currency", currency: "USD" }}
-          step={10}
+          formatOptions={{ style: "currency", currency: "AED" }}
+          step={100}
           maxValue={5000}
           minValue={0}
           value={value}
-          onChange={setValue}
-          className="max-w-md "
+          onChange={handleSliderChange}
+          className="max-w-md"
           classNames={{
             base: "max-w-md",
             filler: "bg-black",
@@ -37,7 +49,7 @@ export default function App() {
           size="sm"
         />
         <p className="text-default-500 font-medium text-small">
-          Selected budget: {Array.isArray(value) && value.map((b) => `$${b}`).join(" – ")}
+          Selected budget: {Array.isArray(value) && value.map((b) => `AED ${b}`).join(" – ")}
         </p>
       </div>
     </div>

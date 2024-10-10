@@ -1,18 +1,37 @@
 "use client"
-import React from "react"
+import React, { useEffect } from "react"
 import { Checkbox } from "@nextui-org/checkbox"
 import { Divider } from "@nextui-org/divider"
-import { AddDuration } from "@/lib/Redux/features/sidebarSlice"
-import { useAppDispatch } from "@/lib/Redux/hooks"
+import { useRouter, useSearchParams } from "next/navigation"
+
 const Duration = () => {
-  const dispatch = useAppDispatch()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const [selectedDurations, setSelectedDurations] = React.useState<number>()
+
+  // Move URL update logic to an effect
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
+    if (selectedDurations) {
+      params.set("duration", selectedDurations.toString())
+      router.push(`?${params.toString()}`)
+    } else {
+      params.delete("duration")
+      router.push(`?${params.toString()}`)
+    }
+  }, [selectedDurations, router, searchParams])
+
+  const handleDurationChange = (duration: number) => {
+    setSelectedDurations((prevDuration) => (prevDuration === duration ? undefined : duration))
+  }
 
   return (
     <>
       <div className="flex flex-col gap-2 pt-4">
         <h4 className="font-bold text-large">Duration</h4>
         <Checkbox
-          onClick={() => dispatch(AddDuration(1))}
+          onChange={() => handleDurationChange(1)}
+          isSelected={selectedDurations === 1}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -24,7 +43,8 @@ const Duration = () => {
           Up to 1 hour
         </Checkbox>
         <Checkbox
-          onClick={() => dispatch(AddDuration(3))}
+          onChange={() => handleDurationChange(2)}
+          isSelected={selectedDurations === 2}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -36,7 +56,8 @@ const Duration = () => {
           1 to 3 hours
         </Checkbox>
         <Checkbox
-          onClick={() => dispatch(AddDuration(6))}
+          onChange={() => handleDurationChange(6)}
+          isSelected={selectedDurations === 6}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -48,7 +69,8 @@ const Duration = () => {
           3 to 6 hours
         </Checkbox>
         <Checkbox
-          onClick={() => dispatch(AddDuration(24))}
+          onChange={() => handleDurationChange(24)}
+          isSelected={selectedDurations === 24}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -60,7 +82,8 @@ const Duration = () => {
           6 to 1 Day
         </Checkbox>
         <Checkbox
-          onClick={() => dispatch(AddDuration(26))}
+          onChange={() => handleDurationChange(26)}
+          isSelected={selectedDurations === 26}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:

@@ -52,7 +52,7 @@ const PaymentSuccess = () => {
   const dubaiDateTime = tourDate.toLocaleString("en-US", options)
 
   // Add a sign that it's in Dubai time
-  const formattedDubaiDateTime = `${dubaiDateTime} (GST)`
+  const formattedDubaiDateTime = `${dubaiDateTime}`
 
   const screenshotRef = useRef<HTMLDivElement | null>(null)
 

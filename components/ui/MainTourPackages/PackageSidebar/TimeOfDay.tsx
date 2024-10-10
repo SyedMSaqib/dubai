@@ -1,19 +1,40 @@
 "use client"
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Checkbox } from "@nextui-org/checkbox"
 import { Divider } from "@nextui-org/divider"
-import { useAppDispatch } from "@/lib/Redux/hooks"
-import { AddTime } from "@/lib/Redux/features/sidebarSlice"
+import { useRouter, useSearchParams } from "next/navigation"
 
 const TimeOfDay = () => {
-  const dispatch = useAppDispatch()
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const [selectedTimes, setSelectedTimes] = useState<string[]>([])
+
+  const handleTimeChange = (time: string) => {
+    setSelectedTimes((prev) => {
+      const newTimes = prev.includes(time) ? prev.filter((t) => t !== time) : [...prev, time]
+
+      return newTimes
+    })
+  }
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
+    if (selectedTimes.length > 0) {
+      params.set("timeOfDay", selectedTimes.join(","))
+    } else {
+      params.delete("timeOfDay")
+    }
+    router.push(`?${params.toString()}`)
+  }, [selectedTimes, router, searchParams])
 
   return (
     <>
       <h4 className="font-bold text-large">Time of Day</h4>
       <div className="flex flex-col gap-2 pt-4">
         <Checkbox
-          onClick={() => dispatch(AddTime("morning"))}
+          isSelected={selectedTimes.includes("morning")}
+          onChange={() => handleTimeChange("morning")}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -26,8 +47,10 @@ const TimeOfDay = () => {
           Morning
         </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts before 12pm</p>
+
         <Checkbox
-          onClick={() => dispatch(AddTime("afternoon"))}
+          isSelected={selectedTimes.includes("afternoon")}
+          onChange={() => handleTimeChange("afternoon")}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
@@ -40,8 +63,10 @@ const TimeOfDay = () => {
           Afternoon
         </Checkbox>
         <p className="text-[14px] text-zinc-500 pl-[30px]">Starts after 12pm</p>
+
         <Checkbox
-          onClick={() => dispatch(AddTime("evening"))}
+          isSelected={selectedTimes.includes("evening")}
+          onChange={() => handleTimeChange("evening")}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
             wrapper:
