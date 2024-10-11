@@ -1,4 +1,4 @@
-// import transporter from '@/lib/nodemailer';
+import { generateEmailHTML } from '@/utils/nodemailerHtml';
 import prisma from '@/lib/prisma';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
@@ -93,22 +93,50 @@ export async function POST(request: Request) {
       });
     }
 
+    const time = new Date(metadata.tour_time)
+    const formattedTime = time.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true, // Set to false for 24-hour format
+      timeZone: "UTC", // Ensure it displays as UTC
+    })
+
     type MailError = Error & { code?: string };
+    
+    const htmlContent = generateEmailHTML(booking, metadata, formattedTime);
     
     const mailOptions = {
       from: process.env.EMAIL_USERNAME!,
       to: metadata.user_email,
       subject: 'Booking Confirmation',
-      text: 'Booking Confirmation',
-      html: `
-        <h1>Booking Confirmation</h1>
-        <p>Booking ID: ${booking.id}</p>
-        <p>Tour Date: ${metadata.tour_date}</p>
-        <p>Total Price: ${booking.totalPrice}</p>
-      `,
+      text: `
+    Booking Confirmation
+    
+    Dear ${metadata.user_first_name},
+    
+    Thank you for booking with us. Your reservation has been confirmed. Here are the details of your booking:
+    
+    Booking ID: ${booking.id}
+    Tour Date: ${metadata.tour_date}
+    Tour Time: ${formattedTime}
+    Number of Adults: ${metadata.booking_adults}
+    Number of Children: ${metadata.booking_child}
+    Transport Type: ${metadata.booking_transport_type}
+    Pick-up Point: ${metadata.user_pickup_point}
+    Total Price: AED ${booking.totalPrice.toLocaleString()}
+    
+    If you have any questions or need to make changes to your booking, please don't hesitate to contact us.
+    
+    We look forward to welcoming you!
+    
+    Best regards,
+    Dubai Tourism LLC
+    
+  `,
+  html: htmlContent,
     };
 
-    await transporter.sendMail(mailOptions, function (err: MailError | null, info: { response: string }) {
+     transporter.sendMail(mailOptions, function (err: MailError | null, info: { response: string }) {
       if (err)
         console.log(err);
       else

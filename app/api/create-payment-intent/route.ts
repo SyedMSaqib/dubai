@@ -73,6 +73,7 @@ idsAndQuantities.forEach(({ id, quantity }: AddOn) => {
         booking_addons:JSON.stringify(idsAndQuantities),
         booking_subTourId: packageDetails[0].subTourId,
         tour_date: packageDetails[0].date,
+        tour_time:packageDetails[0].time,
         
         // User details
         user_first_name: userDetails.firstName,
