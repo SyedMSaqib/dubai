@@ -4,8 +4,8 @@ import { Modal, ModalContent, ModalBody, ModalFooter } from "@nextui-org/modal"
 import { Button } from "@nextui-org/button"
 
 import PriceRangeSlider from "./PriceRangeSlider"
-import RatingSelection from "./RatingsSelection"
-import TimeOfDay from "./TimeOfDay"
+// import RatingSelection from "./RatingsSelection"
+// import TimeOfDay from "./TimeOfDay"
 import Duration from "./Duration"
 
 const MobilePackageFilter = () => {

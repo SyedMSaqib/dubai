@@ -8,21 +8,25 @@ const Duration = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [selectedDurations, setSelectedDurations] = React.useState<number>()
+  const [hasInteracted, setHasInteracted] = React.useState(false)
 
   // Move URL update logic to an effect
   useEffect(() => {
-    const params = new URLSearchParams(searchParams)
-    if (selectedDurations) {
-      params.set("duration", selectedDurations.toString())
-      router.push(`?${params.toString()}`)
-    } else {
-      params.delete("duration")
-      router.push(`?${params.toString()}`)
+    if (hasInteracted && selectedDurations) {
+      const params = new URLSearchParams(searchParams)
+      if (selectedDurations) {
+        params.set("duration", selectedDurations.toString())
+        router.push(`?${params.toString()}`)
+      } else {
+        params.delete("duration")
+        router.push(`?${params.toString()}`)
+      }
     }
   }, [selectedDurations, router, searchParams])
 
   const handleDurationChange = (duration: number) => {
-    setSelectedDurations((prevDuration) => (prevDuration === duration ? undefined : duration))
+    setSelectedDurations(duration)
+    setHasInteracted(true)
   }
 
   return (
@@ -30,7 +34,7 @@ const Duration = () => {
       <div className="flex flex-col gap-2 pt-4">
         <h4 className="font-bold text-large">Duration</h4>
         <Checkbox
-          onChange={() => handleDurationChange(1)}
+          onValueChange={() => handleDurationChange(1)}
           isSelected={selectedDurations === 1}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
@@ -43,7 +47,7 @@ const Duration = () => {
           Up to 1 hour
         </Checkbox>
         <Checkbox
-          onChange={() => handleDurationChange(2)}
+          onValueChange={() => handleDurationChange(2)}
           isSelected={selectedDurations === 2}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
@@ -56,7 +60,7 @@ const Duration = () => {
           1 to 3 hours
         </Checkbox>
         <Checkbox
-          onChange={() => handleDurationChange(6)}
+          onValueChange={() => handleDurationChange(6)}
           isSelected={selectedDurations === 6}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
@@ -69,7 +73,7 @@ const Duration = () => {
           3 to 6 hours
         </Checkbox>
         <Checkbox
-          onChange={() => handleDurationChange(24)}
+          onValueChange={() => handleDurationChange(24)}
           isSelected={selectedDurations === 24}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
@@ -82,7 +86,7 @@ const Duration = () => {
           6 to 1 Day
         </Checkbox>
         <Checkbox
-          onChange={() => handleDurationChange(26)}
+          onValueChange={() => handleDurationChange(26)}
           isSelected={selectedDurations === 26}
           classNames={{
             base: "inline-flex max-w-md w-full bg-content1 m-0",
