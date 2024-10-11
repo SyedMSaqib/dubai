@@ -14,10 +14,11 @@ const CheckoutPackageDetails = () => {
     day: "numeric",
   })
   const time = new Date(packageDetails[0]?.time)
-  const formattedTime = time.toLocaleTimeString([], {
+  const formattedTime = time.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true, // Change to false for 24-hour format
+    hour12: true, // Set to false for 24-hour format
+    timeZone: "UTC", // Ensure it displays as UTC
   })
 
   const totalPrice = packageDetails[0]?.totalPrice || 0
