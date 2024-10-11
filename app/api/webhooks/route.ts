@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { transportType } from '@prisma/client';
+import transporter from '@/lib/nodemailer';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
@@ -92,27 +93,27 @@ export async function POST(request: Request) {
       });
     }
 
-    // type MailError = Error & { code?: string };
+    type MailError = Error & { code?: string };
     
-    // const mailOptions = {
-    //   from: process.env.EMAIL_USERNAME!,
-    //   to: metadata.user_email,
-    //   subject: 'Booking Confirmation',
-    //   text: 'Booking Confirmation',
-    //   html: `
-    //     <h1>Booking Confirmation</h1>
-    //     <p>Booking ID: ${booking.id}</p>
-    //     <p>Tour Date: ${metadata.tour_date}</p>
-    //     <p>Total Price: ${booking.totalPrice}</p>
-    //   `,
-    // };
+    const mailOptions = {
+      from: process.env.EMAIL_USERNAME!,
+      to: metadata.user_email,
+      subject: 'Booking Confirmation',
+      text: 'Booking Confirmation',
+      html: `
+        <h1>Booking Confirmation</h1>
+        <p>Booking ID: ${booking.id}</p>
+        <p>Tour Date: ${metadata.tour_date}</p>
+        <p>Total Price: ${booking.totalPrice}</p>
+      `,
+    };
 
-    // await transporter.sendMail(mailOptions, function (err: MailError | null, info: { response: string }) {
-    //   if (err)
-    //     console.log(err);
-    //   else
-    //     console.log(info);
-    // });
+    await transporter.sendMail(mailOptions, function (err: MailError | null, info: { response: string }) {
+      if (err)
+        console.log(err);
+      else
+        console.log(info);
+    });
       
     console.log('Booking created:', booking);
   } catch (error) {
