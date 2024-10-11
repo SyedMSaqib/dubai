@@ -30,7 +30,7 @@ const Duration = () => {
     if (duration) {
       setSelectedDurations(parseInt(duration, 10)) // Adding radix 10 for clarity
     }
-  }, [])
+  }, [searchParams])
 
   const handleDurationChange = (duration: number) => {
     setSelectedDurations((prev) => (prev === duration ? null : duration)) // Toggle selection
