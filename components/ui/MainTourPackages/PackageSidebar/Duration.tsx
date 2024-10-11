@@ -7,25 +7,33 @@ import { useRouter, useSearchParams } from "next/navigation"
 const Duration = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [selectedDurations, setSelectedDurations] = React.useState<number>()
+  const [selectedDurations, setSelectedDurations] = React.useState<number | null>(null)
   const [hasInteracted, setHasInteracted] = React.useState(false)
-
   // Move URL update logic to an effect
   useEffect(() => {
-    if (hasInteracted && selectedDurations) {
-      const params = new URLSearchParams(searchParams)
-      if (selectedDurations) {
+    const params = new URLSearchParams(searchParams)
+
+    if (hasInteracted) {
+      if (selectedDurations !== null) {
         params.set("duration", selectedDurations.toString())
-        router.push(`?${params.toString()}`)
       } else {
         params.delete("duration")
-        router.push(`?${params.toString()}`)
       }
+      router.push(`?${params.toString()}`)
     }
-  }, [selectedDurations, router, searchParams])
+  }, [selectedDurations, hasInteracted, router, searchParams])
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
+    const duration = params.get("duration")
+
+    if (duration) {
+      setSelectedDurations(parseInt(duration, 10)) // Adding radix 10 for clarity
+    }
+  }, [])
 
   const handleDurationChange = (duration: number) => {
-    setSelectedDurations(duration)
+    setSelectedDurations((prev) => (prev === duration ? null : duration)) // Toggle selection
     setHasInteracted(true)
   }
 

@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from "react"
-import { Modal, ModalContent, ModalBody, ModalFooter } from "@nextui-org/modal"
+import React from "react"
+import { Modal, ModalContent, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/modal"
 import { Button } from "@nextui-org/button"
 
 import PriceRangeSlider from "./PriceRangeSlider"
@@ -9,10 +9,7 @@ import PriceRangeSlider from "./PriceRangeSlider"
 import Duration from "./Duration"
 
 const MobilePackageFilter = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const onOpen = () => setIsOpen(true)
-  const onClose = () => setIsOpen(false)
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   return (
     <div className="lg:hidden mt-[10px]">
@@ -88,25 +85,27 @@ const MobilePackageFilter = () => {
         <span className="text-black font-semibold">All filters</span>
       </button>
 
-      <Modal isOpen={isOpen} onOpenChange={setIsOpen} scrollBehavior="inside">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} scrollBehavior="inside">
         <ModalContent>
-          <>
-            {/* <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader> */}
-            <ModalBody>
-              {/* <TimeOfDay /> */}
-              <Duration />
-              <PriceRangeSlider />
-              {/* <RatingSelection /> */}
-            </ModalBody>
-            <ModalFooter className="border-t border-zinc-300">
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <Button color="success" onPress={onClose} className="rounded-full">
-                See Results
-              </Button>
-            </ModalFooter>
-          </>
+          {(onClose) => (
+            <>
+              {/* <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader> */}
+              <ModalBody>
+                {/* <TimeOfDay /> */}
+                <Duration />
+                <PriceRangeSlider />
+                {/* <RatingSelection /> */}
+              </ModalBody>
+              <ModalFooter className="border-t border-zinc-300">
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="success" onPress={onClose} className="rounded-full">
+                  See Results
+                </Button>
+              </ModalFooter>
+            </>
+          )}
         </ModalContent>
       </Modal>
     </div>
