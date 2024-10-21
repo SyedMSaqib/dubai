@@ -29,15 +29,28 @@ export const getAllTours = unstable_cache(async () => {
   }
 );
 
-export const getSubTourRatings = (SubTourId: string) => unstable_cache(
+export const getSubTourRatings = (SubTourId: string, page: string = "1") => unstable_cache(
   async () => {
     try {
-      const subTourRatings = await prisma.subToursRating.findMany({
-        where: {
-          subToursId: SubTourId
-        }
-      })
-      return subTourRatings
+      const [subTourRaing, totalSubtourRating] = await Promise.all([
+        prisma.subToursRating.findMany({
+          where: {
+            subToursId: SubTourId,
+          },
+          skip: (+page - 1) * 5,
+          take: 5,
+
+        }),
+        prisma.subToursRating.count({
+          where: {
+            subToursId: SubTourId,
+          },
+        }),
+      ]);
+      return {
+        subTourRating: subTourRaing,
+        totalSubtourRating: totalSubtourRating,
+      };
     } catch (error) {
       console.error('Database error:', error);
       throw new Error('Failed to fetch tours');

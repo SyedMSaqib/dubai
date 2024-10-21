@@ -11,6 +11,9 @@ import TourInclusions from "@/components/ui/MainTourPackages/TourInclusions"
 import TourReviews from "@/components/ui/MainTourPackages/TourReviews"
 import { SubTourInfo, subTourRatingsCount } from "@/lib/db"
 import { getSubTourRatings } from "@/lib/db"
+import PackagePaginition from "@/components/ui/MainTourPackages/PackagePagination"
+
+
 const PackagesDetails = async ({ params }: { params: { packagesDetails: string } }) => {
   const { packagesDetails } = params
   const subTourInfo = SubTourInfo(packagesDetails)
@@ -19,7 +22,8 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
   const totalRating = await rating()
   const totalPrice = tourInfo?.adultPrice || 0
   const subTourRatings = getSubTourRatings(tourInfo!.subTour!.id)
-  const allSubTourRatings = await subTourRatings()
+  const { subTourRating, totalSubtourRating } = await subTourRatings()
+
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4">
       <h1 className="text-xl lg:text-3xl font-bold  p-4">{slugToText(packagesDetails)}</h1>
@@ -83,10 +87,12 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
           <p className="font-bold text-xl mt-[50px] ">Reviews</p>
           <div className="py-4">
             {
-              allSubTourRatings.map((rating) => {
+              subTourRating.map((rating) => {
                 return <TourReviews comment={rating.comment} name={rating.name} rating={rating.rating} key={rating.id} time={rating.createdAt} />
               })}
-            <p className="text-center underline hover:cursor-pointer">Load more...</p>
+            <div className="flex justify-center mt-[50px] mb-[20px]">
+              <PackagePaginition totalCount={totalSubtourRating} />
+            </div>
           </div>
         </div>
       </div>

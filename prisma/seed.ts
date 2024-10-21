@@ -116,6 +116,13 @@ async function main() {
                 create: [
                   { rating: getRandomNumber(3, 5), comment: 'Awesome experience!', name: 'John Doe' },
                   { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
                 ],
               },
             };

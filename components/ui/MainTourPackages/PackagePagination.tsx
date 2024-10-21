@@ -28,9 +28,9 @@ export default function App({ totalCount }: { totalCount: number }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-gray-500 flex justify-center items-center">
         {totalCount > 0
-          ? `Showing ${startItem}-${endItem} of ${totalCount} tours`
+          ? `Showing ${startItem}-${endItem} of ${totalCount} items`
           : "No items to display"}
       </div>
       {totalCount > 0 && (
