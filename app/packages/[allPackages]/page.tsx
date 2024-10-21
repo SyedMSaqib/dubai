@@ -60,7 +60,7 @@ const Packages = async ({
             </Link>
           ))}
           <div className="flex justify-center mt-[50px] mb-[20px]">
-            <PackagePagination totalCount={totalCount} />
+            <PackagePagination itemsPerPage={5} totalCount={totalCount} />
           </div>
         </div>
       </div>

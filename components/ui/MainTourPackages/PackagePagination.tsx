@@ -3,10 +3,9 @@ import React from "react"
 import { Pagination } from "@nextui-org/pagination"
 import { useRouter, useSearchParams } from "next/navigation"
 
-export default function App({ totalCount }: { totalCount: number }) {
+export default function App({ totalCount, itemsPerPage }: { totalCount: number, itemsPerPage: number }) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const itemsPerPage = 5
 
   // Get current page from URL or default to 1
   const pageParam = searchParams.get("page")

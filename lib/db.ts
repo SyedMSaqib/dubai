@@ -37,8 +37,8 @@ export const getSubTourRatings = (SubTourId: string, page: string = "1") => unst
           where: {
             subToursId: SubTourId,
           },
-          skip: (+page - 1) * 5,
-          take: 5,
+          skip: (+page - 1) * 10,
+          take: 10,
 
         }),
         prisma.subToursRating.count({

@@ -91,7 +91,7 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
                 return <TourReviews comment={rating.comment} name={rating.name} rating={rating.rating} key={rating.id} time={rating.createdAt} />
               })}
             <div className="flex justify-center mt-[50px] mb-[20px]">
-              <PackagePaginition totalCount={totalSubtourRating} />
+              <PackagePaginition itemsPerPage={10} totalCount={totalSubtourRating} />
             </div>
           </div>
         </div>
