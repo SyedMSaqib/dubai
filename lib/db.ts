@@ -7,15 +7,15 @@ import prisma from './prisma';
 export const getAllTours = unstable_cache(async () => {
   try {
     const tours = await prisma.tours.findMany({
-        include:{
-            image:true,
-            _count: {
-                select: {
-                    subTours: true
-                    
-                }
-            }
-        },
+      include: {
+        image: true,
+        _count: {
+          select: {
+            subTours: true
+
+          }
+        }
+      },
     });
     return tours;
   } catch (error) {
@@ -23,11 +23,32 @@ export const getAllTours = unstable_cache(async () => {
     throw new Error('Failed to fetch tours');
   }
 },
-['tours'],
-{
-    tags: ['tours'], 
-}
+  ['tours'],
+  {
+    tags: ['tours'],
+  }
 );
+
+export const getSubTourRatings = (SubTourId: string) => unstable_cache(
+  async () => {
+    try {
+      const subTourRatings = await prisma.subToursRating.findMany({
+        where: {
+          subToursId: SubTourId
+        }
+      })
+      return subTourRatings
+    } catch (error) {
+      console.error('Database error:', error);
+      throw new Error('Failed to fetch tours');
+    }
+  },
+  [`subTourRatings_${SubTourId}`], // Dynamic cache key
+  {
+    tags: ['subTourRatings'],
+  }
+);
+
 
 export const getAllSubTours = (
   page: string = "1",
@@ -64,7 +85,7 @@ export const getAllSubTours = (
         }
 
         // Add price filter if provided
-        if ((filters.minPrice !== undefined || filters.maxPrice !== undefined )&& filters.maxPrice !== 0) {
+        if ((filters.minPrice !== undefined || filters.maxPrice !== undefined) && filters.maxPrice !== 0) {
           whereClause.AND.push({
             SubTourInfo: {
               adultPrice: {
@@ -75,7 +96,7 @@ export const getAllSubTours = (
           });
         }
 
-        
+
 
         // If no filters are applied, remove the empty AND array
         if (whereClause.AND.length === 0) {
@@ -86,7 +107,7 @@ export const getAllSubTours = (
           prisma.subTours.count({
             where: whereClause,
           }),
-          
+
           prisma.subTours.findMany({
             where: whereClause,
             include: {
@@ -108,7 +129,7 @@ export const getAllSubTours = (
             },
           }),
         ]);
-        
+
         return {
           subTours,
           totalCount,
@@ -128,57 +149,58 @@ export const getAllSubTours = (
 
 
 
-  export const subTourRatingsCount =(slug:string)=> 
-    unstable_cache(
-      async () => {
-        try {
-          const subToursRating = await prisma.subToursRating.aggregate({
-            _avg: {
-              rating: true,
+export const subTourRatingsCount = (slug: string) =>
+  unstable_cache(
+    async () => {
+      try {
+        const subToursRating = await prisma.subToursRating.aggregate({
+          _avg: {
+            rating: true,
+          },
+          _count: {
+            rating: true,
+          },
+          where: {
+            SubTours: {
+              slug: slug,
             },
-            _count: {
-              rating: true,
-            },
-            where: {
-              SubTours: {
-                slug: slug,
-              },
-            },
-          });
-          return subToursRating;
-        } catch (error) {
-          console.error('Database error:', error);
-          throw new Error('Failed to fetch tours');
-        }
-      },
-      
-      [`subTourRatings-${slug}`], // Dynamic cache key
-      {
-        tags: [`subTourRatings-${slug}`], // Optional: use a tag per slug for finer cache control
+          },
+        });
+        return subToursRating;
+      } catch (error) {
+        console.error('Database error:', error);
+        throw new Error('Failed to fetch tours');
       }
-    
-    );
-  
+    },
 
-  export const SubTourInfo =(slug: string)=> unstable_cache(
+    [`subTourRatings-${slug}`], // Dynamic cache key
+    {
+      tags: [`subTourRatings-${slug}`], // Optional: use a tag per slug for finer cache control
+    }
+
+  );
+
+
+export const SubTourInfo = (slug: string) => unstable_cache(
+  unstable_cache(
     async () => {
       try {
         const subTourInfo = await prisma.subTourInfo.findUnique({
           where: {
             subTourSlug: slug
           },
-          include: {      
-            Highlight: true,     
+          include: {
+            Highlight: true,
             whatsIncluded: true,
             whatToExpect: true,
             additionalInfo: true,
             addOns: true,
             subTour: {
               select: {
-                images:true,
-                id:true,
-                thumbnail:true,
-                name:true // Include images from the related SubTour model
+                images: true,
+                id: true,
+                thumbnail: true,
+                name: true // Include images from the related SubTour model
               }
             }
           }
@@ -191,29 +213,29 @@ export const getAllSubTours = (
     },
     [`subTourInfo_${slug}`], // Dynamic cache key
     {
-      tags: ['subTourInfo'], 
+      tags: ['subTourInfo'],
     }
-  );
-  export const checkOutInfo =async(subTourSlug: string)=>  {
-      try {
-        const subTourInfo = await prisma.subTourInfo.findUnique({
-          where: {
-            subTourSlug: subTourSlug
-          },
-          include: {      
-            addOns: true,
-          }
-        });
-        return subTourInfo;
-      } catch (error) {
-        console.error('Database error:', error);
-        throw new Error('Failed to fetch tours');
+  ));
+export const checkOutInfo = async (subTourSlug: string) => {
+  try {
+    const subTourInfo = await prisma.subTourInfo.findUnique({
+      where: {
+        subTourSlug: subTourSlug
+      },
+      include: {
+        addOns: true,
       }
-    }
+    });
+    return subTourInfo;
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch tours');
+  }
+}
 
 
-    export async function getRandomSubTours(){
-      const randomSubTours = await prisma.$queryRaw`
+export async function getRandomSubTours() {
+  const randomSubTours = await prisma.$queryRaw`
         WITH RankedSubTours AS (
           SELECT 
             st.*,
@@ -252,22 +274,22 @@ export const getAllSubTours = (
         ORDER BY RANDOM()
         LIMIT 10;
       `
-    
-      return randomSubTours as RandomSubTour[];
-    }
-    
-    // TypeScript type for the return value
-    export type RandomSubTour = {
-      id: string
-      name: string
-      thumbnail: string
-      tourSlug: string
-      tourName: string
-      adultPrice: number | null
-      average_rating: number
-      rating_count: number
-      slug:string
-    }
+
+  return randomSubTours as RandomSubTour[];
+}
+
+// TypeScript type for the return value
+export type RandomSubTour = {
+  id: string
+  name: string
+  thumbnail: string
+  tourSlug: string
+  tourName: string
+  adultPrice: number | null
+  average_rating: number
+  rating_count: number
+  slug: string
+}
 
 
 

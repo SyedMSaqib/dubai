@@ -135,12 +135,16 @@ export async function POST(request: Request) {
   `,
   html: htmlContent,
     };
-
-     transporter.sendMail(mailOptions, function (err: MailError | null, info: { response: string }) {
-      if (err)
-        console.log(err);
-      else
-        console.log(info);
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, (err: MailError | null, info: { response: string }) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          console.log(info);
+          resolve(info);
+        }
+      });
     });
       
     console.log('Booking created:', booking);

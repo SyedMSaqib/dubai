@@ -114,8 +114,8 @@ async function main() {
               },
               rating: {
                 create: [
-                  { rating: getRandomNumber(3, 5), comment: 'Awesome experience!' },
-                  { rating: getRandomNumber(3, 5), comment: 'A must try.' },
+                  { rating: getRandomNumber(3, 5), comment: 'Awesome experience!', name: 'John Doe' },
+                  { rating: getRandomNumber(3, 5), comment: 'A must try.', name: 'Saqib' },
                 ],
               },
             };
@@ -127,7 +127,7 @@ async function main() {
     console.log(`Created tour: ${tour.name}`);
   }
 
-  
+
 }
 
 main()

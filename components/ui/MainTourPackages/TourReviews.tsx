@@ -1,28 +1,37 @@
 import Ratings from "../Ratings"
+
 type PropType = {
   rating: number
-  totalRatings: number | string
+  name: string
+  time: Date | string
+  comment: string
 }
 
-const TourReviews = ({ rating, totalRatings }: PropType) => {
+const TourReviews = ({ rating, name, comment, time }: PropType) => {
+  // Function to format the date
+  const formatDate = (date: Date | string) => {
+    const dateObject = date instanceof Date ? date : new Date(date);
+    return dateObject.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
   return (
     <>
       <div className="pb-8 border-b border-gray-200 max-xl:max-w-3xl max-xl:mx-auto">
         <div className="flex sm:items-center flex-col sm:flex-row justify-between mb-4">
           <div className="flex items-center gap-3">
-            <Ratings rating={rating} totalRatings={totalRatings} />
+            <Ratings rating={rating} totalRatings={""} />
           </div>
           <div className="flex items-center gap-3">
-            <h6 className="font-semibold text-lg leading-8 text-black">@john.doe</h6>
-            <p className="font-medium text-base leading-7 text-gray-400">Nov 01, 2023</p>
+            <h6 className="font-semibold text-lg leading-8 text-black">{name}</h6>
+            <p className="font-medium text-base leading-7 text-gray-400">{formatDate(time)}</p>
           </div>
         </div>
-
         <p className="font-normal text-lg leading-8 text-gray-500">
-          I recently had the opportunity to explore Pagedones UI design system, and it left a
-          lasting impression on my workflow. The system seamlessly blends user-friendly features
-          with a robust set of design components, making it a go-to for creating visually stunning
-          and consistent interfaces.
+          {comment}
         </p>
         <aside className="flex items-center mt-3">
           <p className="inline-flex items-center text-sm font-medium text-gray-600 hover:underline  hover:cursor-pointer">

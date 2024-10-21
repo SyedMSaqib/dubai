@@ -10,7 +10,7 @@ import { Divider } from "@nextui-org/divider"
 import TourInclusions from "@/components/ui/MainTourPackages/TourInclusions"
 import TourReviews from "@/components/ui/MainTourPackages/TourReviews"
 import { SubTourInfo, subTourRatingsCount } from "@/lib/db"
-
+import { getSubTourRatings } from "@/lib/db"
 const PackagesDetails = async ({ params }: { params: { packagesDetails: string } }) => {
   const { packagesDetails } = params
   const subTourInfo = SubTourInfo(packagesDetails)
@@ -18,7 +18,8 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
   const rating = subTourRatingsCount(packagesDetails)
   const totalRating = await rating()
   const totalPrice = tourInfo?.adultPrice || 0
-
+  const subTourRatings = getSubTourRatings(tourInfo!.subTour!.id)
+  const allSubTourRatings = await subTourRatings()
   return (
     <div className=" mx-auto max-w-[1400px]  lg:px-8 mt-4">
       <h1 className="text-xl lg:text-3xl font-bold  p-4">{slugToText(packagesDetails)}</h1>
@@ -81,11 +82,10 @@ const PackagesDetails = async ({ params }: { params: { packagesDetails: string }
         <div>
           <p className="font-bold text-xl mt-[50px] ">Reviews</p>
           <div className="py-4">
-            <TourReviews rating={5} totalRatings={""} />
-            <TourReviews rating={3} totalRatings={""} />
-            <TourReviews rating={4.6} totalRatings={""} />
-            <TourReviews rating={1} totalRatings={""} />
-            <TourReviews rating={5} totalRatings={""} />
+            {
+              allSubTourRatings.map((rating) => {
+                return <TourReviews comment={rating.comment} name={rating.name} rating={rating.rating} key={rating.id} time={rating.createdAt} />
+              })}
             <p className="text-center underline hover:cursor-pointer">Load more...</p>
           </div>
         </div>

@@ -55,7 +55,7 @@ model SubToursRating {
   id      String @id @default(uuid())
   rating  Float
   comment String
-
+  name    String
   subTourInfoId String?
   createdAt     DateTime  @default(now())
   SubTours      SubTours? @relation(fields: [subToursId], references: [id])

@@ -66,7 +66,17 @@ const Ratings: React.FC<PropType> = ({ rating, totalRatings }) => {
       </div>
 
       <p className="pl-2 text-gray-600 text-sm md:text-base">
-        ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
+
+
+        {
+          totalRatings !== "" ? (
+            <>
+              ({totalRatings} {totalRatings === 1 ? "review" : "reviews"})
+            </>
+          ) : (
+            ""
+          )
+        }
       </p>
     </div>
   )
