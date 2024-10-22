@@ -6,6 +6,8 @@ import Link from "next/link"
 import { slugToText } from "@/utils/slug"
 import Ratings from "@/components/ui/Ratings"
 import { getAllSubTours } from "@/lib/db"
+import { Suspense } from "react"
+import LottieLoader from "@/components/Loaders/LottieLoader"
 
 type searchParams = { [key: string]: string }
 const Packages = async ({
@@ -46,19 +48,21 @@ const Packages = async ({
         </div>
 
         <div className="lg:mt-[20px] flex flex-col gap-2 w-full">
-          {subTours.map((subtour) => (
-            <Link href={`/packages/${allPackages}/${subtour.slug}`} key={subtour.id}>
-              <PackagesItem
-                key={subtour.id}
-                src={subtour.thumbnail}
-                title={subtour.name}
-                price={subtour.SubTourInfo?.adultPrice || 0}
-                time={subtour.SubTourInfo?.duration || 0}
-                description={subtour.SubTourInfo?.description || ""}
-                slug={subtour.slug}
-              />
-            </Link>
-          ))}
+          <Suspense key={searchParams.page} fallback={<LottieLoader />}>
+            {subTours.map((subtour) => (
+              <Link href={`/packages/${allPackages}/${subtour.slug}`} key={subtour.id}>
+                <PackagesItem
+                  key={subtour.id}
+                  src={subtour.thumbnail}
+                  title={subtour.name}
+                  price={subtour.SubTourInfo?.adultPrice || 0}
+                  time={subtour.SubTourInfo?.duration || 0}
+                  description={subtour.SubTourInfo?.description || ""}
+                  slug={subtour.slug}
+                />
+              </Link>
+            ))}
+          </Suspense>
           <div className="flex justify-center mt-[50px] mb-[20px]">
             <PackagePagination itemsPerPage={5} totalCount={totalCount} />
           </div>
