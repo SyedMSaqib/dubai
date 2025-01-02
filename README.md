@@ -55,7 +55,7 @@ A cutting-edge web application for tourism services in Dubai. This app features 
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Node.js](https://nodejs.org/) (v18 or higher)
 - [PostgreSQL](https://www.postgresql.org/)
 - Stripe account for API keys.
 
