@@ -63,8 +63,8 @@ const CheckoutForm = () => {
       clientSecret,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        // return_url: `https://dubai-seven.vercel.app/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
-        return_url: `http://localhost:3000/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
+        return_url: `https://dubai-seven.vercel.app/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
+          // return_url: `http://localhost:3000/checkout/paymentSuccess?packageDetails=${encodeURIComponent(
           JSON.stringify({ ...packageDetails, userName })
         )}`,
       },
