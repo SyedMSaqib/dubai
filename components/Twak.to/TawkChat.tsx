@@ -1,5 +1,5 @@
 'use client';
-// @ts-ignore
+// @ts-expect-error
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 
 const TawkChat = () => {
