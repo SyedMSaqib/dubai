@@ -1,6 +1,7 @@
 'use client';
-// @ts-expect-error
+// @ts-expect-error: TawkMessengerReact types are incompatible with our setup.
 import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+
 
 const TawkChat = () => {
   return (
