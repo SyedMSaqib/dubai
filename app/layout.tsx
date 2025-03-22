@@ -5,6 +5,7 @@ import { Providers } from "./providers"
 import Navbar from "../components/layout/navbar"
 import Footer from "@/components/layout/Footer"
 import StoreProvider from "./StoreProvider"
+import TawkChat from "./../components/Twak.to/TawkChat"
 
 const tripSans = localFont({
   src: [
@@ -35,6 +36,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
+            <TawkChat/>
           </Providers>
         </StoreProvider>
       </body>
