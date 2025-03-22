@@ -34,6 +34,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@stripe/react-stripe-js": "^2.8.0",
     "@stripe/stripe-js": "^4.5.0",
+    "@tawk.to/tawk-messenger-react": "^2.0.2",
     "@types/nodemailer": "^6.4.16",
     "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.5.4",
